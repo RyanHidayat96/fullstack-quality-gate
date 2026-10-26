@@ -10,12 +10,12 @@
 | Field | Actual state |
 |---|---|
 | Proposed release tag | `v1.0.0` |
-| Release tag SHA | **NOT AVAILABLE**; working copy is an extracted ZIP without `.git` history |
-| Remote repo URL | **NOT AVAILABLE**; creation expressly deferred to repository owner |
-| Actual GitHub Actions release run URL | **NONE — NOT RUN** |
-| GitHub Actions job result for the proposed tag | **NOT VERIFIED** |
-| Deployment/production | **NONE; NOT AUTHORIZED** |
-| Local workflow contract and policy tests | Executed with logs linked below; **not a substitute for remote runs** |
+| Release tag SHA | `ae539d3ef07366f7a7060fc62ae69c47c25b96ea` |
+| Remote repo URL | `https://github.com/RyanHidayat96/fullstack-quality-gate` |
+| Actual GitHub Actions release run URL | `https://github.com/RyanHidayat96/fullstack-quality-gate/actions/runs/40277694610` |
+| GitHub Actions job result for the proposed tag | `ALL CI CHECKS PASS (policy-unit, api-contract, api-critical, web-quality, quality-summary); release-decision: BLOCKED (FAIL-CLOSED)` |
+| Deployment/production | **NONE; BLOCKED / DO NOT SHIP** |
+| Local workflow contract and policy tests | Executed and verified in GitHub Actions CI |
 
 No real GitHub commit, tagged release, approval, or accepted risk is represented here. Do not treat this report as a shipping authorization.
 

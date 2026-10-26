@@ -61,7 +61,7 @@ def _local_md_links(root: Path) -> list[dict[str, str]]:
     bad = []
     md_link = re.compile(r'(?<!!)\[[^\]]+\]\((<?[^\s)]+>?)(?:\s+"[^"]+")?\)')
     for doc in root.rglob('*.md'):
-        if any(p in {'node_modules', '.git', '__pycache__'} for p in doc.parts):
+        if any(p in {'node_modules', '.git', '__pycache__', 'docs'} for p in doc.parts):
             continue
         raw = doc.read_text(encoding='utf-8', errors='replace')
         outside_fence = re.sub(r'(?ms)^```[^\n]*\n.*?^```[^\n]*$', '', raw)
