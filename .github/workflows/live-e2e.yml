@@ -1,0 +1,115 @@
+name: Live Browser and WebSocket E2E
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, ready_for_review]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: browser-e2e-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  browser-ws-e2e:
+    name: browser-ws-e2e
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_DB: quality_net_test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U postgres -d quality_net_test"
+          --health-interval 5s --health-timeout 3s --health-retries 12
+      redis:
+        image: redis:7-alpine
+        ports: ['6379:6379']
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 5s --health-timeout 3s --health-retries 12
+    env:
+      RAILS_ENV: test
+      DB_HOST: 127.0.0.1
+      DB_PORT: '5432'
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: quality_net_test
+      REDIS_URL: redis://127.0.0.1:6379/1
+      SECRET_KEY_BASE: synthetic_browser_e2e_only_not_for_production
+      GEMINI_API_KEY: no_external_ai_called_in_this_suite
+      ALLOWED_ORIGINS: http://127.0.0.1:5173,http://localhost:5173
+      APP_BASE_URL: http://127.0.0.1:3001
+      WEB_APP_BASE_URL: http://127.0.0.1:5173
+      VITE_API_BASE_URL: http://127.0.0.1:3001/api/v1
+      VITE_WS_BASE_URL: ws://127.0.0.1:3001
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+          bundler-cache: true
+          working-directory: api
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Prepare isolated PostgreSQL fixture
+        working-directory: api
+        run: |
+          set -euo pipefail
+          bundle exec rails db:migrate
+          bundle exec rails runner script/seed_browser_e2e.rb
+      - name: Install verified browser and frontend
+        run: |
+          set -euo pipefail
+          npm ci --prefix web --ignore-scripts --no-audit --no-fund
+          python -m pip install --disable-pip-version-check playwright==1.56.0
+          python -m playwright install --with-deps chromium
+      - name: BROWSER-DB-01 INVITE-02 WS-AUTH-05 live integration
+        run: |
+          set -euo pipefail
+          (cd api && bundle exec rails server -b 127.0.0.1 -p 3001 -e test) > /tmp/quality-rails.log 2>&1 &
+          RAILS_PID=$!
+          (cd web && npm run dev -- --host 127.0.0.1 --port 5173 --strictPort) > /tmp/quality-vite.log 2>&1 &
+          WEB_PID=$!
+          trap 'kill "$RAILS_PID" "$WEB_PID" 2>/dev/null || : ' EXIT
+
+          ready=0
+          for attempt in $(seq 1 90); do
+            if curl --silent --fail http://127.0.0.1:3001/health > /dev/null &&
+               curl --silent --fail http://127.0.0.1:5173/login > /dev/null; then
+              ready=1
+              break
+            fi
+            sleep 2
+          done
+          if [[ "$ready" != 1 ]]; then
+            echo "::error::Rails or Vite failed to start"
+            tail -40 /tmp/quality-rails.log
+            tail -40 /tmp/quality-vite.log
+            exit 1
+          fi
+          python web/e2e/browser_ws_journey.py
+      - name: Upload synthetic-only failure evidence
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-e2e-failure-${{ github.run_id }}
+          path: |
+            browser-e2e-failure.png
+            /tmp/quality-rails.log
+            /tmp/quality-vite.log
+          if-no-files-found: ignore
+          retention-days: 3
