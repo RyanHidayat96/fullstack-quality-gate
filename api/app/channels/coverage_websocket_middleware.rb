@@ -151,3 +151,6 @@ class CoverageWebSocketMiddleware
     }
   end
 end
+
+CoverageWebsocketMiddleware = CoverageWebSocketMiddleware
+
