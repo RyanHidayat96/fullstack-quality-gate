@@ -11,13 +11,27 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class CurrentEvidenceTests(unittest.TestCase):
-    # TEST-GATE-06: CI claims must match their linked, current evidence index.
+    # TEST-GATE-06: check CI claims using the PDF-required quality report.
     def test_live_checks_are_linked_without_claiming_full_stack_e2e(self):
-        status = (ROOT / "assessment/09-current-status.md").read_text(encoding="utf-8")
+        status = (ROOT / "assessment/02-quality-system.md").read_text(encoding="utf-8")
         self.assertIn("40301673841", status)
         self.assertIn("40295447111", status)
         self.assertIn("DO NOT SHIP", status)
-        self.assertIn("not fully demonstrated", status)
+        self.assertIn("not fully demonstrated", status.lower())
+
+    def test_only_requested_top_level_assessment_reports_remain(self):
+        expected = {"01-audit.md", "02-quality-system.md", "03-release-decision.md"}
+        actual = {p.name for p in (ROOT / "assessment").glob("*.md")}
+        self.assertEqual(expected, actual)
+        self.assertFalse((ROOT / "PLAN.md").exists())
+        self.assertFalse((ROOT / "assessment/evidence").exists())
+        for path in (
+            "assessment/design/phase-3-test-catalog.json",
+            "assessment/requirements/REQ-QUALITY-001.md",
+            "assessment/criteria/AC-QUALITY-001.md",
+            "assessment/designs/DES-QUALITY-001.md",
+        ):
+            self.assertTrue((ROOT / path).is_file(), path)
 
     def test_readiness_claims_reflect_bounded_success(self):
         data = json.loads((ROOT / "assessment/release-readiness.json").read_text(encoding="utf-8"))
