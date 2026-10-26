@@ -34,6 +34,8 @@ The `pr-inputs` job checks PR inputs using the **target branch's trusted validat
 | `api-critical` | `bundle exec rails db:migrate`; `bundle exec rspec spec --format documentation` from `api/` | HTTP, PostgreSQL persistence, service, model, middleware and worker regressions |
 | `web-quality` | `npm ci --ignore-scripts --no-audit --no-fund`; `npm run build`; `node --test tests/*.test.mjs` from `web/` | Unrepeatable dependency/build, TypeScript, frontend configuration and component rendering regressions |
 | `quality-summary` | Requires every relevant upstream job to succeed, including `pr-inputs` for PR events | A failed or skipped mandatory job presented as green |
+| `browser-ws-e2e` | Separate `.github/workflows/live-e2e.yml`: Chromium, Vite, Rails, PostgreSQL and actual WebSocket upgrades | Broken assessor login/invite UI, persistence or WebSocket authorization |
+| `catalog-audit` | `scripts/verify_catalog_coverage.py` reports each of 41 planned IDs with its assertion scope | Unsubstantiated claims of full coverage from file names or comments |
 | `release-decision` | On version tags, `python scripts/release_gate.py` validates the exact tag commit and release-risk ledger | A releasable badge with open P1 risks, missing checks, incomplete acceptance or no owner |
 
 GitHub Actions is in `.github/workflows/quality.yml`, and the human-facing PR inputs are in `.github/pull_request_template.md`. The pipeline runs on pull requests, pushes to `main`, and `v*` tags. Rails CI uses isolated PostgreSQL and Redis service containers and synthetic fixtures; it does not run against a customer environment.
@@ -68,11 +70,20 @@ Follow `api/README.md` and `web/README.md` for environment setup. Tests that use
 
 The RED and GREEN runs above correspond to **real GitHub commits**, with production fixes between them. Earlier local Phase 0–8 notes were interim development records, not substitutes for these remote test results.
 
+## Recent fix coverage after the original release tag
+
+- [PR #12](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/12) added genuine Chromium, persisted UI/API/database and WebSocket upgrade regressions; [live CI](https://github.com/RyanHidayat96/fullstack-quality-gate/actions/runs/40323669835) passed on the latest reviewed `main`.
+- [PR #13](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/13) added a deterministic vacancy-edit-during-fit-gap-generation regression and revalidates the source fingerprint before the final write.
+- [PR #14](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/14) verifies malformed AI output does not leave a partially updated portfolio or incorrectly completed worker state.
+- All three PRs were merged after passing mandatory CI; they are **not** part of the historical `v1.0.0` tagged candidate. The quality net remains fail-closed.
+
 ## What the net catches, and what it does not
 
 **Covered by executable checks:** syntactic policy bypass, absent PR inputs/tests, test execution being reduced to file-presence checks, tenant JWT membership and revocation, selected cross-tenant HTTP/DB mutations, session completion state, stale fit/gap data, malformed portfolio scoring, invitation origin/expiry/revocation, Ruby contracts and React rendering/configuration.
 
-**Not fully demonstrated:** actual browser-driven journeys through an interactive UI, WebSocket upgrade and audio streaming over a real network connection, realistic concurrent requests and jobs, all 41 originally planned test IDs, the exact behavior of external AI services, and product-approved global-admin/SSO semantics. The seven-day candidate invitation lifetime is a provisional security assumption.
+**Live CI now demonstrated:** actual Chromium UI login and invite flow, HTTP-to-PostgreSQL persistence, genuine WebSocket coverage upgrade with allowed/denied token, and revoked-candidate Audio WebSocket handshake refusal. See [main browser run 40323669835](https://github.com/RyanHidayat96/fullstack-quality-gate/actions/runs/40323669835) and [Quality Net 40323669757](https://github.com/RyanHidayat96/fullstack-quality-gate/actions/runs/40323669757), both SUCCESS on commit `19e7839184b8e42c40d1bbcb7833b576f1edcd62`.
+
+**Not fully demonstrated:** real external AI voice-stream integration, all concurrency schedules, every baseline scenario and independent business-policy approval. The executed catalog audit currently classifies **41 items: 22 executable, 12 partial and 7 missing**. `EXECUTABLE` means an assertion is detected in a runnable test, not that full acceptance/UAT has been proven. Seven-day invitation expiry and tenant entitlement rules remain explicit engineering assumptions.
 
 **Repository enforcement gap:** CI may run on every PR, but GitHub currently reports `main` as **unprotected**, with no active repository ruleset. A direct push could bypass the PR gate. The repository administrator must activate rules requiring PRs and `quality-summary` plus relevant critical job checks; passing workflow runs are not proof this setting exists.
 
