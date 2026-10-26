@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2026_10_22_000001) do
+ActiveRecord::Schema[7.0].define(version: 2026_10_26_000002) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -166,6 +166,15 @@ ActiveRecord::Schema[7.0].define(version: 2026_10_22_000001) do
     t.index ["skill_id"], name: "idx_skill_taxonomies_skill_id", unique: true
   end
 
+  create_table "tenant_memberships", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "tenant_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "tenant_id"], name: "idx_tenant_memberships_user_tenant", unique: true
+    t.index ["user_id"], name: "index_tenant_memberships_on_user_id"
+  end
+
   create_table "transcript_turns", force: :cascade do |t|
     t.bigint "session_id", null: false
     t.integer "turn_number", null: false
@@ -215,6 +224,8 @@ ActiveRecord::Schema[7.0].define(version: 2026_10_22_000001) do
   add_foreign_key "portfolio_skills", "portfolios"
   add_foreign_key "portfolios", "sessions"
   add_foreign_key "sessions", "assessments"
+  add_foreign_key "tenant_memberships", "users"
+  add_foreign_key "tenant_memberships", "public.organizations", column: "tenant_id"
   add_foreign_key "transcript_turns", "sessions"
   add_foreign_key "vacancy_skills", "vacancies"
 end
