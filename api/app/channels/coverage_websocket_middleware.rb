@@ -128,6 +128,8 @@ class CoverageWebSocketMiddleware
       return [nil, 'Assessor permission required']
     end
 
+    return [nil, 'Tenant membership required'] unless TenantAccess.permitted?(payload)
+
     org = Organization.find_by(scheme: payload[:scheme])
     return [nil, 'Invalid tenant'] unless org
 
