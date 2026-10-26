@@ -23,8 +23,8 @@ test('INVITE-03: WebSocket client and example target Rails port 3001', () => {
 test('SIGNUP-01: public signup is absent until account enrollment is specified', () => {
   const routes = readFileSync(resolve(root, 'src/App.tsx'), 'utf8');
   const auth = readFileSync(resolve(root, 'src/services/auth.ts'), 'utf8');
-  assert.match(routes, /path="\\/login"/);
-  assert.doesNotMatch(routes, /path="\\/signup"/);
-  assert.doesNotMatch(auth, /signup\\s*:/);
+  assert.ok(routes.includes('path="/login"'));
+  assert.ok(!routes.includes('path="/signup"'));
+  assert.ok(!auth.includes('signup:'));
   assert.equal(existsSync(resolve(root, 'src/pages/auth/SignupPage.tsx')), false);
 });
