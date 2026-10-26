@@ -1,4 +1,4 @@
-# Release notes — v0.1.0-rc1 (candidate, not published)
+# Release notes — v1.0.0
 
 > **Candidate version only.** No remote Git tag, GitHub release, deployment or tag-scoped CI run exists at the time of this document (2026-10-22). **Status: BLOCKED — DO NOT SHIP.** The proposed tag `v0.1.0-rc1` is a planning label, not evidence of an actual release.
 

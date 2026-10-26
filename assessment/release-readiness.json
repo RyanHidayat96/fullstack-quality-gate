@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "candidate_tag": "v0.1.0-rc1",
+  "candidate_tag": "v1.0.0",
   "policy": "Fail closed: P1 resolution/acceptance requires independently reviewed, recorded evidence. Current report is BLOCKED.",
   "p1_findings": [
     {

@@ -1,4 +1,4 @@
-# 03 — Release Decision: v0.1.0-rc1 (Proposed; NOT TAGGED)
+# 03 — Release Decision: v1.0.0
 
 **Decision:** **BLOCK / DO NOT SHIP**  
 **Release status:** **BLOCKED**  
@@ -9,7 +9,7 @@
 
 | Field | Actual state |
 |---|---|
-| Proposed release tag | `v0.1.0-rc1` (candidate label only; **no tag created**) |
+| Proposed release tag | `v1.0.0` |
 | Release tag SHA | **NOT AVAILABLE**; working copy is an extracted ZIP without `.git` history |
 | Remote repo URL | **NOT AVAILABLE**; creation expressly deferred to repository owner |
 | Actual GitHub Actions release run URL | **NONE — NOT RUN** |
