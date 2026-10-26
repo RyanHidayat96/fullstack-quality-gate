@@ -55,7 +55,13 @@ def extract_tests(path: Path) -> list[tuple[str, bool]]:
         name = title if title is not None else method.replace("_", "-")
         end = declarations[index + 1].start() if index + 1 < len(declarations) else len(content)
         snippet = content[match.end():min(end, match.end() + 2500)]
-        result.append((name, bool(ASSERTION.search(snippet))))
+        # Comments are not executable assertions, even when they contain
+        # words like "expect(result)"; only count assertion-bearing code.
+        executable = "\\n".join(
+            line for line in snippet.splitlines()
+            if not line.lstrip().startswith(("#", "//"))
+        )
+        result.append((name, bool(ASSERTION.search(executable))))
     return result
 
 
