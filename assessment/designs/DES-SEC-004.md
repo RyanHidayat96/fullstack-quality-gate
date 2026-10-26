@@ -1,0 +1,11 @@
+# DES-SEC-004 — Persist token expiry and revocation
+- Design ID: DES-SEC-004
+- Requirement: REQ-SEC-004
+- Acceptance IDs: AC-SEC-004
+- Planned test IDs: INVITE-04
+- Affected layers: PostgreSQL sessions, session model, Rails HTTP actions, candidate Audio WebSocket token branch and tests.
+- Proposed solution: Add expiration/revocation timestamps and a shared model predicate; protect revoke action by existing assessor/tenant checks.
+- Data migration / backwards compatibility: Backfill existing expiry from creation date plus seven days; do not make old invitations immortal. Permit configurable future expiry for new invitations after an approved policy change.
+- Alternatives and trade-offs: Unlimited tokens improve convenience but cannot be revoked. Reject expired tokens rather than silently renewing them.
+- Failure handling and rollback: Return not found for invalid candidate links and deny WebSocket connection. Preserve audit timestamps after revoke.
+- Risks and open questions: Candidate UX for expired links and exact TTL require product approval; this patch does not claim a full browser handshake was executed.
