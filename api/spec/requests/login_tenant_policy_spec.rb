@@ -8,7 +8,9 @@ RSpec.describe 'Tenant-scoped authentication', type: :request do
   let!(:other) { Organization.create!(name: 'Other', scheme: 'other-tenant', identifier: 'other-tenant', host: 'other.example.invalid') }
 
   def login_as(scheme = nil)
-    headers = scheme ? { 'X-Tenant-Scheme' => scheme } : {}
+    # Distinct RFC 5737 client IP per example keeps the production login throttle intact.
+    headers = { 'REMOTE_ADDR' => "192.0.2.#{RSpec.current_example.metadata[:line_number] % 200 + 1}" }
+    headers['X-Tenant-Scheme'] = scheme if scheme
     post '/api/v1/auth/login', params: { email: admin.email, password: password }, headers: headers
   end
 
