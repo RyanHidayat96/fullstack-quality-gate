@@ -26,6 +26,7 @@ buildSync({
   format: 'cjs',
   jsx: 'automatic',
   outdir: scratch,
+  entryNames: '[name]',
   outExtension: { '.js': '.cjs' },
   logLevel: 'silent'
 });
