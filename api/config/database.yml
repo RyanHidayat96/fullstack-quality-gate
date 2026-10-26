@@ -1,4 +1,4 @@
-# AI Interview shares the same PostgreSQL database as rakamin-api.
+# AI Interview shares the same PostgreSQL database as upstream service.
 # Organizations live in the public schema and are used for tenant resolution.
 # AI interview tables are in the ai_interview schema.
 
@@ -16,11 +16,11 @@ default: &default
 
 development:
   <<: *default
-  database: rakamin_development
+  database: quality_net_development
 
 test:
   <<: *default
-  database: rakamin_test
+  database: quality_net_test
 
 staging:
   <<: *default

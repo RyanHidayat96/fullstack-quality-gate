@@ -2,6 +2,7 @@
 > **Reviewer Tour:** Begin with [Reviewer Start Here](assessment/08-reviewer-start-here.md), then inspect [Platform Audit](assessment/01-audit.md), [Quality System & Red-to-Green](assessment/02-quality-system.md), [Release Decision](assessment/03-release-decision.md), and [Live Defense Guide](assessment/08-live-defense.md).  
 > **Workflow Gate Demonstrations:** [PR #1 (Gate Blocked / RED)](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/1) | [PR #2 (Gate Passed / GREEN)](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/2) | [Release Tag v1.0.0 CI Run](https://github.com/RyanHidayat96/fullstack-quality-gate/actions/runs/40277694610).  
 > **Current Release Decision:** **BLOCKED / DO NOT SHIP** (fail-closed release gate evaluated via `scripts/release_gate.py`).
+> **Current verification:** [Status and known gaps](assessment/09-current-status.md) · [PR #3 expanded test execution](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/3). Phase handoff logs are historical snapshots, not live GitHub status.
 
 ---
 

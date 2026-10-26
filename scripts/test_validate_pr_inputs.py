@@ -82,6 +82,12 @@ Justification: code requires tests
         self.assertEqual('METADATA_PASS', result['result'])
         self.assertFalse(result['tests_executed'])
 
+    def test_TEST_GATE_06_positive_metadata_requires_human_review(self):
+        result = validate(self.root, self.body, self.changed)
+        self.assertTrue(result['human_review_required'])
+        self.assertEqual('METADATA_PASS', result['result'])
+        self.assertFalse(result['tests_executed'])
+
     def test_DOR_01_missing_spec(self):
         self.assert_blocked(self.body.replace(f'Spec: {self.spec}', ''))
 

@@ -1,5 +1,7 @@
 # 03 — Release Decision: v1.0.0
 
+> **Current GitHub status (2026-10-26):** The annotated `v1.0.0` tag and [tag CI run](https://github.com/RyanHidayat96/fullstack-quality-gate/actions/runs/40277694610) exist. Technical checks passed, while `release-decision` correctly blocked release. Statements below that say there is no GitHub repository, tag, lockfile, or executed Rails CI describe the earlier local snapshot, **not the current state**. Refer to [current verification](09-current-status.md). The release remains **DO NOT SHIP**.
+
 **Decision:** **BLOCK / DO NOT SHIP**  
 **Release status:** **BLOCKED**  
 **Decision date:** 2026-10-22 (Asia/Jakarta)  

@@ -1,5 +1,7 @@
 # Final Submission Checklist — OWNER CONTROLLED, NOT YET SUBMITTED
 
+> **Current status (2026-10-26):** The GitHub repository, [PR #1](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/1), [PR #2](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/2), and [v1.0.0 release CI](https://github.com/RyanHidayat96/fullstack-quality-gate/actions/runs/40277694610) now exist. Any earlier text below stating they do not exist is a **historical snapshot**. See [current verification](09-current-status.md). Product release is **BLOCKED**; hiring-platform submission is not evidenced.
+
 **Current verdict:** `BLOCKED / NOT SUBMISSION READY` (2026-10-22 Asia/Jakarta). The repository owner expressly deferred independent repo creation; no GitHub repository/tag/PR or hiring-platform submission is claimed. The actual platform deadline has not been supplied or verified. Do not assume the brief's multi-day estimate is the deadline.
 
 ## A. Deliverables and reviewability

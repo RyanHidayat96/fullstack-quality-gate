@@ -59,7 +59,7 @@ spec:
       # ── Main container ──────────────────────────────────────────────────────
       containers:
         - name: ai-interview-api
-          image: asia-southeast2-docker.pkg.dev/rakamin-poc/rakamin-images/ai-interview-api:latest
+          image: registry.example.invalid/quality-net/backend:configure-before-deploy
           imagePullPolicy: Always
           command: ["bundle"]
           args: ["exec", "puma", "-C", "config/puma.rb"]
