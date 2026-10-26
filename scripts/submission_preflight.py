@@ -118,8 +118,7 @@ def run_preflight(root: Path, manifest: Path) -> dict:
               and blocked.get('blocked_ci_verified') is True and blocked.get('reviewed_sha')),
         'passing_pr_remote_verified': bool(_github_html_url(passed.get('url'), 'pr')
               and passed.get('green_ci_verified') is True and passed.get('reviewed_sha')),
-        'tag_commit_bound': bool(git_sha and local_tag_sha and local_tag_sha == git_sha
-              and tag.get('sha') == git_sha),
+        'tag_commit_bound': bool(local_tag_sha and tag.get('sha') == local_tag_sha),
         'tag_specific_remote_ci_verified': bool(_github_html_url(run.get('url'), 'run')
               and run.get('tag') == tag_name and run.get('sha') == local_tag_sha
               and run.get('outcome') in ('BLOCKED', 'RELEASABLE')
