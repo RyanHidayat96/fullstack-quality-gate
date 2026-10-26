@@ -100,7 +100,11 @@ class CriticalSourceRegressions < Minitest::Test
 
   # SESSION-01: known defect. Rejected pending completion must persist nothing.
   def test_SESSION_01_pending_audio_complete_must_not_finalize
-    s = Struct.new(:status) { def ended? = status == 'ended'; def active? = status == 'active' }.new('pending')
+    s = Struct.new(:status) do
+      def ended? = status == 'ended'
+      def active? = status == 'active'
+      def invite_valid? = true
+    end.new('pending')
     Session.test_session = s
     controller = Api::V1::SessionsController.new
     controller.params = {token: 'synthetic-token'}
@@ -168,6 +172,7 @@ class CriticalSourceRegressions < Minitest::Test
     session = Struct.new(:status, :ready_to_end_at, :coverage_maps) do
       def ended? = status == 'ended'
       def active? = status == 'active'
+      def invite_valid? = true
     end.new('active', nil, maps)
     Session.test_session = session
     controller = Api::V1::SessionsController.new
@@ -184,6 +189,7 @@ class CriticalSourceRegressions < Minitest::Test
     session = Struct.new(:status, :ready_to_end_at, :coverage_maps) do
       def ended? = status == 'ended'
       def active? = status == 'active'
+      def invite_valid? = true
     end.new('active', Time.now, maps)
     Session.test_session = session
     controller = Api::V1::SessionsController.new
@@ -199,6 +205,7 @@ class CriticalSourceRegressions < Minitest::Test
     session = Struct.new(:status, :ready_to_end_at, :coverage_maps) do
       def ended? = status == 'ended'
       def active? = status == 'active'
+      def invite_valid? = true
     end.new('active', Time.now, maps)
     Session.test_session = session
     controller = Api::V1::SessionsController.new
