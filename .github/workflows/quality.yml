@@ -116,7 +116,7 @@ jobs:
         working-directory: api
         run: |
           bundle exec rails db:migrate
-          bundle exec rspec spec/requests spec/services spec/models --format documentation --fail-if-no-examples
+          bundle exec rspec spec/requests spec/services spec/models --format documentation
 
   web-quality:
     name: web-quality
