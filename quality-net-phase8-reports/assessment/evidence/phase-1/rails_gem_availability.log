@@ -1,6 +1,0 @@
-$ ruby -e require "rails"; puts Rails.version
-exit_code=1
-
-<internal:/usr/lib/ruby/vendor_ruby/rubygems/core_ext/kernel_require.rb>:136:in `require': cannot load such file -- rails (LoadError)
-	from <internal:/usr/lib/ruby/vendor_ruby/rubygems/core_ext/kernel_require.rb>:136:in `require'
-	from -e:1:in `<main>'

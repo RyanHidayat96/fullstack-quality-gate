@@ -24,3 +24,4 @@ web/.vite/
 
 # One-off local release verdict output
 release-verdict.json
+/docs/

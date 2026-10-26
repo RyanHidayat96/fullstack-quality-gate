@@ -1,8 +1,0 @@
-$ ruby -rbundler -e puts 'Bundler: ' + Bundler::VERSION; abort 'Rails gem unavailable' unless Gem::Specification.find_all_by_name('rails').any?
-[exit_code] 1
-
-[stdout]
-Bundler: 2.5.22
-
-[stderr]
-Rails gem unavailable
