@@ -78,12 +78,12 @@ jobs:
       postgres:
         image: postgres:16
         env:
-          POSTGRES_DB: rakamin_test
+          POSTGRES_DB: quality_net_test
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
         ports: ['5432:5432']
         options: >-
-          --health-cmd "pg_isready -U postgres -d rakamin_test"
+          --health-cmd "pg_isready -U postgres -d quality_net_test"
           --health-interval 5s --health-timeout 3s --health-retries 12
       redis:
         image: redis:7-alpine
@@ -97,7 +97,7 @@ jobs:
       DB_PORT: '5432'
       DB_USERNAME: postgres
       DB_PASSWORD: postgres
-      DB_NAME: rakamin_test
+      DB_NAME: quality_net_test
       REDIS_URL: redis://127.0.0.1:6379/1
       SECRET_KEY_BASE: test_only_random_placeholder_not_for_production
       GEMINI_API_KEY: test_only_no_external_requests
