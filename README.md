@@ -51,8 +51,15 @@ node --test tests/*.test.mjs
 
 CI executes the same core checks on pull requests and `main`. A separate tag-triggered release decision blocks on unresolved risks even when technical tests pass.
 
+## Current verified CI and fixes
+
+- [Quality Net on `main` — SUCCESS](https://github.com/RyanHidayat96/fullstack-quality-gate/actions/runs/40323669757)
+- [Chromium, PostgreSQL and real WebSocket E2E — SUCCESS](https://github.com/RyanHidayat96/fullstack-quality-gate/actions/runs/40323669835)
+- [PR #12](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/12): browser/WS verification; [PR #13](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/13): stale fit-gap race; [PR #14](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/14): AI worker integrity.
+- The historical `v1.0.0` tag **predates these fixes** and correctly reports BLOCKED. Do not interpret current `main` CI as a passing release verdict for that old tag.
+
 ## Known limits
 
-PostgreSQL-backed request coverage and component rendering are verified, but actual browser-to-API-to-DB journeys, upgraded WebSocket streaming, exhaustive test catalog coverage and realistic concurrency still need further verification. The `main` branch has not been verified as protected. Historical Git objects and redistribution rights are not cleared even though the active application source passes a naming guard.
+GitHub Actions now verifies real Chromium UI login and invitation against Rails/PostgreSQL, plus actual WebSocket handshakes for tenant coverage and revoked candidate tokens. External AI audio streaming, broader concurrency and exhaustive coverage remain outside proven scope. The 41-scenario catalog audit currently reports **22 executable, 12 partial, 7 missing**. `main` is still unprotected, and historical Git objects (including the original imported brief and old working files) remain accessible despite the clean active application source. No publication/redistribution clearance is claimed.
 
 The [release decision](assessment/03-release-decision.md) records why the product remains blocked and which approvals are missing. No secret, publication clearance or production sign-off is implied.
