@@ -1,5 +1,7 @@
 # 01 — Risk-Based Platform Audit & Defect Triage
 
+> **Current post-GitHub status (2026-10-26):** For updated CI links, see [09-current-status.md](09-current-status.md). Tenant membership authorization (FIND-011) has a verified code-level fix ([PR #5](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/5)), but business-wide role/SSO policy approval is outstanding. Invitation expiry/revocation (FIND-008) and unsupported signup removal (FIND-013) now have code and tests ([PR #9](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/9), [PR #8](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/8)); their product decisions remain provisional. Earlier Phase 2/5 observations below are historical. Release remains BLOCKED.
+
 > **Phase 5 remediation update (2026-10-22):** 7 of 8 originally ranked P1 findings have code-level changes; all seven remain **PENDING DATABASE/HTTP VERIFICATION**. `FIND-011` is still `OPEN` because tenant-admin membership rules are unavailable. The release recommendation **DO NOT SHIP** remains unchanged. Details and exact test evidence: `assessment/PHASE_5_HANDOFF.md` and `assessment/evidence/phase-5/`. Original Phase 2 pre-fix source evidence is preserved below.
 
 > **Release recommendation:** **DO NOT SHIP / G3 BLOCKED** based on high-consequence code-level defects and an unverified integration baseline. This is a *preliminary* decision, not a claim that a deployed system was compromised or that every theoretical scenario is reachable in production.  
@@ -24,7 +26,7 @@ This repository implements a two-service interview-assessment product: assessor-
 | 4 · FIND-005 | **P1** | Invalid AI level becomes valid-looking stored level via `.to_i.clamp` | BUILT_WRONG (data correctness invariant) | SRC + PROBE(expression) | CODE_FIXED_UNVERIFIED | BLOCK |
 | 5 · FIND-003 | **P1** | Repeated vacancy skill labels silently drop comparisons | SPEC_AMBIGUOUS + observed behavior | SRC + PROBE | CODE_FIXED_UNVERIFIED | BLOCK pending contract |
 | 6 · FIND-007 | **P1** | Coverage WebSocket validates token/tenant but not assessor role | BUILT_WRONG (auth policy inferred) | SRC; RUNTIME-UNVERIFIED | CODE_FIXED_UNVERIFIED | BLOCK |
-| 7 · FIND-011 | **P1** | Login uses caller-selected tenant scheme without verified tenant membership | SPEC_AMBIGUOUS | SRC; RUNTIME-UNVERIFIED | OPEN | BLOCK pending policy |
+| 7 · FIND-011 | **P1** | Login uses caller-selected tenant scheme without verified tenant membership | SPEC_AMBIGUOUS | SRC + Rails/PG regression | CODE_FIXED_UNVERIFIED | BLOCK pending policy |
 | 8 · FIND-006 | **P1** | Default candidate invite URL resolves to API instead of web host | BUILT_WRONG (documented local setup) | SRC + PROBE | CODE_FIXED_UNVERIFIED | BLOCK local release |
 | 9 · FIND-008 | **P2** | Invite token expiry/revocation rule not defined in snapshot | SPEC_MISSING | SRC; RUNTIME-UNVERIFIED | OPEN | CONDITIONAL |
 | 10 · FIND-009 | **P2** | No versioned automated suite or PR/release CI gate in source snapshot | SPEC_MISSING (quality artifacts) | SRC inventory | OPEN | BLOCK (DoR/G3) |
@@ -47,12 +49,12 @@ Per the brief's requirement to explicitly classify each audit item's final outco
 | **FIND-005** | **P1** | AI level coercion into valid scores | **FIXED** | Verified in `portfolio_level_spec.rb` (Generator spec) |
 | **FIND-006** | **P1** | Local invite URL host mismatch | **FIXED** | Verified via public frontend origin separation |
 | **FIND-007** | **P1** | Coverage WebSocket role authorization | **FIXED** | Verified in `coverage_ws_auth_spec.rb` (Middleware spec) |
-| **FIND-011** | **P1** | Tenant scheme login without membership check | **REMAINING** | OPEN: Blocked pending formal Product Owner authorization policy |
-| **FIND-008** | **P2** | Invite token expiry & revocation policy absent | **REMAINING** | OPEN: Spec missing, link lifecycle undefined in product |
+| **FIND-011** | **P1** | Tenant scheme login without membership check | **CODE FIXED — POLICY PENDING** | PR #5 Rails/DB RED→GREEN; independent global-admin/SSO product rule is not approved |
+| **FIND-008** | **P2** | Invite token expiry & revocation policy absent | **CODE FIXED — POLICY PENDING** | PR #9 Rails/DB RED→GREEN; seven-day lifetime is an engineering assumption |
 | **FIND-009** | **P2** | Missing versioned automated test net / CI gate | **FIXED** | Verified: GitHub Actions CI + PR gate + release gating live |
 | **FIND-010** | **P2** | Missing linked PRD/AC/design inputs (DoR) | **FIXED** | Verified: REQ, AC, DES docs + `phase-3-test-catalog.json` |
 | **FIND-012** | **P2** | API address and monorepo port conflict | **FIXED** | Verified: `api_config.test.mjs` Node contract tests PASS |
-| **FIND-013** | **P2** | Signup UI without API route | **REMAINING** | OPEN: Spec missing, signup endpoint not defined |
+| **FIND-013** | **P2** | Signup UI without API route | **REMOVED ORPHAN CLIENT** | PR #8 removes unreachable signup and tests no unsupported public registration |
 
 ### 1.3 Proven versus unproven
 
