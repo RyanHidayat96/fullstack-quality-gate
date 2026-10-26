@@ -262,5 +262,14 @@ Justification: code requires tests
         self.assertEqual(1, main(['--repo', str(self.root), '--event', str(event_file)]))
 
 
+    def test_TEST_GATE_06_ci_contract_enforces_executable_coverage(self):
+        from test_ci_contract import check_workflow
+        workflow = Path(__file__).resolve().parents[1] / '.github/workflows/quality.yml'
+        contents = workflow.read_text(encoding='utf-8')
+        self.assertTrue(check_workflow(contents))
+        with self.assertRaises(ValueError):
+            check_workflow(contents.replace('node --test tests/*.test.mjs', 'echo skipped'))
+
+
 if __name__ == '__main__':
     unittest.main()

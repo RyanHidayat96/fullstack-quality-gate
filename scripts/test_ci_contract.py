@@ -28,6 +28,15 @@ def check_workflow(content):
         raise ValueError('Only non-PR may skip pr-inputs')
     if 'web/package-lock.json' not in content or 'npm ci' not in content or 'bundle exec rspec' not in content:
         raise ValueError('Required reproducibility/build checks missing')
+    # TEST-GATE-06: executing only one RSpec directory or counting test filenames
+    # cannot prove the critical backend and frontend checks have actually run.
+    if 'bundle exec rspec spec --format documentation' not in content:
+        raise ValueError('All RSpec directories (including middleware and workers) must run')
+    web = content.split('  web-quality:', 1)[-1].split('  quality-summary:', 1)[0]
+    if 'working-directory: web' not in web or 'node --test tests/*.test.mjs' not in web:
+        raise ValueError('Front-end tests must be executed, not counted by filename')
+    if re.search(r'test -n "\$\(find web/src', web):
+        raise ValueError('A filename-presence check is not a component test')
     # The PR can edit its own scripts; do not run the gate implementation from PR HEAD.
     if not re.search(r'(?m)^\s*ref: \$\{\{ github\.event\.pull_request\.base\.sha \}\}\s*$', content):
         raise ValueError('PR validator must be checked out from the target base SHA')
@@ -62,6 +71,16 @@ class WorkflowContractTests(unittest.TestCase):
     def test_no_missing_rspects(self):
         with self.assertRaises(ValueError):
             check_workflow(self.workflow.replace('bundle exec rspec', 'echo rspec'))
+
+    def test_all_rspec_folders_are_included(self):
+        with self.assertRaisesRegex(ValueError, 'All RSpec directories'):
+            check_workflow(self.workflow.replace('bundle exec rspec spec --format documentation',
+                                                 'bundle exec rspec spec/requests spec/services spec/models --format documentation'))
+
+    def test_frontend_tests_must_execute(self):
+        with self.assertRaisesRegex(ValueError, 'Front-end tests must be executed'):
+            check_workflow(self.workflow.replace('node --test tests/*.test.mjs',
+                                                 'find web/src -name "*.test.ts"'))
 
     def test_pr_validator_cannot_run_from_untrusted_head(self):
         with self.assertRaises(ValueError):
