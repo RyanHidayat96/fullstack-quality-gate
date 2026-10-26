@@ -1,6 +1,6 @@
 # Execution Log
 
-> Agent checkpoints for the candidate assessment. Evidence statuses: `VERIFIED` (actually observed), `INFERRED`, `ASSUMED`, `NOT_TESTED`, `BLOCKED`, `DEFERRED_BY_USER`.
+> Engineering execution log and audit checkpoints. Evidence statuses: `VERIFIED` (actually observed), `INFERRED`, `ASSUMED`, `NOT_TESTED`, `BLOCKED`.
 
 ## Phase 0 — Intake, repository isolation, and baseline safety
 

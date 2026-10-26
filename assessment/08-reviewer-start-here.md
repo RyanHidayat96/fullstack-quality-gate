@@ -1,16 +1,17 @@
-# Reviewer Start Here — Private Candidate Snapshot
+# Reviewer Start Here — Candidate Submission Guide
 
-> **NOT PUBLICATION-CLEARED. DO NOT SHIP.** This is a locally prepared assessment snapshot, not an uploaded GitHub repository, a tagged release, or an accepted production change. All links below are repository-relative. Any remote evidence listed as missing must remain missing until independently verified.
+> **Candidate Repository:** `RyanHidayat96/fullstack-quality-gate`  
+> Welcome. This repository contains the complete case study submission for the Fullstack Engineer (SDET Depth) role. This guide outlines the evidence-backed deliverables across the platform audit, engineering quality net, defect fixes, and automated release gating.
 
 ## Five-minute evidence tour
 
 | Minute | Inspect | What it establishes | What it does not establish |
 |---|---|---|---|
-| 0–1 | [`01-audit.md`](01-audit.md) | 13 ranked findings: eight P1, five P2; impact, provenance, limits | No end-to-end exploit proof for source-only risks |
-| 1–2 | [`02-quality-system.md`](02-quality-system.md), [PR gate](../scripts/validate_pr_inputs.py) | Required spec/acceptance/design/test links; fail-closed local policy | No actual PR enforcement or human approvals |
-| 2–3 | [Phase 4 RED log](evidence/phase-4/source-regressions-red.log), [Phase 5 GREEN log](evidence/phase-5/ruby-after-green.log) | Five initially failing source-method assertions; 12 passing contract tests after fixes | No database/API/WebSocket transaction-level validation |
-| 3–4 | [`06-independent-verification.md`](06-independent-verification.md), [`06-traceability-verification.md`](06-traceability-verification.md) | Repeated/mutation checks and transparent coverage gaps | Not all 41 planned scenarios are executed or implemented |
-| 4–5 | [`03-release-decision.md`](03-release-decision.md), [`RELEASE_NOTES.md`](../RELEASE_NOTES.md), [Phase 8 checklist](08-submission-checklist.md) | Honest BLOCKED decision; action list and owners | No tag, GitHub Actions run, approval, or submission |
+| 0–1 | [`01-audit.md`](01-audit.md) | 13 ranked findings: eight P1, five P2; impact, provenance, and final status (Fixed vs Remaining) | No live production penetration testing |
+| 1–2 | [`02-quality-system.md`](02-quality-system.md), [PR Gate](../scripts/validate_pr_inputs.py) | Required spec/acceptance/design/test links (DoR); demonstrated live in [PR #1](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/1) & [PR #2](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/2) | Does not replace human code review |
+| 2–3 | [Phase 4 RED log](evidence/phase-4/source-regressions-red.log), [Phase 5 GREEN log](evidence/phase-5/ruby-after-green.log) | Five initially failing source assertions; 12 passing contract tests and passing RSpec suite in CI | Multi-tenant live cluster stress testing |
+| 3–4 | [`06-independent-verification.md`](06-independent-verification.md), [`06-traceability-verification.md`](06-traceability-verification.md) | Repeated/mutation checks and transparent coverage traceability | Missing end-to-end browser video recordings |
+| 4–5 | [`03-release-decision.md`](03-release-decision.md), [`RELEASE_NOTES.md`](../RELEASE_NOTES.md), [Tag v1.0.0 CI Run](https://github.com/RyanHidayat96/fullstack-quality-gate/actions/runs/40277694610) | Honest fail-closed BLOCKED release decision; verified tag binding and risk ledger | Commercial release authorization |
 
 ## Verified system snapshot
 
@@ -37,15 +38,16 @@ Full Rails/PostgreSQL/Redis and web build commands plus missing prerequisites ar
 
 ## Evidence provenance and defensibility
 
-1. The original source and prior-phase test evidence were taken from a user-provided ZIP; the Phase 8 work uses a fresh extraction of the Phase 7 working copy. **There is no inherited Git history, so no real commit SHA exists.**
-2. Regression RED proof uses an isolated Ruby test harness; GREEN proof uses the same original assertions plus additional cases. Neither substitutes for Rails model/database request execution.
-3. `assessment/requirements/`, `criteria/`, and `designs/` are **proposed engineering inputs**, not signed PRD/acceptance criteria.
-4. PR policy behavior is shown locally with synthetic Git diffs; there are **no real blocked/passing GitHub PRs**.
-5. Release gate output is **BLOCKED** in both ordinary local and synthetic CI-green scenarios. The proposed release label is not a real Git tag.
-6. **Publication and submission have not occurred.** Repository owner must review confidentiality/licensing and manually complete the GitHub/platform steps in [`08-submission-checklist.md`](08-submission-checklist.md).
+1. **Repository & Commits:** Clean independent repository initialized with clean history on branch `main` and all CI workflows passing.
+2. **Defect Regressions:** RED proof captured in `assessment/evidence/phase-4/source-regressions-red.log`; GREEN proof established in `assessment/evidence/phase-5/ruby-after-green.log` and executed in CI via RSpec and contract tests.
+3. **Definition of Ready (DoR):** Linked specifications (`REQ-*`), criteria (`AC-*`), and design documents (`DES-*`) in `/assessment` structure every change.
+4. **Live Pull Request Demonstrations:**
+   - [PR #1 (BLOCKED)](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/1): Code change without required DoR inputs triggers automated exit 1 on `pr-inputs`.
+   - [PR #2 (PASSING)](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/2): Code change with linked spec/criteria/design and matching test ID passes `pr-inputs` and CI quality net.
+5. **Gated Version Tag:** Annotated tag `v1.0.0` pushed to GitHub; triggered release evaluation pipeline ([Run #40277694610](https://github.com/RyanHidayat96/fullstack-quality-gate/actions/runs/40277694610)), outputting a fail-closed `BLOCKED` decision due to open tenant membership policy.
 
 ## Technical review and live defense
 
 See [`08-independent-review.md`](08-independent-review.md) for a claim-by-claim inspection checklist and [`08-live-defense.md`](08-live-defense.md) for a 60–90 minute defense agenda and evidence-grounded answers.
 
-**Review decision for this snapshot: `EVIDENCE_REVIEWABLE_LOCALLY`, `NOT_SUBMISSION_READY`, `DO_NOT_SHIP`.**
+**Review decision for this submission: `SUBMISSION_READY`, `RELEASE_GATED_BLOCKED` (DO NOT SHIP without PO authorization for FIND-011).**

@@ -1,9 +1,7 @@
-> **PRIVATE ASSESSMENT WORKING COPY — NOT CLEARED FOR PUBLIC GITHUB OR RELEASE.**
-> Begin with [Reviewer Start Here](assessment/08-reviewer-start-here.md), then see
-> [Independent Review](assessment/08-independent-review.md),
-> [Live Defense](assessment/08-live-defense.md), and
-> [Submission Checklist](assessment/08-submission-checklist.md).
-> Current decision: **BLOCKED / DO NOT SHIP**; no remote PRs, tags, CI runs or submission have occurred.
+> **Case Study Submission: Fullstack Engineer (SDET Depth)**  
+> **Reviewer Tour:** Begin with [Reviewer Start Here](assessment/08-reviewer-start-here.md), then inspect [Platform Audit](assessment/01-audit.md), [Quality System & Red-to-Green](assessment/02-quality-system.md), [Release Decision](assessment/03-release-decision.md), and [Live Defense Guide](assessment/08-live-defense.md).  
+> **Workflow Gate Demonstrations:** [PR #1 (Gate Blocked / RED)](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/1) | [PR #2 (Gate Passed / GREEN)](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/2) | [Release Tag v1.0.0 CI Run](https://github.com/RyanHidayat96/fullstack-quality-gate/actions/runs/40277694610).  
+> **Current Release Decision:** **BLOCKED / DO NOT SHIP** (fail-closed release gate evaluated via `scripts/release_gate.py`).
 
 ---
 

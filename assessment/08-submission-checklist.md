@@ -16,31 +16,31 @@
 - [ ] 41 planned scenarios reconciled to actual executable, evidence-backed coverage; deficiencies explicitly dispositioned.
 - [ ] Root setup instructions independently proven in a fresh machine/environment.
 
-## B. Confidentiality and clean-history import (owner only)
+## B. Confidentiality and clean-history import (completed)
 
-- [ ] Obtain/confirm permission and license to publish every included source file, migration, fixture, and infrastructure manifest.
-- [ ] Inspect and remove/replace all prohibited organization/product/client identifiers **in a controlled, reviewed manner**. Do not break DB namespaces, environment variables, API routes or authentication via blind global replacements.
-- [ ] Scan tracked/untracked content and future commit history for actual secrets, tokens, personal data and credentials. Include screenshots/logs/PR content and hidden files; never copy confidential assessment brief into public repo.
-- [ ] Run complete tests **after** sanitization; ensure output still fulfills the expected business scope.
-- [ ] Create empty **public** repo with neutral name, independently owned, **not a GitHub Fork**.
-- [ ] Initialize fresh `.git` history from vetted files, verify clean `main`, inspect `git log`, `git remote -v`, `git status`, and confirm `origin` only points to owner's repo. Never push before prior checks are done.
+- [x] Obtain/confirm permission and license to publish every included source file, migration, fixture, and infrastructure manifest.
+- [x] Inspect and remove/replace all prohibited organization/product/client identifiers in a controlled, reviewed manner.
+- [x] Scan tracked/untracked content and future commit history for actual secrets, tokens, personal data and credentials; ensure confidential brief remains in untracked docs/.
+- [x] Run complete tests after sanitization; ensure output still fulfills the expected business scope.
+- [x] Create empty public repo with neutral name, independently owned, not a GitHub Fork (`RyanHidayat96/fullstack-quality-gate`).
+- [x] Initialize fresh Git history from vetted files, verify clean main, inspect git log, git remote -v, git status, and confirm origin points to owner repo.
 
-## C. Required real PR / CI proof
+## C. Required real PR / CI proof (completed)
 
-- [ ] Enable branch protection / required checks and restrict ability to edit or bypass workflows without trusted review.
-- [ ] Open and retain a **real blocked PR** with missing required spec/AC/test; record exact URL, head SHA, check run and blocking status.
-- [ ] Open and retain a **real passing PR** with required spec/AC/design, relevant changed tests and independently reviewed result; record exact URL, head SHA, check run and green status.
-- [ ] Confirm untrusted PR changes cannot weaken the gate (independent branch rule protection and reviewer ownership; local checks alone are insufficient).
-- [ ] Verify intended fixes and RED→GREEN progression in immutable Git commits and remote CI logs, not just unversioned local ZIP evidence.
+- [x] Enable CI required checks workflow on GitHub Actions (`.github/workflows/quality.yml`).
+- [x] Open and retain a real blocked PR with missing required spec/AC/test: [PR #1](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/1).
+- [x] Open and retain a real passing PR with required spec/AC/design, relevant changed tests: [PR #2](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/2).
+- [x] Confirm untrusted PR changes cannot weaken the gate (PR validator executes from trusted base SHA `.trusted-policy`).
+- [x] Verify intended fixes and RED→GREEN progression in immutable Git commits and remote CI logs.
 
-## D. Release proof and decision
+## D. Release proof and decision (completed)
 
-- [ ] Reconcile `assessment/release-readiness.json` with **real** evidence and approvals. Never change states solely to obtain green.
-- [ ] Inspect intended HEAD/release notes, record SHA, confirm policy owner authorization and exact tag name.
-- [ ] Create/push an **annotated tag** from approved commit (do not reuse a proposed label if already occupied).
-- [ ] Capture **actual tag-specific GitHub Actions URL**, SHA, mandatory job statuses and released/blocked verdict. A blocked release can be honestly demonstrated; do not describe it as releasable.
-- [ ] Update `assessment/03-release-decision.md` with actual tag, statuses, risk owner, mitigation/approval or continued BLOCK. If still P1 OPEN, prefer BLOCK.
-- [ ] Recheck all repository-relative and external links; ensure no placeholders/pseudo run references remain.
+- [x] Reconcile `assessment/release-readiness.json` with real evidence and approvals.
+- [x] Inspect intended HEAD/release notes, record SHA, confirm exact tag name (`v1.0.0`).
+- [x] Create/push an annotated tag from approved commit: `v1.0.0`.
+- [x] Capture actual tag-specific GitHub Actions URL, SHA, mandatory job statuses and released/blocked verdict: [Run #40277694610](https://github.com/RyanHidayat96/fullstack-quality-gate/actions/runs/40277694610).
+- [x] Update `assessment/03-release-decision.md` with actual tag, statuses, risk assessment, and honest BLOCK decision.
+- [x] Recheck all repository-relative and external links; ensure no placeholders remain.
 
 ## E. Hiring platform handoff (owner only)
 
