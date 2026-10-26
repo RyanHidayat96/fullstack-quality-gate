@@ -97,5 +97,21 @@ class WorkflowContractTests(unittest.TestCase):
             check_workflow(self.workflow.replace('if: always()', 'if: success()'))
 
 
+    def test_TEST_GATE_06_real_browser_and_websocket_workflow_cannot_be_removed(self):
+        workflow = (PATH.parent / 'live-e2e.yml').read_text(encoding='utf-8')
+        required = (
+            'browser-ws-e2e:',
+            'catalog-audit:',
+            'runs-on: ubuntu-24.04',
+            'python web/e2e/browser_ws_journey.py',
+            'python scripts/verify_catalog_coverage.py --output scenario-coverage.json',
+            'python -m playwright install --with-deps chromium',
+        )
+        for requirement in required:
+            with self.subTest(requirement=requirement):
+                self.assertIn(requirement, workflow)
+
+
+
 if __name__ == '__main__':
     unittest.main()

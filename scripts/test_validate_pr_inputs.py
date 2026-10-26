@@ -143,6 +143,22 @@ Justification: code requires tests
                                          'Affected paths: '+', '.join([self.code, self.test, 'scripts/test_validate_pr_inputs.py', '.github/workflows/quality.yml']))
         self.assertEqual('METADATA_PASS', validate(self.root, complete_body, changed)['result'])
 
+    # TEST-GATE-04: a new executable CI workflow is a policy change too.
+    def test_TEST_GATE_04_live_workflow_must_update_trusted_policy_tests(self):
+        workflow = '.github/workflows/live-e2e.yml'
+        (self.root / '.github/workflows').mkdir(parents=True)
+        (self.root / workflow).write_text('name: Live browser E2E\\n')
+        self.assert_blocked(changed=self.changed + [workflow])
+
+        fixture = 'scripts/test_validate_pr_inputs.py'
+        (self.root / fixture).write_text('# SESSION-01: real policy regression added\\n')
+        changed = self.changed + [workflow, fixture]
+        full = self.body.replace(
+            'Affected paths: ' + self.code + ', ' + self.test,
+            'Affected paths: ' + ', '.join([self.code, self.test, workflow, fixture])
+        )
+        self.assertEqual('METADATA_PASS', validate(self.root, full, changed)['result'])
+
     def test_gate_rejects_undeclared_changed_code(self):
         # An apparently valid PR must not silently hide additional behavior-changing files.
         extra = 'api/app/more.rb'
