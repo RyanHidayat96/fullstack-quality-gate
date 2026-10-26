@@ -3,6 +3,8 @@
 module FitGap
   # N13: Generates a fit/gap report comparing a portfolio against a vacancy.
   # Uses rule-based comparison for skill levels + Gemini Flash for culture narrative.
+  class StaleSourceError < StandardError; end
+
   class Engine
     def initialize(portfolio:, vacancy:, gemini_client: nil)
       @portfolio = portfolio
@@ -19,18 +21,27 @@ module FitGap
       skill_comparisons = build_skill_comparisons
       narratives        = generate_narratives(skill_comparisons)
 
-      report = FitGapReport.find_or_initialize_by(
-        portfolio_id: @portfolio.id,
-        vacancy_id:   @vacancy.id
-      )
+      # The narrative request may outlive an assessor's update to this vacancy.
+      # Lock/reload the source before committing; never publish a report created
+      # against a fingerprint that is no longer current.
+      report = nil
+      @vacancy.with_lock do
+        unless @vacancy.fit_gap_fingerprint == source_fingerprint
+          raise StaleSourceError, 'Vacancy inputs changed during fit/gap generation'
+        end
 
-      report.update!(
-        skill_comparisons: skill_comparisons,
-        culture_narrative: narratives[:culture],
-        overall_narrative: narratives[:overall],
-        generated_at:      Time.current,
-        source_fingerprint: source_fingerprint
-      )
+        report = FitGapReport.find_or_initialize_by(
+          portfolio_id: @portfolio.id,
+          vacancy_id:   @vacancy.id
+        )
+        report.update!(
+          skill_comparisons: skill_comparisons,
+          culture_narrative: narratives[:culture],
+          overall_narrative: narratives[:overall],
+          generated_at:      Time.current,
+          source_fingerprint: source_fingerprint
+        )
+      end
 
       Rails.logger.info("[N13] Fit/gap report generated: portfolio=#{@portfolio.id} vacancy=#{@vacancy.id}")
       report
