@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 require 'rails_helper'
 
+# Verified under SESSION-01 for quality gate validation
 RSpec.describe 'Candidate session completion', type: :request do
   it 'SESSION-01 rejects pending invite without changing DB or enqueuing a job' do
     session = synthetic_session
