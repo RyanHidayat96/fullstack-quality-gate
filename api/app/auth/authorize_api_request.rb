@@ -22,6 +22,7 @@ class AuthorizeApiRequest
     user_struct = build_user_struct(claims)
 
     check_role!(user_struct) if @required_roles.any?
+    raise(ExceptionHandler::Unauthorized, Message.unauthorized) unless TenantAccess.permitted?(claims)
 
     { user: user_struct, claims: }
   end
