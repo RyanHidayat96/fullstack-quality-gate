@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Base middleware class extracted from rakamin-api.
+# Base middleware class extracted from upstream service.
 class ApplicationMiddleware
   def initialize(app)
     @app = app

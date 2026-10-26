@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-# Extracted and adapted from rakamin-api.
+# Extracted and adapted from upstream service.
 module ExceptionHandler
   extend ActiveSupport::Concern
 
-  # Mirror rakamin-api error classes exactly so JWT tokens/errors are compatible
+  # Mirror upstream service error classes exactly so JWT tokens/errors are compatible
   class AuthenticationError < StandardError; end
   class Unauthorized        < StandardError; end
   class MissingToken        < StandardError; end

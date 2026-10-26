@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Extracted and simplified from rakamin-api.
+# Extracted and simplified from upstream service.
 # Sets Current.user (OpenStruct) from a validated JWT.
 # Does NOT look up the user in the database — trusts JWT claims.
 #

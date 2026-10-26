@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "note": "Populated with real GitHub repository, PR demonstrations, and tag CI evidence.",
+  "note": "Real GitHub PR and release evidence recorded. Publication clearance is NOT verified: historical Git objects and licensing remain subject to review.",
   "public_independent_repo": {
     "url": "https://github.com/RyanHidayat96/fullstack-quality-gate",
     "independent_not_fork": true,
@@ -27,7 +27,7 @@
     "outcome": "BLOCKED",
     "verified_by_human": true
   },
-  "publication_clearance": true,
+  "publication_clearance": false,
   "hiring_platform_submission": {
     "completed": false,
     "submitted_at": null,

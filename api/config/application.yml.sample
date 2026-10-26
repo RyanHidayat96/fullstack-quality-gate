@@ -1,13 +1,13 @@
 # Copy this to config/application.yml and fill in your values.
 # This file is loaded by Figaro and values become ENV vars.
 
-# Shared with rakamin-api — must match exactly for JWT to work
+# Shared with upstream authentication service — must match exactly for JWT to work
 SECRET_KEY_BASE: "your_secret_key_base_here"
 
-# Database (shared with rakamin-api)
+# Database (shared with upstream authentication service)
 DB_HOST: "localhost"
 DB_PORT: "5432"
-DB_NAME: "rakamin_development"
+DB_NAME: "quality_net_development"
 DB_USERNAME: "postgres"
 DB_PASSWORD: ""
 
@@ -22,7 +22,7 @@ APP_BASE_URL: "http://localhost:3001"
 # Browser-accessible frontend origin for invitations
 WEB_APP_BASE_URL: "http://localhost:5173"
 
-# Token settings (should match rakamin-api)
+# Token settings (should match upstream authentication service)
 TOKEN_EXPIRATION_TIME: "259200"  # 3 days in seconds
 
 # CORS

@@ -12,9 +12,16 @@ This page is the current index for repository evidence. Phase handoff notes and 
 | Tagged release | [v1.0.0 tag workflow](https://github.com/RyanHidayat96/fullstack-quality-gate/actions/runs/40277694610) ran checks and **blocked** deployment | Tag identifies an older commit; later changes are not part of v1.0.0 |
 | RED to GREEN | Saved Phase 4 RED / Phase 5 GREEN source-regression logs | Initial import already included the fixed code; not a GitHub-native two-commit reproduction |
 
+## Verified updates after the first reviewer tour
+
+- [PR #4](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/4): CI-validated sample configuration and evidence updates, merged.
+- [PR #5](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/5): reproduced a tenant-authorization defect on a test-only commit ([RED run](https://github.com/RyanHidayat96/fullstack-quality-gate/actions/runs/40295447111), 14 RSpec / 4 failures), then enforced persisted tenant grants, token re-validation and coverage subscription checks ([GREEN run](https://github.com/RyanHidayat96/fullstack-quality-gate/actions/runs/40297012832), all mandatory jobs passed); merged.
+- FIND-011: **code remediation and Rails/PostgreSQL regression evidence now exist**, but the fail-closed cross-tenant-admin policy is still a **provisional engineering rule**, not approved production entitlement semantics.
+- This branch adds a source-identifier regression check and removes references from active application files. It **does not rewrite past commits** or establish legal permission to publish proprietary material.
+
 ## Remaining blockers
 
-- FIND-011: tenant-admin authorization is still a product-policy and implementation risk. The membership proposal in `REQ-AUTH-001` is **not product-approved**.
+- FIND-011: code-level checks for tenant memberships exist and passed CI, but externally approved role/SSO policy is still missing; production release remains blocked.
 - Other code-level P1 fixes require expanded negative-path API and persisted-data checks before release clearance.
 - Real browser-to-API-to-database journeys and actual WebSocket connection tests have not been demonstrated.
 - The public repository currently has legacy identifiers in source/configuration and **historical Git objects**. Cleaning a working tree cannot remove old commits or previously uploaded assessment materials.
