@@ -14,6 +14,28 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  catalog-audit:
+    name: catalog-audit
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Reconcile 41 design scenarios against executable assertions
+        run: |
+          python scripts/verify_catalog_coverage.py --output scenario-coverage.json
+          python -m unittest discover -s scripts -p 'test_traceability_catalog.py' -v
+      - name: Upload complete 41-scenario status ledger
+        uses: actions/upload-artifact@v4
+        with:
+          name: scenario-coverage-${{ github.run_id }}
+          path: scenario-coverage.json
+          retention-days: 30
+
   browser-ws-e2e:
     name: browser-ws-e2e
     runs-on: ubuntu-24.04
