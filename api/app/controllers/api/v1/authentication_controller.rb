@@ -10,22 +10,26 @@ module Api
         user = User.find_by(email: params[:email].to_s.downcase)
 
         return json_error('Invalid email or password', :unauthorized) unless user&.authenticate(params[:password])
-
         return json_error('Invalid email or password', :unauthorized) unless user.role == 'admin'
 
-        scheme = resolve_scheme
-        token  = JsonWebToken.encode({ user_id: user.id, role: user.role, scheme: })
+        memberships = user.tenant_memberships.includes(:organization).to_a
+        requested_scheme = request.headers['X-Tenant-Scheme'].presence || params[:tenant_scheme].presence
 
-        json_response({ token:, user: { id: user.id, email: user.email, role: user.role } })
-      end
+        if requested_scheme.present?
+          membership = memberships.find { |grant| grant.organization.scheme == requested_scheme }
+          return json_error('Tenant access denied', :forbidden) unless membership
+        elsif memberships.one?
+          membership = memberships.first
+        elsif memberships.empty?
+          return json_error('Tenant access denied', :forbidden)
+        else
+          return json_error('Tenant scheme is required for multi-tenant accounts', :unprocessable_entity)
+        end
 
-      private
+        scheme = membership.organization.scheme
+        token = JsonWebToken.encode({ user_id: user.id, role: user.role, scheme: scheme })
 
-      def resolve_scheme
-        request.headers['X-Tenant-Scheme'].presence ||
-          ActiveRecord::Base.connection.select_value(
-            'SELECT scheme FROM organizations LIMIT 1'
-          ) || 'test-corp'
+        json_response({ token: token, user: { id: user.id, email: user.email, role: user.role } })
       end
     end
   end
