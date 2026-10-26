@@ -23,5 +23,5 @@ web/.vite/
 **/*.py[cod]
 
 # One-off local release verdict output
-release-verdict.json
+/release-verdict.json
 /docs/
