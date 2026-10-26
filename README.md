@@ -7,8 +7,8 @@
 
 ---
 
-# The Product
-Please refer to https://github.com/rakamindev/ai-interview-platform/wiki for initial product specification
+# Architecture & Specification
+Please refer to [Architecture Notes](assessment/architecture-notes.md) and [Audit Findings](assessment/01-audit.md) for platform architecture and specifications.
 
 # The Platform
 
