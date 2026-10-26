@@ -1,78 +1,50 @@
-# Live Defense Preparation — Evidence-Led Technical Discussion
+# Live technical defense — 60–90 minutes
 
-> This preparation document is for a 60–90 minute conversation. Speak to **what was actually verified**, not what the pipeline ought to have done in an uncreated repository. Do not present hypothetical demonstrations as remote evidence.
+**Current verified state:** GitHub PRs, CI, Rails/PostgreSQL test runs and a real blocked tag exist. Do not repeat older Phase 8 statements that no remote repository or executable RSpec was available.
 
-## Suggested 75-minute walkthrough
+## Suggested CTO review flow
 
-| Time | Segment | Evidence to open |
-|---|---|---|
-| 0–5 min | Executive summary, goal and current `DO NOT SHIP` decision | [`08-reviewer-start-here.md`](08-reviewer-start-here.md); [`03-release-decision.md`](03-release-decision.md) |
-| 5–20 min | Show ranked risks and observed-vs-unknown separation | [`01-audit.md`](01-audit.md); Phase 2 source probes |
-| 20–35 min | Walk through one data-integrity defect, unit RED → fix → GREEN | Phase 4/5 evidence and corresponding Ruby services |
-| 35–50 min | Show PR DoR/DoD validator, CI fail-closed path, adversarial coverage | [`02-quality-system.md`](02-quality-system.md); quality workflow and policy tests |
-| 50–60 min | Release gate, P1 register, accepted-vs-unverified risk | [`03-release-decision.md`](03-release-decision.md); release readiness JSON |
-| 60–75 min | Remaining gaps, product-policy questions, AI verification, next-sprint plan | [`06-traceability-verification.md`](06-traceability-verification.md); [`08-independent-review.md`](08-independent-review.md) |
+| Time | Topic | Evidence |
+| --- | --- | --- |
+| 0–10 min | Application risks and severity choices | [01-audit](01-audit.md) |
+| 10–25 min | Requirement → AC → design → test → PR traceability | [02-quality-system](02-quality-system.md), [PR #1](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/1), [PR #2](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/2) |
+| 25–45 min | Tenant grants, ownership and real RED→GREEN | [PR #5](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/5), [PR #7](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/7) |
+| 45–60 min | Interview session integrity, invites and derived data | [PR #9](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/9), [Rails specs](../api/spec/) |
+| 60–75 min | Version-tag CI and release recommendation | [v1.0.0 tagged run](https://github.com/RyanHidayat96/fullstack-quality-gate/actions/runs/40277694610), [03-release-decision](03-release-decision.md) |
+| 75–90 min | Remaining assumptions, counterexamples and Q&A | [09-current-status](09-current-status.md), [10-repository-protection](10-repository-protection.md) |
 
-For a 60-minute meeting shorten the demo; for 90 minutes allocate more time to question-driven investigation.
+## Questions to be ready for
 
-## Ten questions from the brief and defensible answer outlines
+**1. Why were tenant boundaries and data integrity ranked above UI polish?**  
+They can expose other organizations' candidate records or silently alter authoritative outcomes. A misleading fit-gap comparison can be more consequential than an obvious styling defect.
 
-### 1. Why the top three risks?
+**2. What is genuinely demonstrated by a RED→GREEN chain?**  
+[PR #5 RED](https://github.com/RyanHidayat96/fullstack-quality-gate/actions/runs/40295447111) exposed a missing membership boundary before the implementation; its later CI passed. [PR #7 RED](https://github.com/RyanHidayat96/fullstack-quality-gate/actions/runs/40299313986) exposed unauthorized signed audio WebSocket access. [PR #9 RED](https://github.com/RyanHidayat96/fullstack-quality-gate/actions/runs/40300922243) had three missing-lifecycle failures, while [GREEN](https://github.com/RyanHidayat96/fullstack-quality-gate/actions/runs/40301673841) ran 27 passing examples. These runs prove their stated assertions, **not** every production flow.
 
-**Tenant boundary** (`FIND-001`, `FIND-011`): assessment and candidate information may be incorrectly accessible across tenants if ownership/membership checks are absent. **Session completion** (`FIND-002`): an incomplete session can lead to a prematurely generated portfolio. **Data integrity** (`FIND-003`/`FIND-005`): skill comparisons silently lose records, or malformed AI outputs are coerced to plausible scores. These outrank cosmetic issues because they alter authorization and authoritative stored outcomes. The observed proof is source/method-level; actual cross-tenant exploitation remains unverified.
+**3. Why did you choose explicit tenant membership?**  
+A caller-supplied tenant scheme must not grant data access merely because a JWT is signed. The conservative engineering default denies unknown memberships and re-checks them when bearer tokens are used. Global-admin/SSO policy is not independently approved.
 
-### 2. What was unspecified vs implemented incorrectly?
+**4. What happens after tenant membership is revoked?**  
+A previously issued signed JWT fails the protected API grant check. Coverage and signed Audio WebSocket authentication enforce equivalent membership restrictions. These are Rails request and helper regressions, not a proof of a live upgraded WebSocket stream.
 
-`FIND-011` is chiefly **SPEC_MISSING / policy unresolved**: which user/role can select which tenant? Duplicate-skill semantics under `FIND-003` also need a product contract: reject duplicate labels versus preserve distinct IDs. Clearly incorrect source behavior relative to known data invariants includes coercing an invalid AI score into L1/L5 (`FIND-005`) and a backend-origin invitation URL (`FIND-006`). Proposed REQ/AC files are not product sign-off.
+**5. What protects candidate invitations?**  
+PR #9 added expiration and revocation timestamps, server-side validity checks in candidate endpoints and audio token authentication, and a scoped revocation action. Seven days is provisional. Older invitations expire on migration; deployment requires stakeholder approval.
 
-### 3. Trace one UI → API → persistence defect.
+**6. Why was self-service signup removed instead of implemented?**  
+The UI had no registered route or backend signup API. Adding open account/admin registration without tenant enrollment requirements would create new risk. PR #8 removed the dead path with a regression test; product must approve onboarding separately.
 
-Use `FIND-003` as an explainable example: assessor configures multiple required skill rows; vacancy API/model persists those rows; the fit-gap service previously converted vacancy skills into a hash keyed by `skill_label` and could lose one when labels matched; the computed comparison subsequently displayed fewer requirements. Phase 2 executed the actual service method with doubles and observed two inputs collapse into one; Phase 5 preserved distinct IDs and introduced regression assertions. **The full browser→API→PostgreSQL journey was not executed** and must not be described as proven.
+**7. How do you prevent premature session completion?**  
+Server-owned readiness must be persisted, valid session state and coverage must be checked, and the end handler holds a DB row lock before finalizing to avoid duplicate side effects. Current request specs cover sequential idempotency; concurrency load testing is still a gap.
 
-### 4. Why these test layers?
+**8. What stops an attacker from editing their own PR validator?**  
+The GitHub workflow runs its validator from the trusted base commit against the untrusted PR worktree; adversarial policy tests check bypass attempts. However `main` must also have enforced rules to stop direct pushes. Current repository policy is not verified as protected.
 
-- Python policy unit tests guard metadata parsing, changed-file enumeration, fake input paths and tampering.
-- Ruby method-level contracts efficiently capture failure semantics before Rails starts.
-- RSpec request/service/model tests were drafted for actual data/tenant persistence and concurrency checks but have **not** run.
-- Node static tests protect frontend API/WS configuration only, not DOM behavior.
-- Browser-level end-to-end journeys remain a high-priority missing layer. 41 planned scenarios were reconciled: 22 partial local, 3 authored-but-not-executed Rails, 16 without matching test implementation.
+**9. Why is the release gate RED when technical checks pass?**  
+Quality jobs test specified behavior. The separate release gate also requires stakeholder acceptance, consistent traceability, publication clearance, an approved candidate and P1 closure. [v1.0.0](https://github.com/RyanHidayat96/fullstack-quality-gate/actions/runs/40277694610) correctly failed closed.
 
-### 5. How do DoR and DoD gates work beyond checkboxes?
+**10. What would you do next before a release?**  
+Confirm approved tenant/global-admin grants and invitation policy; complete browser→API→DB and live WebSocket tests, concurrency cases and the remaining design-catalog IDs; enforce repository rules; independently clear licensing/Git-history risks; obtain accountable reviewer signoff; then issue a new tag.
 
-Changes must link an existing spec, acceptance criteria and design, declare affected paths and associated executable tests. Local policy checks compare real changed files against declarations, reject missing/unrelated test IDs, path traversal, missing documents and suspicious policy edits. Workflow intends to use validator code from the trusted PR base SHA. **Limit:** structural validity does not guarantee substantive acceptance criteria, reviewer approval, or real enforcement until GitHub branch rules are enabled.
+## Evidence boundaries
 
-### 6. Show blocked and passing PR evidence.
-
-Open the live GitHub repository:
-- **Blocked PR demonstration:** [PR #1](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/1) — modifies application code but intentionally omits Definition of Ready inputs. CI check `pr-inputs` failed closed with `{"error": "required PR field missing/placeholder: Spec", "result": "BLOCKED"}`.
-- **Passing PR demonstration:** [PR #2](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/2) — links valid requirements, acceptance criteria, design doc, test ID `SESSION-01`, and lists matching affected paths. CI check `pr-inputs` passed with `{"result": "METADATA_PASS", "scope": "CODE"}`, and all test suites ran GREEN.
-- Explain the security design: the PR validator is checked out from the trusted target base commit (`.trusted-policy`), so an untrusted PR cannot edit the gate script in its own branch to bypass validation.
-
-### 7. Show RED → GREEN and why the fix is causal.
-
-Open `assessment/evidence/phase-4/source-regressions-red.log` (five failing assertions before changes), Phase 5 `ruby-after-green.log` (12 runs, 40 assertions PASS), and `original-assertion-preservation.json`. Explain root-cause changes: stable skill IDs, raw input validation before persistence, server-owned readiness/state transition, tenant scoping and correct invite origin. Phase 6 mutation probes demonstrated four deliberately reintroduced defects make assertions fail; they are **isolated**, not transaction/HTTP proofs.
-
-### 8. Why was release blocked and who owns residual risks?
-
-Open the tag release pipeline: [Tag v1.0.0 Run #40277694610](https://github.com/RyanHidayat96/fullstack-quality-gate/actions/runs/40277694610).
-Explain the honest fail-closed gate: while all automated test jobs (`policy-unit`, `api-contract`, `api-critical`, `web-quality`) passed 100%, the automated release gate `scripts/release_gate.py` produced a **BLOCKED / DO NOT SHIP** verdict because `FIND-011` remains OPEN and live multi-tenant browser-to-DB integration testing requires formal risk signoff. No fictitious green status was forced.
-
-### 9. How was AI used responsibly?
-
-AI-assisted code/document drafting is permitted by the brief. Verification is demonstrated by read-only source inspection, preserved RED logs, local unit/mutation checks, repeated validation and explicit failure to claim unrun integration coverage. A Phase 6 mutation exposed a faulty test double that caused a misleading failure; the fixture was corrected and mutation verification repeated. Do not claim that a named AI tool produced or corrected a particular change without contemporaneous evidence.
-
-### 10. What changes in the next sprint?
-
-First obtain approved tenant membership and ownership policy, then implement/review `FIND-011`. Provision disposable PostgreSQL/Redis and supported Ruby; execute DB/WS/async concurrency tests. Build web deterministically using a reviewed lockfile, add component tests and one browser→API→DB path. After confidentiality clearance, create clean independent Git history, configure protected checks, demonstrate real failing/passing PRs, then tag and gate an actual release. No skip of P1 or test weakening to force a green badge.
-
-## Honest phrases during discussion
-
-- “That result is reproduced at method level; the HTTP/database integration remains an explicitly blocked item.”
-- “Those requirements are proposed, not yet product-approved; I would block the related release decision.”
-- “The automated validator enforces traceable inputs, but human review is still required for semantic correctness.”
-- “Our PR and release tag checks are live in GitHub Actions: PR #1 demonstrates the block, PR #2 demonstrates the pass, and tag v1.0.0 demonstrates the fail-closed release gate.”
-- “A blocked release with evidence is safer than misrepresenting an unverified version as production-ready.”
-
-## Demonstration discipline
-
-Only open recorded evidence and rerun local checks when dependencies are present. Never expose real candidate data, secrets, production account cookies or credentials during screen share. Do not run migration/seed commands against any shared database. Keep logs from synthetic fixtures separate from live-environment verification.
+Never claim that historical Phase 4 logs were produced by commits before the repository existed, that tests performed live browser interaction when they did not, or that passing CI implies publication rights. Describe exactly what is demonstrated, what is a documented engineering assumption, and why the product release remains **BLOCKED / DO NOT SHIP**.

@@ -1,85 +1,41 @@
-# 03 — Release Decision: v1.0.0
+# 03 — Release decision: v1.0.0
 
-> **Current GitHub status (2026-10-26):** The annotated `v1.0.0` tag and [tag CI run](https://github.com/RyanHidayat96/fullstack-quality-gate/actions/runs/40277694610) exist. Technical checks passed, while `release-decision` correctly blocked release. Statements below that say there is no GitHub repository, tag, lockfile, or executed Rails CI describe the earlier local snapshot, **not the current state**. Refer to [current verification](09-current-status.md). The release remains **DO NOT SHIP**.
+**Decision: BLOCKED / DO NOT SHIP.**  
+**Tag:** `v1.0.0` → commit `ae539d3ef07366f7a7060fc62ae69c47c25b96ea`.  
+**Actual evidence:** [v1.0.0 GitHub Actions run](https://github.com/RyanHidayat96/fullstack-quality-gate/actions/runs/40277694610).
 
-**Decision:** **BLOCK / DO NOT SHIP**  
-**Release status:** **BLOCKED**  
-**Decision date:** 2026-10-22 (Asia/Jakarta)  
-**Evidence scope:** independent local Phase 6 checks and Phase 7 *release-policy* checks, **not remote GitHub Actions**.
+## What happened on the tagged commit
 
-## 1. Identity and constraints
+The release workflow ran on the real tag. Its technical checks succeeded, including engineering policy, Ruby regression contracts, scoped Rails/PostgreSQL specifications, frontend configuration/build checks and the aggregate quality summary. The **release-decision job deliberately failed closed** because not all P1 conditions, acceptance approvals, end-to-end scenarios and release authority were satisfied.
 
-| Field | Actual state |
-|---|---|
-| Proposed release tag | `v1.0.0` |
-| Release tag SHA | `ae539d3ef07366f7a7060fc62ae69c47c25b96ea` |
-| Remote repo URL | `https://github.com/RyanHidayat96/fullstack-quality-gate` |
-| Actual GitHub Actions release run URL | `https://github.com/RyanHidayat96/fullstack-quality-gate/actions/runs/40277694610` |
-| GitHub Actions job result for the proposed tag | `ALL CI CHECKS PASS (policy-unit, api-contract, api-critical, web-quality, quality-summary); release-decision: BLOCKED (FAIL-CLOSED)` |
-| Deployment/production | **NONE; BLOCKED / DO NOT SHIP** |
-| Local workflow contract and policy tests | Executed and verified in GitHub Actions CI |
+A passing engineering quality summary is **not** the same thing as an approved product release. No deployed production build or authorized risk acceptance is evidenced.
 
-No real GitHub commit, tagged release, approval, or accepted risk is represented here. Do not treat this report as a shipping authorization.
+## Verified work after v1.0.0
 
-## 2. Release-gate checks
+The following changes are real and verified, but they **are not part of the older tag**:
 
-| Gate | Expected condition | Current state | Release impact |
-|---|---|---|---|
-| Tag identity | Actual annotated version tag resolves to the workflow's exact commit | NO TAG / SHA | BLOCK |
-| CI requirements | PR policy unit, Ruby source contracts, API/DB, frontend and aggregate jobs succeeded on tag | ONLY LOCAL LAYERS VERIFIED | BLOCK |
-| API/data integrity | Multi-tenant authorization, session states, portfolio and fit-gap persisted semantics proven using test DB | NO RAILS/PG/REDIS INTEGRATION | BLOCK |
-| Web build/UI | Lockfile-based reproducible build, component regressions, browser/API/DB journeys | MISSING LOCKFILE / SUITE | BLOCK |
-| P1 register | Every ranked P1 independently verified fixed or explicitly accepted by named owner | 7 `CODE_FIXED_UNVERIFIED`, 1 `OPEN` | BLOCK |
-| Traceability | Critical planned test scenarios executable and linked to evidence | 22 partial / 3 unexecuted / 16 missing | BLOCK |
-| Engineering inputs | Proposed spec, AC and design receive independent product approval | APPROVAL UNCONFIRMED | BLOCK |
-| Change control | Real failed and passing PR gate runs reviewed | NOT AVAILABLE | BLOCK |
-| Publication | Public name/secret/legal/privacy/history review completed | NOT CLEARED | BLOCK |
-| Release approval | Real owner/reviewer must approve the exact tag and evidence | NOT PROVIDED | BLOCK |
+| Change | Evidence |
+| --- | --- |
+| Expanded RSpec and React render checks | [PR #3](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/3) |
+| Configuration and source privacy guard | [PR #4](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/4), [PR #6](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/6) |
+| Tenant-admin membership authorization | [PR #5](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/5) |
+| Tenant HTTP/DB and Audio WS auth tests | [PR #7](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/7) |
+| Removed unsupported self-service signup | [PR #8](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/8) |
+| Expiring and revocable invitation tokens | [PR #9](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/9), [CI: 27 RSpec / 0 failures](https://github.com/RyanHidayat96/fullstack-quality-gate/actions/runs/40301673841) |
 
-**Gate implementation:** `.github/workflows/quality.yml` now listens for version tag pushes, runs existing mandatory quality jobs, then runs `release-decision` with `if: always()` and a non-optional fail-closed verdict. `scripts/release_gate.py` reconciles the severity-ranked audit with `assessment/release-readiness.json`, checks all critical status inputs, checks evidence references, and validates tag/commit binding passed from the workflow. It writes a JSON verdict and GitHub job summary when running on GitHub. A `BLOCKED` verdict exits nonzero.
+For a complete timeline, read [current verification](09-current-status.md). Archived Phase 0–8 notes reflect the state of their original local execution and must not override current remote CI evidence.
 
-## 3. Outstanding severity-ranked risks
+## Release blockers
 
-| ID | Severity | Disposition | Consequence |
-|---|---|---|---|
-| FIND-001 | P1 | CODE_FIXED_UNVERIFIED | Cross-tenant portfolio and override access must be DB/API tested |
-| FIND-002 | P1 | CODE_FIXED_UNVERIFIED | Premature/duplicate session completion must be concurrency tested |
-| FIND-003 | P1 | CODE_FIXED_UNVERIFIED | Duplicate skill identity and outcomes require data-backed verification |
-| FIND-004 | P1 | CODE_FIXED_UNVERIFIED | Stale fit-gap results require DB/worker tests |
-| FIND-005 | P1 | CODE_FIXED_UNVERIFIED | Invalid AI level, atomic persistence and rollback require real DB tests |
-| FIND-006 | P1 | CODE_FIXED_UNVERIFIED | Invitation URL must be exercised through web host and browser |
-| FIND-007 | P1 | CODE_FIXED_UNVERIFIED | Coverage WebSocket role and tenant constraints need real WS tests |
-| FIND-011 | P1 | **OPEN** | Tenant-admin membership binding lacks approved spec and safe implementation |
+1. **P1 ownership and product approval.** Code-level remediation exists for FIND-011, but entitlement behavior for global admins, tenant membership provisioning and external SSO requires independent product/security approval. Other P1 coverage is not exhaustively validated under realistic concurrency or live integrations.
+2. **Invitation policy.** FIND-008 now has test-backed expiry/revocation code, but the seven-day default and customer experience require product approval before rollout. Existing invitations older than that threshold are invalidated by migration.
+3. **Integration and traceability.** Rails HTTP/PostgreSQL and React rendering pass scoped tests. A real browser-driven journey and actual WebSocket protocol upgrade/audio streaming have not been independently demonstrated. The entire 41-case plan is not yet proven complete.
+4. **Repository enforcement.** CI runs on PRs, but no mandatory protected branch/ruleset was verified on `main`. Direct pushes could bypass pre-merge checks.
+5. **Publication and source provenance.** Active app source identifiers are guarded in CI; historical commits and other archived materials may still carry restricted names. `publication_clearance=false` until an authorized rights and complete Git-history review is performed.
+6. **Independent sign-off.** There is no named release owner approval or documented risk acceptance.
 
-**Risk acceptance:** NONE. No real person approved an exception and no accountable risk owner was assigned; therefore there is no conditional ship route. Remaining P2/process issues are recorded in `assessment/01-audit.md` and Phase 6 verification.
+## Required decision before any new release
 
-## 4. Evidence and interpretation
+The responsible product/security owner must approve the entitlement and invitation policies, reviewers must verify remaining security/integration cases, repository administrators must enforce required PR checks, and publication rights must be cleared. Only then should a **new** candidate tag be pushed and evaluated by the fail-closed release workflow.
 
-- `assessment/evidence/phase-6/repeat-1-ruby.log` and `repeat-2-ruby.log` / `repeat-3-ruby.log`: Ruby source-level regressions, 12 runs / 40 assertions, local PASS.
-- `assessment/evidence/phase-6/repeat-1-policy.log`: 32 local PR validator tests PASS before release-policy additions.
-- `assessment/evidence/phase-6/repeat-1-web.log`: 2 static URL contracts PASS, not browser tests.
-- `assessment/evidence/phase-6/phase-6-checks.json`: failed/blocked dependency and integration checks.
-- `assessment/evidence/phase-6/traceability-verification.json`: scenario-to-evidence reconciliation.
-- `assessment/evidence/phase-7/`: release policy unit tests, local workflow validation and fail-closed simulated verdicts.
-
-**Interpretation:** Passing isolated contract and policy tests validates only their asserted behavior. The product's actual release correctness and data integrity are not established. The nonzero gate is intended, not a passing release test.
-
-## 5. Required before any proposed SHIP decision
-
-1. Obtain authoritative tenant membership/role policy for FIND-011; implement and test with two independent tenants and synthetic identities.
-2. Run and preserve successful Rails/PostgreSQL/Redis/Sidekiq API/integration tests, and verify migrations, data integrity, duplicate jobs and error paths.
-3. Generate a reviewed frontend lockfile, run build/typecheck/component tests, and independently execute core browser-to-DB journeys.
-4. Complete missing critical test paths and review traceability; reconcile each P1 audit state with direct evidence.
-5. Resolve outstanding spec/acceptance ambiguity and publication confidentiality review without indiscriminate source rewriting.
-6. Once the owner has created a genuinely independent repo, demonstrate one **real failed** and one **real passed** PR; establish required branch/status protections.
-7. Review the intended commit; create/push the annotated tag only when authorized, then capture an actual tag-specific CI run URL and SHA. Do not call a failing release gate green by weakening checks.
-8. Reassess the release decision with a documented reviewer. Any unresolved P1 requires formally recorded, time-bounded risk acceptance with a real owner and approver, otherwise continue to BLOCK.
-
-## 6. Owner and conclusion
-
-- Technical recommendation: **BLOCK**.
-- Product/security acceptance owner: **NOT NOMINATED / approval unavailable**.
-- Release reviewer/approver: **NOT NOMINATED**.
-- Scope: this decision is final for the **current candidate snapshot**, not a permanent judgment on future corrected versions.
-
-**Final: BLOCKED — DO NOT SHIP.**
+Do **not** re-tag `v1.0.0` or claim its historical CI included post-tag fixes. The current decision remains **BLOCKED / DO NOT SHIP**.
