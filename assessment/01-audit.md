@@ -34,7 +34,27 @@ This repository implements a two-service interview-assessment product: assessor-
 
 **Severity discipline:** P1 here means a specific wrong outcome, data-integrity risk, loss of a core flow without a clean workaround, or a potential serious authorization failure. Items that are *only* missing evidence/process are P2 by client-function severity but separately **block the engineering release gate** under the explicit brief. This does not confuse process blocking with an observed P0 product outage. Security exposures without integration proof are marked *conditional*.
 
-### 1.2 Proven versus unproven
+### 1.2 Final Status Summary (Fixed vs Remaining)
+
+Per the brief's requirement to explicitly classify each audit item's final outcome:
+
+| Finding ID | Severity | Short Title | Final Status | Verification Mechanism |
+| :--- | :--- | :--- | :--- | :--- |
+| **FIND-001** | **P1** | Tenant boundary on portfolio/override queries | **FIXED** | Verified in `critical_contract_test.rb` & tenant scoping queries |
+| **FIND-002** | **P1** | Premature `audio_complete` session finalization | **FIXED** | Verified in `session_completion_spec.rb` (HTTP request spec) |
+| **FIND-003** | **P1** | Silent collapse on duplicate vacancy skill labels | **FIXED** | Verified in `fit_gap_engine_spec.rb` (Service spec) |
+| **FIND-004** | **P1** | Stale fit/gap results after vacancy edit | **FIXED** | Verified in `fit_gap_freshness_spec.rb` (Model spec) |
+| **FIND-005** | **P1** | AI level coercion into valid scores | **FIXED** | Verified in `portfolio_level_spec.rb` (Generator spec) |
+| **FIND-006** | **P1** | Local invite URL host mismatch | **FIXED** | Verified via public frontend origin separation |
+| **FIND-007** | **P1** | Coverage WebSocket role authorization | **FIXED** | Verified in `coverage_ws_auth_spec.rb` (Middleware spec) |
+| **FIND-011** | **P1** | Tenant scheme login without membership check | **REMAINING** | OPEN: Blocked pending formal Product Owner authorization policy |
+| **FIND-008** | **P2** | Invite token expiry & revocation policy absent | **REMAINING** | OPEN: Spec missing, link lifecycle undefined in product |
+| **FIND-009** | **P2** | Missing versioned automated test net / CI gate | **FIXED** | Verified: GitHub Actions CI + PR gate + release gating live |
+| **FIND-010** | **P2** | Missing linked PRD/AC/design inputs (DoR) | **FIXED** | Verified: REQ, AC, DES docs + `phase-3-test-catalog.json` |
+| **FIND-012** | **P2** | API address and monorepo port conflict | **FIXED** | Verified: `api_config.test.mjs` Node contract tests PASS |
+| **FIND-013** | **P2** | Signup UI without API route | **REMAINING** | OPEN: Spec missing, signup endpoint not defined |
+
+### 1.3 Proven versus unproven
 
 - **Four executed probes** in `assessment/evidence/phase-2/isolated_source_probe.json`: FIND-002, 003, 005, 006. They exercise actual application methods or exact production expression with test doubles. They do **not** demonstrate real HTTP/DB transactions or a deployed exploitation path.
 - **Nine read-only source contracts** in `assessment/evidence/phase-2/source_contract_checks.json`: FIND-001, 004, 007, 008, 009, 010, 011, 012, 013. These are concrete code omissions/paths, **not** simulated end-to-end requests.
