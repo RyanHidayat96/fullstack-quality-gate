@@ -1,0 +1,453 @@
+{
+  "version": "phase3-design-1",
+  "generated_date": "2026-10-22",
+  "phase": 3,
+  "implementation_state": "DESIGN_ONLY_NOT_EXECUTED",
+  "source_audit": "assessment/01-audit.md",
+  "requirement_status": "PROPOSED_NOT_PRODUCT_APPROVED",
+  "findings": [
+    {
+      "finding": "FIND-001",
+      "severity": "P1",
+      "classification": "BUILT_WRONG",
+      "title": "Foreign-tenant portfolio/override isolation",
+      "requirement": "REQ-SEC-001",
+      "acceptance": "AC-SEC-001",
+      "product_decision": "Code-derived parent-tenant invariant; independently validate with request/DB tests",
+      "source": "api/app/controllers/api/v1/portfolios_controller.rb",
+      "tests": [
+        {
+          "id": "AUTH-TENANT-01",
+          "layer": "request+db",
+          "planned_file": "api/spec/requests/portfolio_access_spec.rb",
+          "assertion": "Tenant B JWT receives 404/403 for tenant A portfolio read/export; zero foreign data returned; owner A access succeeds",
+          "status": "PLANNED_NOT_IMPLEMENTED"
+        },
+        {
+          "id": "AUTH-TENANT-02",
+          "layer": "request+db",
+          "planned_file": "api/spec/requests/portfolio_skill_override_spec.rb",
+          "assertion": "Tenant B override request denied; original portfolio skill, override and downstream report unchanged",
+          "status": "PLANNED_NOT_IMPLEMENTED"
+        },
+        {
+          "id": "AUTH-TENANT-03",
+          "layer": "request+worker+db",
+          "planned_file": "api/spec/requests/fitgap_tenant_isolation_spec.rb",
+          "assertion": "Foreign vacancy/portfolio combinations denied in request and worker; no report persisted, same-tenant succeeds",
+          "status": "PLANNED_NOT_IMPLEMENTED"
+        }
+      ]
+    },
+    {
+      "finding": "FIND-002",
+      "severity": "P1",
+      "classification": "BUILT_WRONG",
+      "title": "Candidate completion must not finalize pending/uncovered session",
+      "requirement": "REQ-SESSION-001",
+      "acceptance": "AC-SESSION-001",
+      "product_decision": "Completion semantics require server-issued readiness proof; exact mechanism proposed, not approved",
+      "source": "api/app/controllers/api/v1/sessions_controller.rb",
+      "tests": [
+        {
+          "id": "SESSION-01",
+          "layer": "request+db",
+          "planned_file": "api/spec/requests/session_completion_spec.rb",
+          "assertion": "Pending invite audio_complete denied; status remains pending; no portfolio job",
+          "status": "PLANNED_NOT_IMPLEMENTED"
+        },
+        {
+          "id": "SESSION-02",
+          "layer": "request+db",
+          "planned_file": "api/spec/requests/session_completion_spec.rb",
+          "assertion": "Active uncovered interview cannot be declared all_covered by candidate-only call; no final row/job",
+          "status": "PLANNED_NOT_IMPLEMENTED"
+        },
+        {
+          "id": "SESSION-03",
+          "layer": "request+db",
+          "planned_file": "api/spec/requests/session_completion_spec.rb",
+          "assertion": "Server-confirmed completed session ends exactly once and queues a single portfolio job",
+          "status": "PLANNED_NOT_IMPLEMENTED"
+        },
+        {
+          "id": "SESSION-04",
+          "layer": "request+db",
+          "planned_file": "api/spec/requests/session_completion_spec.rb",
+          "assertion": "Repeated/concurrent completion does not duplicate state transitions, jobs or portfolio rows",
+          "status": "PLANNED_NOT_IMPLEMENTED"
+        }
+      ]
+    },
+    {
+      "finding": "FIND-004",
+      "severity": "P1",
+      "classification": "BUILT_WRONG",
+      "title": "Fit/gap reports stale after vacancy edit",
+      "requirement": "REQ-DATA-001",
+      "acceptance": "AC-DATA-001",
+      "product_decision": "Decide invalidate/recompute vs explicit historical snapshot; current unversioned cache implies freshness",
+      "source": "api/app/controllers/api/v1/vacancies_controller.rb",
+      "tests": [
+        {
+          "id": "FITGAP-01",
+          "layer": "request+db",
+          "planned_file": "api/spec/requests/vacancy_fitgap_freshness_spec.rb",
+          "assertion": "After vacancy required level edit, stale report not returned as current",
+          "status": "PLANNED_NOT_IMPLEMENTED"
+        },
+        {
+          "id": "FITGAP-02",
+          "layer": "request+db",
+          "planned_file": "api/spec/requests/vacancy_fitgap_freshness_spec.rb",
+          "assertion": "Recomputed report and API JSON/PDF export expected_level match DB vacancy skills",
+          "status": "PLANNED_NOT_IMPLEMENTED"
+        },
+        {
+          "id": "FITGAP-03",
+          "layer": "worker+db",
+          "planned_file": "api/spec/workers/fitgap_regeneration_spec.rb",
+          "assertion": "Concurrent edit/queued jobs do not expose wrong-version report or preserve stale cache",
+          "status": "PLANNED_NOT_IMPLEMENTED"
+        }
+      ]
+    },
+    {
+      "finding": "FIND-005",
+      "severity": "P1",
+      "classification": "BUILT_WRONG",
+      "title": "Invalid generated scores silently clamped",
+      "requirement": "REQ-DATA-002",
+      "acceptance": "AC-DATA-002",
+      "product_decision": "Decide reject/retry/unassessed policy; silently authoritative L1/L5 is disallowed",
+      "source": "api/app/services/portfolios/generator.rb",
+      "tests": [
+        {
+          "id": "PORTFOLIO-01",
+          "layer": "service+db",
+          "planned_file": "api/spec/services/portfolio_generator_spec.rb",
+          "assertion": "Valid integer 1..5 stored precisely, evidence and portfolio association preserved",
+          "status": "PLANNED_NOT_IMPLEMENTED"
+        },
+        {
+          "id": "PORTFOLIO-02",
+          "layer": "service+db",
+          "planned_file": "api/spec/services/portfolio_generator_spec.rb",
+          "assertion": "nil, n/a, noninteger and out-of-range never persisted as plausible L1/L5",
+          "status": "PLANNED_NOT_IMPLEMENTED"
+        },
+        {
+          "id": "PORTFOLIO-03",
+          "layer": "worker+db",
+          "planned_file": "api/spec/workers/portfolio_generator_spec.rb",
+          "assertion": "Invalid generated data does not leave complete portfolio with partial/false saved skills; explicit failed/retry state",
+          "status": "PLANNED_NOT_IMPLEMENTED"
+        }
+      ]
+    },
+    {
+      "finding": "FIND-003",
+      "severity": "P1",
+      "classification": "SPEC_AMBIGUOUS",
+      "title": "Duplicate vacancy skill labels collapse in comparison",
+      "requirement": "REQ-DATA-003",
+      "acceptance": "AC-DATA-003",
+      "product_decision": "PENDING product choice: reject duplicates or retain distinct skills by stable identity",
+      "source": "api/app/services/fit_gap/engine.rb",
+      "tests": [
+        {
+          "id": "FITGAP-04",
+          "layer": "service+db",
+          "planned_file": "api/spec/services/fitgap_engine_spec.rb",
+          "assertion": "Two stored rows with same label never silently collapse into one: either both compared or write rejected explicitly",
+          "status": "PLANNED_NOT_IMPLEMENTED"
+        },
+        {
+          "id": "FITGAP-05",
+          "layer": "service+db",
+          "planned_file": "api/spec/services/fitgap_engine_spec.rb",
+          "assertion": "Blank/case-variant/custom labels follow explicitly chosen uniqueness rule; compare count/IDs/levels to DB",
+          "status": "PLANNED_NOT_IMPLEMENTED"
+        }
+      ]
+    },
+    {
+      "finding": "FIND-007",
+      "severity": "P1",
+      "classification": "BUILT_WRONG",
+      "title": "Coverage WebSocket lacks assessor role check",
+      "requirement": "REQ-SEC-002",
+      "acceptance": "AC-SEC-002",
+      "product_decision": "Assessor-only inferred from protected REST/monitoring purpose, confirm policy",
+      "source": "api/app/channels/coverage_websocket_middleware.rb",
+      "tests": [
+        {
+          "id": "WS-AUTH-01",
+          "layer": "websocket",
+          "planned_file": "api/spec/requests/websocket/coverage_authorization_spec.rb",
+          "assertion": "Signed non-assessor JWT denied before coverage payload is emitted",
+          "status": "PLANNED_NOT_IMPLEMENTED"
+        },
+        {
+          "id": "WS-AUTH-02",
+          "layer": "websocket",
+          "planned_file": "api/spec/requests/websocket/coverage_authorization_spec.rb",
+          "assertion": "Assessor JWT from tenant B denied tenant A coverage frames",
+          "status": "PLANNED_NOT_IMPLEMENTED"
+        },
+        {
+          "id": "WS-AUTH-03",
+          "layer": "websocket",
+          "planned_file": "api/spec/requests/websocket/coverage_authorization_spec.rb",
+          "assertion": "Assessor from owner tenant receives permitted current coverage state",
+          "status": "PLANNED_NOT_IMPLEMENTED"
+        },
+        {
+          "id": "WS-AUTH-04",
+          "layer": "websocket",
+          "planned_file": "api/spec/requests/websocket/coverage_authorization_spec.rb",
+          "assertion": "Expired/invalid JWT denied and no coverage bytes leaked",
+          "status": "PLANNED_NOT_IMPLEMENTED"
+        }
+      ]
+    },
+    {
+      "finding": "FIND-011",
+      "severity": "P1",
+      "classification": "SPEC_AMBIGUOUS",
+      "title": "Caller-selected tenant on login",
+      "requirement": "REQ-SEC-003",
+      "acceptance": "AC-SEC-003",
+      "product_decision": "PENDING global-admin vs tenant-admin privilege model and tenant-membership source",
+      "source": "api/app/controllers/api/v1/authentication_controller.rb",
+      "tests": [
+        {
+          "id": "AUTH-TENANT-04",
+          "layer": "request+db",
+          "planned_file": "api/spec/requests/login_tenant_policy_spec.rb",
+          "assertion": "Tenant-bound admin must not mint another tenant JWT from arbitrary scheme header; behavior conditional on decided policy",
+          "status": "PLANNED_NOT_IMPLEMENTED"
+        },
+        {
+          "id": "AUTH-TENANT-05",
+          "layer": "request+db",
+          "planned_file": "api/spec/requests/login_tenant_policy_spec.rb",
+          "assertion": "Authorized home-tenant login succeeds and JWT claims match resolved permitted tenant",
+          "status": "PLANNED_NOT_IMPLEMENTED"
+        },
+        {
+          "id": "AUTH-TENANT-06",
+          "layer": "request+db",
+          "planned_file": "api/spec/requests/login_tenant_policy_spec.rb",
+          "assertion": "If global admin is designed, privileged tenant switch requires explicit grant with corresponding positive/negative tests",
+          "status": "PLANNED_NOT_IMPLEMENTED"
+        }
+      ]
+    },
+    {
+      "finding": "FIND-006",
+      "severity": "P1",
+      "classification": "BUILT_WRONG",
+      "title": "Candidate invite origin configured as backend",
+      "requirement": "REQ-FLOW-001",
+      "acceptance": "AC-FLOW-001",
+      "product_decision": "Frontend owns interview route; define WEB_BASE_URL or equivalent explicit public origin",
+      "source": "api/app/models/session.rb",
+      "tests": [
+        {
+          "id": "INVITE-01",
+          "layer": "model+config",
+          "planned_file": "api/spec/models/session_invite_url_spec.rb",
+          "assertion": "Generated invite URL has configured frontend origin/route, not API host",
+          "status": "PLANNED_NOT_IMPLEMENTED"
+        },
+        {
+          "id": "INVITE-02",
+          "layer": "model",
+          "planned_file": "api/spec/models/session_invite_url_spec.rb",
+          "assertion": "Path uses encoded invite token and no malformed slash/unsafe route concatenation",
+          "status": "PLANNED_NOT_IMPLEMENTED"
+        },
+        {
+          "id": "INVITE-03",
+          "layer": "config+component",
+          "planned_file": "web/src/pages/assessments/AssessmentInvitePage.test.tsx",
+          "assertion": "DEV/staging/prod public origin injection and rendered copied link consistent with backend value",
+          "status": "PLANNED_NOT_IMPLEMENTED"
+        }
+      ]
+    },
+    {
+      "finding": "FIND-008",
+      "severity": "P2",
+      "classification": "SPEC_MISSING",
+      "title": "Invite token lifecycle policy undefined",
+      "requirement": "REQ-SEC-004",
+      "acceptance": "AC-SEC-004",
+      "product_decision": "PENDING defined TTL, revocation, use after end, replay and WS validation",
+      "source": "api/app/controllers/api/v1/sessions_controller.rb",
+      "tests": [
+        {
+          "id": "INVITE-04",
+          "layer": "request+websocket+db",
+          "planned_file": "api/spec/requests/invite_token_lifecycle_spec.rb",
+          "assertion": "When policy specified, HTTP/WS reject expired/revoked token and define valid-before behavior without inventing TTL",
+          "status": "PLANNED_NOT_IMPLEMENTED"
+        }
+      ]
+    },
+    {
+      "finding": "FIND-009",
+      "severity": "P2",
+      "classification": "SPEC_MISSING",
+      "title": "No tracked critical regressions or CI gate",
+      "requirement": "REQ-QUALITY-001",
+      "acceptance": "AC-QUALITY-001",
+      "product_decision": "Case-study mandatory engineering input; release blocker even though P2 user-facing severity",
+      "source": "web/package.json",
+      "tests": [
+        {
+          "id": "TEST-GATE-01",
+          "layer": "policy-fixture",
+          "planned_file": "scripts/test_validate_pr_inputs.py",
+          "assertion": "Behavior-changing code without linked executable tests is blocked",
+          "status": "PLANNED_NOT_IMPLEMENTED"
+        },
+        {
+          "id": "TEST-GATE-02",
+          "layer": "policy+human-review",
+          "planned_file": "scripts/test_validate_pr_inputs.py",
+          "assertion": "Presence of vacuous test cannot be accepted as meaningful; machine ensures execution, human reviews semantics",
+          "status": "PLANNED_NOT_IMPLEMENTED"
+        },
+        {
+          "id": "TEST-GATE-04",
+          "layer": "policy-fixture",
+          "planned_file": "scripts/test_validate_pr_inputs.py",
+          "assertion": "Workflow/validator change triggers regression policy tests and explicit human review",
+          "status": "PLANNED_NOT_IMPLEMENTED"
+        },
+        {
+          "id": "TEST-GATE-06",
+          "layer": "ci-fixture",
+          "planned_file": "scripts/test_validate_pr_inputs.py",
+          "assertion": "Required test or job skipped/failed/zero discovered cases cannot yield green status",
+          "status": "PLANNED_NOT_IMPLEMENTED"
+        },
+        {
+          "id": "RELEASE-GATE-01",
+          "layer": "ci-fixture",
+          "planned_file": "scripts/test_release_quality.py",
+          "assertion": "Tag with failing/missing check is BLOCKED",
+          "status": "PLANNED_NOT_IMPLEMENTED"
+        },
+        {
+          "id": "RELEASE-GATE-02",
+          "layer": "ci-fixture",
+          "planned_file": "scripts/test_release_quality.py",
+          "assertion": "Tag with unresolved unaccepted P0/P1 is BLOCKED independent of green builds",
+          "status": "PLANNED_NOT_IMPLEMENTED"
+        },
+        {
+          "id": "RELEASE-GATE-03",
+          "layer": "ci-remote",
+          "planned_file": "scripts/test_release_quality.py",
+          "assertion": "Actual tested version SHA with passing gates and cleared/accepted risk is eligible; remote proof required",
+          "status": "PLANNED_NOT_IMPLEMENTED"
+        }
+      ]
+    },
+    {
+      "finding": "FIND-010",
+      "severity": "P2",
+      "classification": "SPEC_MISSING",
+      "title": "No linked PRD/AC/design plan",
+      "requirement": "REQ-QUALITY-002",
+      "acceptance": "AC-QUALITY-002",
+      "product_decision": "Case-study mandatory engineering input; wiki external not audited",
+      "source": "README.md",
+      "tests": [
+        {
+          "id": "DOR-01",
+          "layer": "policy-fixture",
+          "planned_file": "scripts/test_validate_pr_inputs.py",
+          "assertion": "Missing/invalid spec link causes nonzero exit",
+          "status": "PLANNED_NOT_IMPLEMENTED"
+        },
+        {
+          "id": "DOR-02",
+          "layer": "policy-fixture",
+          "planned_file": "scripts/test_validate_pr_inputs.py",
+          "assertion": "Missing/invalid acceptance criteria causes nonzero exit",
+          "status": "PLANNED_NOT_IMPLEMENTED"
+        },
+        {
+          "id": "DOR-03",
+          "layer": "policy-fixture",
+          "planned_file": "scripts/test_validate_pr_inputs.py",
+          "assertion": "Missing/invalid solution design causes nonzero exit",
+          "status": "PLANNED_NOT_IMPLEMENTED"
+        },
+        {
+          "id": "DOR-04",
+          "layer": "policy-fixture",
+          "planned_file": "scripts/test_validate_pr_inputs.py",
+          "assertion": "Well-linked coherent docs+test mapping pass metadata gate only; not proof overall CI green",
+          "status": "PLANNED_NOT_IMPLEMENTED"
+        },
+        {
+          "id": "TEST-GATE-03",
+          "layer": "policy-fixture",
+          "planned_file": "scripts/test_validate_pr_inputs.py",
+          "assertion": "External, traversed or placeholder doc path fails even if text includes checkbox",
+          "status": "PLANNED_NOT_IMPLEMENTED"
+        },
+        {
+          "id": "TEST-GATE-05",
+          "layer": "policy-fixture",
+          "planned_file": "scripts/test_validate_pr_inputs.py",
+          "assertion": "Strict docs-only exemption does not exempt malformed docs or hidden code changes",
+          "status": "PLANNED_NOT_IMPLEMENTED"
+        }
+      ]
+    },
+    {
+      "finding": "FIND-012",
+      "severity": "P2",
+      "classification": "BUILT_WRONG",
+      "title": "Local development setup document conflicts",
+      "requirement": "REQ-DOC-001",
+      "acceptance": "AC-DOC-001",
+      "product_decision": "Choose monorepo-relative commands and one canonical API/web port contract",
+      "source": "api/README.md",
+      "tests": [
+        {
+          "id": "DOC-01",
+          "layer": "static+smoke",
+          "planned_file": "scripts/test_documented_setup.py",
+          "assertion": "README startup paths, ports and env variable names agree with actual config and service startup",
+          "status": "PLANNED_NOT_IMPLEMENTED"
+        }
+      ]
+    },
+    {
+      "finding": "FIND-013",
+      "severity": "P2",
+      "classification": "OBSERVED_UNSPECIFIED",
+      "title": "Signup artifact not accessible",
+      "requirement": "REQ-FLOW-002",
+      "acceptance": "AC-FLOW-002",
+      "product_decision": "PENDING product decision whether self-signup is in/out of scope",
+      "source": "web/src/App.tsx",
+      "tests": [
+        {
+          "id": "SIGNUP-01",
+          "layer": "component+request",
+          "planned_file": "web/src/pages/auth/SignupPage.test.tsx",
+          "assertion": "If in scope, route+API success/error/auth tests; otherwise document intentional absence and remove orphan consumer",
+          "status": "PLANNED_NOT_IMPLEMENTED"
+        }
+      ]
+    }
+  ]
+}

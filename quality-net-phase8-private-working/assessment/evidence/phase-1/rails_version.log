@@ -1,0 +1,16 @@
+$ ruby bin/rails --version
+exit_code=1
+
+ruby: warning: shebang line ending with \r may cause problems
+/usr/lib/ruby/3.3.0/bundler/definition.rb:448:in `validate_ruby!': Your Ruby version is 3.3.8, but your Gemfile specified 3.3.2 (Bundler::RubyVersionMismatch)
+	from /usr/lib/ruby/3.3.0/bundler/definition.rb:423:in `validate_runtime!'
+	from /usr/lib/ruby/3.3.0/bundler.rb:158:in `setup'
+	from /usr/lib/ruby/3.3.0/bundler/setup.rb:32:in `block in <top (required)>'
+	from /usr/lib/ruby/3.3.0/bundler/ui/shell.rb:173:in `with_level'
+	from /usr/lib/ruby/3.3.0/bundler/ui/shell.rb:119:in `silence'
+	from /usr/lib/ruby/3.3.0/bundler/setup.rb:32:in `<top (required)>'
+	from <internal:/usr/lib/ruby/vendor_ruby/rubygems/core_ext/kernel_require.rb>:136:in `require'
+	from <internal:/usr/lib/ruby/vendor_ruby/rubygems/core_ext/kernel_require.rb>:136:in `require'
+	from /mnt/data/quality-net-workspace/api/config/boot.rb:5:in `<top (required)>'
+	from bin/rails:5:in `require_relative'
+	from bin/rails:5:in `<main>'

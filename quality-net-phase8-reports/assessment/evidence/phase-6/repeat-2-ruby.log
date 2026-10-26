@@ -1,0 +1,15 @@
+$ ruby api/spec/regression/critical_contract_test.rb --seed 424
+[exit_code] 0
+
+[stdout]
+Run options: --seed 424
+
+# Running:
+
+............
+
+Finished in 0.001868s, 6423.2161 runs/s, 21410.7202 assertions/s.
+
+12 runs, 40 assertions, 0 failures, 0 errors, 0 skips
+
+[stderr]

@@ -1,0 +1,19 @@
+{
+  "original_tests": [
+    "test_SESSION_01_pending_audio_complete_must_not_finalize",
+    "test_FITGAP_04_duplicate_label_distinct_skills_must_not_disappear",
+    "test_PORTFOLIO_01_unparseable_AI_level_must_not_be_persisted",
+    "test_INVITE_01_default_invite_should_route_to_frontend",
+    "test_AUTH_TENANT_01_direct_fitgap_must_deny_foreign_portfolio"
+  ],
+  "assertions_unchanged": {
+    "test_SESSION_01_pending_audio_complete_must_not_finalize": true,
+    "test_FITGAP_04_duplicate_label_distinct_skills_must_not_disappear": true,
+    "test_PORTFOLIO_01_unparseable_AI_level_must_not_be_persisted": true,
+    "test_INVITE_01_default_invite_should_route_to_frontend": true,
+    "test_AUTH_TENANT_01_direct_fitgap_must_deny_foreign_portfolio": true
+  },
+  "original_count": 5,
+  "after_count": 12,
+  "notes": "The baseline five assertion sets are byte-equivalent. Test doubles were extended to support production Rails semantics; additions enforce positive paths."
+}

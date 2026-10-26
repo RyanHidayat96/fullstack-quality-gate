@@ -1,0 +1,345 @@
+{
+  "phase": 4,
+  "source_catalog": "assessment/design/phase-3-test-catalog.json",
+  "test_count": 41,
+  "status_counts": {
+    "EXECUTED_RED_SOURCE_METHOD": 2,
+    "PLANNED_NOT_IMPLEMENTED": 23,
+    "EXECUTED_RED_SOURCE_METHOD_AND_DB_SPEC_NOT_RUN": 3,
+    "DB_SPEC_WRITTEN_NOT_RUN": 1,
+    "EXECUTED_RED_STATIC_CONFIG": 2,
+    "EXECUTED_GREEN_POLICY_FIXTURE": 7,
+    "PARTIAL_HUMAN_REVIEW_REQUIRED": 2,
+    "PARTIAL_STATIC_CI_CHECK": 1
+  },
+  "tests": [
+    {
+      "id": "AUTH-TENANT-01",
+      "finding": "FIND-001",
+      "severity": "P1",
+      "state": "EXECUTED_RED_SOURCE_METHOD",
+      "actual_test_path": "api/spec/regression/critical_contract_test.rb",
+      "notes": "source method with test double, not DB"
+    },
+    {
+      "id": "AUTH-TENANT-02",
+      "finding": "FIND-001",
+      "severity": "P1",
+      "state": "PLANNED_NOT_IMPLEMENTED",
+      "actual_test_path": "",
+      "notes": "not exercised in Phase 4"
+    },
+    {
+      "id": "AUTH-TENANT-03",
+      "finding": "FIND-001",
+      "severity": "P1",
+      "state": "PLANNED_NOT_IMPLEMENTED",
+      "actual_test_path": "",
+      "notes": "not exercised in Phase 4"
+    },
+    {
+      "id": "SESSION-01",
+      "finding": "FIND-002",
+      "severity": "P1",
+      "state": "EXECUTED_RED_SOURCE_METHOD_AND_DB_SPEC_NOT_RUN",
+      "actual_test_path": "api/spec/regression/critical_contract_test.rb;api/spec/requests/session_completion_spec.rb",
+      "notes": "Ruby source method fails; request persistence spec not run"
+    },
+    {
+      "id": "SESSION-02",
+      "finding": "FIND-002",
+      "severity": "P1",
+      "state": "PLANNED_NOT_IMPLEMENTED",
+      "actual_test_path": "",
+      "notes": "not exercised in Phase 4"
+    },
+    {
+      "id": "SESSION-03",
+      "finding": "FIND-002",
+      "severity": "P1",
+      "state": "PLANNED_NOT_IMPLEMENTED",
+      "actual_test_path": "",
+      "notes": "not exercised in Phase 4"
+    },
+    {
+      "id": "SESSION-04",
+      "finding": "FIND-002",
+      "severity": "P1",
+      "state": "PLANNED_NOT_IMPLEMENTED",
+      "actual_test_path": "",
+      "notes": "not exercised in Phase 4"
+    },
+    {
+      "id": "FITGAP-01",
+      "finding": "FIND-004",
+      "severity": "P1",
+      "state": "DB_SPEC_WRITTEN_NOT_RUN",
+      "actual_test_path": "api/spec/models/fit_gap_freshness_spec.rb",
+      "notes": "requires DB-backed RSpec"
+    },
+    {
+      "id": "FITGAP-02",
+      "finding": "FIND-004",
+      "severity": "P1",
+      "state": "PLANNED_NOT_IMPLEMENTED",
+      "actual_test_path": "",
+      "notes": "not exercised in Phase 4"
+    },
+    {
+      "id": "FITGAP-03",
+      "finding": "FIND-004",
+      "severity": "P1",
+      "state": "PLANNED_NOT_IMPLEMENTED",
+      "actual_test_path": "",
+      "notes": "not exercised in Phase 4"
+    },
+    {
+      "id": "PORTFOLIO-01",
+      "finding": "FIND-005",
+      "severity": "P1",
+      "state": "EXECUTED_RED_SOURCE_METHOD_AND_DB_SPEC_NOT_RUN",
+      "actual_test_path": "api/spec/regression/critical_contract_test.rb;api/spec/services/portfolio_level_spec.rb",
+      "notes": "Ruby source method fails; DB spec not run"
+    },
+    {
+      "id": "PORTFOLIO-02",
+      "finding": "FIND-005",
+      "severity": "P1",
+      "state": "PLANNED_NOT_IMPLEMENTED",
+      "actual_test_path": "",
+      "notes": "not exercised in Phase 4"
+    },
+    {
+      "id": "PORTFOLIO-03",
+      "finding": "FIND-005",
+      "severity": "P1",
+      "state": "PLANNED_NOT_IMPLEMENTED",
+      "actual_test_path": "",
+      "notes": "not exercised in Phase 4"
+    },
+    {
+      "id": "FITGAP-04",
+      "finding": "FIND-003",
+      "severity": "P1",
+      "state": "EXECUTED_RED_SOURCE_METHOD_AND_DB_SPEC_NOT_RUN",
+      "actual_test_path": "api/spec/regression/critical_contract_test.rb;api/spec/services/fit_gap_engine_spec.rb",
+      "notes": "Ruby source method fails; DB spec not run"
+    },
+    {
+      "id": "FITGAP-05",
+      "finding": "FIND-003",
+      "severity": "P1",
+      "state": "PLANNED_NOT_IMPLEMENTED",
+      "actual_test_path": "",
+      "notes": "not exercised in Phase 4"
+    },
+    {
+      "id": "WS-AUTH-01",
+      "finding": "FIND-007",
+      "severity": "P1",
+      "state": "PLANNED_NOT_IMPLEMENTED",
+      "actual_test_path": "",
+      "notes": "not exercised in Phase 4"
+    },
+    {
+      "id": "WS-AUTH-02",
+      "finding": "FIND-007",
+      "severity": "P1",
+      "state": "PLANNED_NOT_IMPLEMENTED",
+      "actual_test_path": "",
+      "notes": "not exercised in Phase 4"
+    },
+    {
+      "id": "WS-AUTH-03",
+      "finding": "FIND-007",
+      "severity": "P1",
+      "state": "PLANNED_NOT_IMPLEMENTED",
+      "actual_test_path": "",
+      "notes": "not exercised in Phase 4"
+    },
+    {
+      "id": "WS-AUTH-04",
+      "finding": "FIND-007",
+      "severity": "P1",
+      "state": "PLANNED_NOT_IMPLEMENTED",
+      "actual_test_path": "",
+      "notes": "not exercised in Phase 4"
+    },
+    {
+      "id": "AUTH-TENANT-04",
+      "finding": "FIND-011",
+      "severity": "P1",
+      "state": "PLANNED_NOT_IMPLEMENTED",
+      "actual_test_path": "",
+      "notes": "not exercised in Phase 4"
+    },
+    {
+      "id": "AUTH-TENANT-05",
+      "finding": "FIND-011",
+      "severity": "P1",
+      "state": "PLANNED_NOT_IMPLEMENTED",
+      "actual_test_path": "",
+      "notes": "not exercised in Phase 4"
+    },
+    {
+      "id": "AUTH-TENANT-06",
+      "finding": "FIND-011",
+      "severity": "P1",
+      "state": "PLANNED_NOT_IMPLEMENTED",
+      "actual_test_path": "",
+      "notes": "not exercised in Phase 4"
+    },
+    {
+      "id": "INVITE-01",
+      "finding": "FIND-006",
+      "severity": "P1",
+      "state": "EXECUTED_RED_SOURCE_METHOD",
+      "actual_test_path": "api/spec/regression/critical_contract_test.rb",
+      "notes": "source method with synthetic token"
+    },
+    {
+      "id": "INVITE-02",
+      "finding": "FIND-006",
+      "severity": "P1",
+      "state": "PLANNED_NOT_IMPLEMENTED",
+      "actual_test_path": "",
+      "notes": "not exercised in Phase 4"
+    },
+    {
+      "id": "INVITE-03",
+      "finding": "FIND-006",
+      "severity": "P1",
+      "state": "EXECUTED_RED_STATIC_CONFIG",
+      "actual_test_path": "web/tests/api_config.test.mjs",
+      "notes": "checks env/client URLs, not browser component"
+    },
+    {
+      "id": "INVITE-04",
+      "finding": "FIND-008",
+      "severity": "P2",
+      "state": "PLANNED_NOT_IMPLEMENTED",
+      "actual_test_path": "",
+      "notes": "not exercised in Phase 4"
+    },
+    {
+      "id": "TEST-GATE-01",
+      "finding": "FIND-009",
+      "severity": "P2",
+      "state": "EXECUTED_GREEN_POLICY_FIXTURE",
+      "actual_test_path": "scripts/test_validate_pr_inputs.py",
+      "notes": "no changed executable test rejected"
+    },
+    {
+      "id": "TEST-GATE-02",
+      "finding": "FIND-009",
+      "severity": "P2",
+      "state": "PARTIAL_HUMAN_REVIEW_REQUIRED",
+      "actual_test_path": "scripts/test_validate_pr_inputs.py",
+      "notes": "machine cannot assess meaningful test semantics"
+    },
+    {
+      "id": "TEST-GATE-04",
+      "finding": "FIND-009",
+      "severity": "P2",
+      "state": "PARTIAL_HUMAN_REVIEW_REQUIRED",
+      "actual_test_path": "scripts/test_validate_pr_inputs.py",
+      "notes": "high-risk/policy-tests presence checked; code review external"
+    },
+    {
+      "id": "TEST-GATE-06",
+      "finding": "FIND-009",
+      "severity": "P2",
+      "state": "PARTIAL_STATIC_CI_CHECK",
+      "actual_test_path": "scripts/test_ci_contract.py",
+      "notes": "CI static contract tests pass; real remote job not run"
+    },
+    {
+      "id": "RELEASE-GATE-01",
+      "finding": "FIND-009",
+      "severity": "P2",
+      "state": "PLANNED_NOT_IMPLEMENTED",
+      "actual_test_path": "",
+      "notes": "not exercised in Phase 4"
+    },
+    {
+      "id": "RELEASE-GATE-02",
+      "finding": "FIND-009",
+      "severity": "P2",
+      "state": "PLANNED_NOT_IMPLEMENTED",
+      "actual_test_path": "",
+      "notes": "not exercised in Phase 4"
+    },
+    {
+      "id": "RELEASE-GATE-03",
+      "finding": "FIND-009",
+      "severity": "P2",
+      "state": "PLANNED_NOT_IMPLEMENTED",
+      "actual_test_path": "",
+      "notes": "not exercised in Phase 4"
+    },
+    {
+      "id": "DOR-01",
+      "finding": "FIND-010",
+      "severity": "P2",
+      "state": "EXECUTED_GREEN_POLICY_FIXTURE",
+      "actual_test_path": "scripts/test_validate_pr_inputs.py",
+      "notes": "missing linked requirement rejected"
+    },
+    {
+      "id": "DOR-02",
+      "finding": "FIND-010",
+      "severity": "P2",
+      "state": "EXECUTED_GREEN_POLICY_FIXTURE",
+      "actual_test_path": "scripts/test_validate_pr_inputs.py",
+      "notes": "missing AC rejected"
+    },
+    {
+      "id": "DOR-03",
+      "finding": "FIND-010",
+      "severity": "P2",
+      "state": "EXECUTED_GREEN_POLICY_FIXTURE",
+      "actual_test_path": "scripts/test_validate_pr_inputs.py",
+      "notes": "missing design rejected"
+    },
+    {
+      "id": "DOR-04",
+      "finding": "FIND-010",
+      "severity": "P2",
+      "state": "EXECUTED_GREEN_POLICY_FIXTURE",
+      "actual_test_path": "scripts/test_validate_pr_inputs.py",
+      "notes": "correct metadata allowed, not proof of test pass"
+    },
+    {
+      "id": "TEST-GATE-03",
+      "finding": "FIND-010",
+      "severity": "P2",
+      "state": "EXECUTED_GREEN_POLICY_FIXTURE",
+      "actual_test_path": "scripts/test_validate_pr_inputs.py",
+      "notes": "unsafe or external path rejected"
+    },
+    {
+      "id": "TEST-GATE-05",
+      "finding": "FIND-010",
+      "severity": "P2",
+      "state": "EXECUTED_GREEN_POLICY_FIXTURE",
+      "actual_test_path": "scripts/test_validate_pr_inputs.py",
+      "notes": "docs-only exemption checked"
+    },
+    {
+      "id": "DOC-01",
+      "finding": "FIND-012",
+      "severity": "P2",
+      "state": "EXECUTED_RED_STATIC_CONFIG",
+      "actual_test_path": "web/tests/api_config.test.mjs",
+      "notes": "checks local ports"
+    },
+    {
+      "id": "SIGNUP-01",
+      "finding": "FIND-013",
+      "severity": "P2",
+      "state": "PLANNED_NOT_IMPLEMENTED",
+      "actual_test_path": "",
+      "notes": "not exercised in Phase 4"
+    }
+  ]
+}

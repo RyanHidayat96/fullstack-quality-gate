@@ -1,0 +1,948 @@
+{
+  "source_archive_sha256": "88da860d806be3c256495f3816ccb5f25f2720bc12a0c0f84951bd8337de1e46",
+  "original_file_count": 188,
+  "original_text_files_with_crlf": 187,
+  "source_git_tree_sha_reported_by_github": "b836d02f45c6300b238b98ad50e66ead706723b6",
+  "entries": [
+    {
+      "path": ".gitignore",
+      "size": 221,
+      "sha256": "6e066fba265d037d480f417d50ec84487b950d825ff6c89c396a7fab6862eca9"
+    },
+    {
+      "path": "README.md",
+      "size": 1407,
+      "sha256": "35e58fc8d8b3e2488ba40d80adce0885c472cb6cf96d394d4049816f9773d82a"
+    },
+    {
+      "path": "api/.gitignore",
+      "size": 474,
+      "sha256": "9bf8a6faa3ad7464a6a4442315d3efdd78bee48d45e0a0be6d966d818d186617"
+    },
+    {
+      "path": "api/.irbrc",
+      "size": 4192,
+      "sha256": "c6530cfdb0a2990556c6c3a9f2d1e253b0ffd2232422dcc6d01cf37cb290a3bf"
+    },
+    {
+      "path": "api/.rspec",
+      "size": 23,
+      "sha256": "f3a2e66599f4c61656d2d0e2a67a165231e88783a5d6649c4a1ea8a6b7112cdf"
+    },
+    {
+      "path": "api/.ruby-version",
+      "size": 7,
+      "sha256": "178f6ec2c4e7e83a28569b6b635ecccfbb938907a69434a29958984279af4d34"
+    },
+    {
+      "path": "api/Dockerfile",
+      "size": 958,
+      "sha256": "640d50011582140559c00dc47809f98e6494d92e9a6d38c152ce5a7a52441425"
+    },
+    {
+      "path": "api/Gemfile",
+      "size": 1118,
+      "sha256": "b670cf49737858877f6cea35515e975f47f7f469d74068ef71308d6e46168851"
+    },
+    {
+      "path": "api/Gemfile.lock",
+      "size": 10119,
+      "sha256": "072f698df0240eb640d0830d5762cbcc75eedde0afd2adaf758887136594a33a"
+    },
+    {
+      "path": "api/Procfile",
+      "size": 97,
+      "sha256": "a338cbb8bde854723d1eaa82e7c1fe6e1a3c5a197a4a9f34486bb5b50bb1cbf8"
+    },
+    {
+      "path": "api/README.md",
+      "size": 2011,
+      "sha256": "d0de0017006b30ac30dc2eb04f1db1c5f7c052a61a96b009d7ebb68f61dce72c"
+    },
+    {
+      "path": "api/Rakefile",
+      "size": 266,
+      "sha256": "afeb1fb649374a3a0500001400fe0be22970f4c5fd56066f3b2a33a84eb9c111"
+    },
+    {
+      "path": "api/app/auth/authorize_api_request.rb",
+      "size": 2017,
+      "sha256": "f821ffc1090cc32aeb431345de4221d715118d7d66a88a4b54cce0bc2a8fe1fd"
+    },
+    {
+      "path": "api/app/channels/audio_websocket_middleware.rb",
+      "size": 33897,
+      "sha256": "a41e65107b29e5d396fef812170fdeea1b26793d78476bdf451757e2f2610abb"
+    },
+    {
+      "path": "api/app/channels/coverage_websocket_middleware.rb",
+      "size": 4711,
+      "sha256": "f548d3c18813f7bfef217c4f1635679ae64484d3cf0c2c38292f2d8728bba73d"
+    },
+    {
+      "path": "api/app/clients/gemini/http_client.rb",
+      "size": 3130,
+      "sha256": "d329957bc747e9a682d3dc147e732823e7bd18a25221d1d59fc73b457daa988a"
+    },
+    {
+      "path": "api/app/clients/gemini/live_client.rb",
+      "size": 17351,
+      "sha256": "81fb62af3c994de98d1398288300eb42c76869670c1b77a02106e1afe5e4b8f5"
+    },
+    {
+      "path": "api/app/controllers/api/v1/api_controller.rb",
+      "size": 128,
+      "sha256": "17e1569155f2dfd4740036a01268caa26f505d8f14b90de42f1d668eb07c7ed7"
+    },
+    {
+      "path": "api/app/controllers/api/v1/assessments_controller.rb",
+      "size": 4162,
+      "sha256": "a397b4a59f5321e4ba1efaca983996371051e3797084629d63d00034fe5358b5"
+    },
+    {
+      "path": "api/app/controllers/api/v1/authentication_controller.rb",
+      "size": 997,
+      "sha256": "4fa2ed808ad927bdefeaaf0e0b5f57dabbd640860d506deaf92b5d9c0e75baa8"
+    },
+    {
+      "path": "api/app/controllers/api/v1/portfolio_skills_controller.rb",
+      "size": 2477,
+      "sha256": "fe1e5875b6e48d2d753abb00e637fe7f138232b2d386cf59f372d4088e84e1fe"
+    },
+    {
+      "path": "api/app/controllers/api/v1/portfolios_controller.rb",
+      "size": 8259,
+      "sha256": "135b77c51e4755ea64b3f35f4c1b116b9e300914d3d7d1a415bb789458a6441d"
+    },
+    {
+      "path": "api/app/controllers/api/v1/sessions_controller.rb",
+      "size": 6965,
+      "sha256": "94f989d3e6fe694c88a2dfec1cfe65d9bbf8c68e93f0cd05fb3f239d3cb0defb"
+    },
+    {
+      "path": "api/app/controllers/api/v1/skill_taxonomies_controller.rb",
+      "size": 1262,
+      "sha256": "f5b7356e8c823a579a40181bad2e00427617811f3ae1a083c9c4bb9df842011a"
+    },
+    {
+      "path": "api/app/controllers/api/v1/vacancies_controller.rb",
+      "size": 3627,
+      "sha256": "308ecdfff063b436bd8b8b22194ea84f06b0a62c7dbf8ed03952628fbe563fd7"
+    },
+    {
+      "path": "api/app/controllers/application_controller.rb",
+      "size": 2687,
+      "sha256": "2044cc10060736e8c66db9bd429b0d31b48b4d2a51e48a626733ff3c5eb71da1"
+    },
+    {
+      "path": "api/app/controllers/concerns/exception_handler.rb",
+      "size": 2306,
+      "sha256": "cfb4dfe55034c6b01915a55a2cfb9bfb8bab33b57460c8820bbbf2bd31171345"
+    },
+    {
+      "path": "api/app/controllers/concerns/response.rb",
+      "size": 896,
+      "sha256": "f51f14e12a38815cba9760a3ee7e2ef58a32a81e0005de2e2f7d0f3c603eeff9"
+    },
+    {
+      "path": "api/app/lib/audio_ring_buffer.rb",
+      "size": 1803,
+      "sha256": "b077174359f9124214c506858fbe1e43018f20e78c97b3de08dcccd53154e1b6"
+    },
+    {
+      "path": "api/app/lib/json_web_token.rb",
+      "size": 1102,
+      "sha256": "6713872af090bf8706b38fb7e56a62204f96bbf1574631b8e17021658f18a032"
+    },
+    {
+      "path": "api/app/lib/message.rb",
+      "size": 715,
+      "sha256": "dfefe233e3fa7596cf64279ef291fc9e0b27bc3ec78fc73a93a9882f4ef98592"
+    },
+    {
+      "path": "api/app/middlewares/application_middleware.rb",
+      "size": 561,
+      "sha256": "c522db658b0938ff4fe9ca6771185fc7228b41a6ddb67843d6fcc97b744068a6"
+    },
+    {
+      "path": "api/app/middlewares/auth_token_middleware.rb",
+      "size": 1389,
+      "sha256": "ce0a4b76a31f02c5f85bee23dc0f2f5d870b90ca6308cb7d5adab1ba77c4c7de"
+    },
+    {
+      "path": "api/app/middlewares/tenant_resolver_middleware.rb",
+      "size": 2002,
+      "sha256": "64c1ac26b306ea097e8abc7e762042a9e61ad1d9a55b331db19f9d6e90a202f9"
+    },
+    {
+      "path": "api/app/models/application_record.rb",
+      "size": 142,
+      "sha256": "2be075e9bdb9b15f3d9b6e3ce9884a7fe944719bb76bdb63d80da01e59c75026"
+    },
+    {
+      "path": "api/app/models/assessment.rb",
+      "size": 723,
+      "sha256": "6538daff5e2fc7f62f5105a6fde14caf0734260b04c381d9e5b76dbb60481063"
+    },
+    {
+      "path": "api/app/models/assessment_skill.rb",
+      "size": 503,
+      "sha256": "5976fff9d415eab6e5ab9ea5708cee5f08d8ac605218ec5fc4c9afdefe3dc10c"
+    },
+    {
+      "path": "api/app/models/assessor_override.rb",
+      "size": 314,
+      "sha256": "336f4b97a48cbc050303732022e7fe6421a0200f6ebd551123b0068e5e0079ae"
+    },
+    {
+      "path": "api/app/models/concerns/tenant_scoped.rb",
+      "size": 915,
+      "sha256": "cb7920e0b34080e1159254791abcb4c46b848315df1d12cbf4a2fe9858bb5e3f"
+    },
+    {
+      "path": "api/app/models/coverage_map.rb",
+      "size": 460,
+      "sha256": "a359ecaea563b179a935bf1fe82bf99b29e23a259d34e1f1becf2771cb9def9e"
+    },
+    {
+      "path": "api/app/models/current.rb",
+      "size": 1245,
+      "sha256": "b8ded0f5882d160b10c0e1ed179fa757a7bdbb314d75f5b109d9987315321a7a"
+    },
+    {
+      "path": "api/app/models/fit_gap_report.rb",
+      "size": 236,
+      "sha256": "a4c9b0dba2a8794db5a1756d80837fe5d196d9807e9f17b1ac582fd570282e0b"
+    },
+    {
+      "path": "api/app/models/organization.rb",
+      "size": 984,
+      "sha256": "7d200f862e7e09278b3c2c0f2c55126275a53d0728f17ea290f8c995fe18c7b0"
+    },
+    {
+      "path": "api/app/models/portfolio.rb",
+      "size": 723,
+      "sha256": "402c6a9a85f68b001c7bade8f1085804141cfd9d2301e0ad50d5d5045241c4f2"
+    },
+    {
+      "path": "api/app/models/portfolio_skill.rb",
+      "size": 547,
+      "sha256": "073388ef332003e83f9e7488d9cdd4686d10bbefc97edf406cd8918ef74f7d45"
+    },
+    {
+      "path": "api/app/models/session.rb",
+      "size": 1158,
+      "sha256": "bf8004347ec022f99dceae15f0cadf77d93fa2cfaa2158e88dd50435e73088be"
+    },
+    {
+      "path": "api/app/models/skill_taxonomy.rb",
+      "size": 578,
+      "sha256": "6d901dbf32c3496dad2c716279e3b63e6840d842a6a68d291a240a80cb44a212"
+    },
+    {
+      "path": "api/app/models/transcript_turn.rb",
+      "size": 404,
+      "sha256": "18ef7dcb91d86e26e5ea720ede96a2f06158070ffe14064cafde98df6b563bd9"
+    },
+    {
+      "path": "api/app/models/user.rb",
+      "size": 447,
+      "sha256": "eeba69e36692d40a38ef4455c3dd509fca193302df23af02a4bf72c71f558058"
+    },
+    {
+      "path": "api/app/models/vacancy.rb",
+      "size": 404,
+      "sha256": "267d8e0245f69f738692ea7d25415146685e71a314b24b66dc298494606bf8cb"
+    },
+    {
+      "path": "api/app/models/vacancy_skill.rb",
+      "size": 222,
+      "sha256": "342cb7c55cde6e0bb285df1df735cde2af1310383b05948ea7cf3ad48afbd20b"
+    },
+    {
+      "path": "api/app/services/assessments/system_prompt_compiler.rb",
+      "size": 13466,
+      "sha256": "6f260608420ab7b2e6afee24eb7a98de60905e833880f228a9f736b5f563cb3f"
+    },
+    {
+      "path": "api/app/services/coverage/analyzer.rb",
+      "size": 6817,
+      "sha256": "7439b9aa0f0c37936c2aec633f2ba6edc3e92a514d519b8db3902ac86bd83622"
+    },
+    {
+      "path": "api/app/services/coverage/map_injector.rb",
+      "size": 4134,
+      "sha256": "d36fc2d00e2ccac7e3aaad5a9b6f42fdcf68fae289263b8dd8a5a58e3e1520db"
+    },
+    {
+      "path": "api/app/services/coverage/state_engine.rb",
+      "size": 1878,
+      "sha256": "5c185d5674f8075e59786d294accdb2f03cb5ff2fcb89ad65f49c29f18e28a33"
+    },
+    {
+      "path": "api/app/services/exports/pdf_generator.rb",
+      "size": 5708,
+      "sha256": "a0164ed7a54ffa2c0f5902055908a228cb04a6e5e7b2e10663826f527604a012"
+    },
+    {
+      "path": "api/app/services/fit_gap/engine.rb",
+      "size": 6115,
+      "sha256": "dadfc801fc719a25adbf571217ec34c2084ca454394216ea45c2ddeadfcd6aa1"
+    },
+    {
+      "path": "api/app/services/portfolios/generator.rb",
+      "size": 7282,
+      "sha256": "a3aef1b78d9e8b3980b4cd8f8b3f2bf8df2d8267b9df03d82dae5406b2d8680c"
+    },
+    {
+      "path": "api/app/services/sessions/end_handler.rb",
+      "size": 2419,
+      "sha256": "6807a45e7a8eaf1cc3dbdd4acda75cc807b40a81060790ee6ed5057091d4c636"
+    },
+    {
+      "path": "api/app/services/sessions/start_handler.rb",
+      "size": 1682,
+      "sha256": "0cc24a807853d4de7404b348b478690bc65dd8cd98206f7193e20cc1d4fc0027"
+    },
+    {
+      "path": "api/app/workers/coverage_analyzer_worker.rb",
+      "size": 4355,
+      "sha256": "4c0b9a794cddb28f38db0facc224505d2869d881095d938e68efda83ef450ab6"
+    },
+    {
+      "path": "api/app/workers/fit_gap_generator_worker.rb",
+      "size": 646,
+      "sha256": "ad7109f3154bc38954c5bf5b9cbe84ab3897c03e91d5aea29040b96b5c4ca31f"
+    },
+    {
+      "path": "api/app/workers/portfolio_generator_worker.rb",
+      "size": 798,
+      "sha256": "1d6d00c9711cfa44ec609aede8c2d82e79ce776c99183aeaa72d66f8cede8257"
+    },
+    {
+      "path": "api/app/workers/system_prompt_generator_worker.rb",
+      "size": 724,
+      "sha256": "8c6780733aeaf9d718733f67ca82b484395c7e43a106858c73f2ae1870117fcc"
+    },
+    {
+      "path": "api/bin/bundle",
+      "size": 310,
+      "sha256": "15386daeec7d8d0f1efe0acd2e965dd86a1cb0f0ec49c6a848e914629b02c342"
+    },
+    {
+      "path": "api/bin/rails",
+      "size": 178,
+      "sha256": "23fd95afe172e87c7e24e17d9cecb48a934db09cf75659aef7bd089bfd2f350a"
+    },
+    {
+      "path": "api/bin/rake",
+      "size": 127,
+      "sha256": "6ec56ce5a0f14726ff9f2ed882f1612f531ba12f1b4c88834d2b4a2098da14ef"
+    },
+    {
+      "path": "api/config/application.rb",
+      "size": 1758,
+      "sha256": "1bb7dd383adae757e4210de3693a944a7c0dafad7f8b6ea157772567263007d8"
+    },
+    {
+      "path": "api/config/application.yml.sample",
+      "size": 854,
+      "sha256": "bada30664b7096d0c7565517c658bf520b7371d536871746fba785a51e7d3679"
+    },
+    {
+      "path": "api/config/boot.rb",
+      "size": 329,
+      "sha256": "db9d0a12f861182422c6b81004874a268cf025ca5afa8722c3bc32395825c6dd"
+    },
+    {
+      "path": "api/config/database.yml",
+      "size": 773,
+      "sha256": "c8b76e81ea67a95f2deba66651687089dfc1c9e0bc95ba0fbc118bb0330c5c3f"
+    },
+    {
+      "path": "api/config/environment.rb",
+      "size": 166,
+      "sha256": "4234f745a1e992c4b1baaa1dd716e2b68f9a85acb0a1ae60a2ea0fdb8251c028"
+    },
+    {
+      "path": "api/config/environments/development.rb",
+      "size": 1601,
+      "sha256": "ad932647d6db4ecde15618cec9402f4c190b689a856c83732df4611b9f55b3c8"
+    },
+    {
+      "path": "api/config/environments/production.rb",
+      "size": 1836,
+      "sha256": "0a7dbea83ffd21e7df9421e65cbaa7f2bebe8b8557b983ecc2a6b684915a77a1"
+    },
+    {
+      "path": "api/config/environments/test.rb",
+      "size": 1830,
+      "sha256": "e81fdaeab17016dee5b7fac753965de3dcff2b4a251e3edba68c2b3afc24b047"
+    },
+    {
+      "path": "api/config/initializers/cors.rb",
+      "size": 367,
+      "sha256": "c50b8a191f850f0c1cc98ed9a819e330b35563a53bf56ed1cfd9b15681bffbe2"
+    },
+    {
+      "path": "api/config/initializers/eventmachine.rb",
+      "size": 505,
+      "sha256": "9300f1381f5e95c34f9064ae1bc3b6bfca510a1714e3294960c346dc254f18f2"
+    },
+    {
+      "path": "api/config/initializers/gemini.rb",
+      "size": 543,
+      "sha256": "444d9ac053c9881ae3520abddd134d8f3857ac0af0e9ac7b56a4a42794c7d469"
+    },
+    {
+      "path": "api/config/initializers/rack_attack.rb",
+      "size": 943,
+      "sha256": "d10bdfc97a8f7d5566581ff1339727dbe5b60fc0326e1cbf941a4fd5913ad72e"
+    },
+    {
+      "path": "api/config/initializers/request_store.rb",
+      "size": 128,
+      "sha256": "222ee2b16fea558cc4b0ac953b3624220b6790e54291668617274572eace6d59"
+    },
+    {
+      "path": "api/config/initializers/sidekiq.rb",
+      "size": 587,
+      "sha256": "1c2a753f18a87c970f216eea989d2bdfa2bd1e9f84ae892cec5908e170dc9d5f"
+    },
+    {
+      "path": "api/config/initializers/websocket.rb",
+      "size": 744,
+      "sha256": "456699119f46b6be3bc593949aff77468efca2b63124ab2855ba2df6f80b9946"
+    },
+    {
+      "path": "api/config/puma.rb",
+      "size": 1476,
+      "sha256": "427a88502aed102646e4b81e3fdb0fcc6155b47b1e6fdf9086d1d06c56f8a375"
+    },
+    {
+      "path": "api/config/routes.rb",
+      "size": 2014,
+      "sha256": "70b6513c22f9b07e64a1b8b8f8fc8e7a8b98e5a21dc48ec9805408be2dd9cdfe"
+    },
+    {
+      "path": "api/config/sidekiq.yml",
+      "size": 308,
+      "sha256": "8a7997ce9b0d97d1337942ca4af8abf4b0829a29e84825f98e8b6f4fd6601859"
+    },
+    {
+      "path": "api/config.ru",
+      "size": 199,
+      "sha256": "d505a52c3ed4ab711a11fb5f6f7bf9889b63a231fbc6ea7f4da550aa2493ee2c"
+    },
+    {
+      "path": "api/db/migrate/20231201000000_create_organizations.rb",
+      "size": 741,
+      "sha256": "9ba780f51c42676278cb58781d9a213e970dec98f3db17ed721be477a6509f79"
+    },
+    {
+      "path": "api/db/migrate/20240101000000_create_ai_interview_schema.rb",
+      "size": 11077,
+      "sha256": "6f50bd4bba3f34d4bfa0aec0482f9187804f5b80a98df6815789de4fe18fb32a"
+    },
+    {
+      "path": "api/db/migrate/20260320000000_create_skill_taxonomies.rb",
+      "size": 901,
+      "sha256": "ca35a66042e23bc8c0c6fb4b4abc65f0c7d2601050178e58ca8cd3ee5ae58df7"
+    },
+    {
+      "path": "api/db/migrate/20260320000001_create_ai_interview_users.rb",
+      "size": 555,
+      "sha256": "db0ee5997f2131ab84c0efcfd241d4c733b42d28e6379dce8db1093b9e08e485"
+    },
+    {
+      "path": "api/db/migrate/20260323032702_add_language_to_assessments.rb",
+      "size": 153,
+      "sha256": "df89fb7d59a9bf4e5dc6412230b51542636ca0d0542c4b4f7100533c9d8bf35d"
+    },
+    {
+      "path": "api/db/migrate/20260411000000_add_10_min_to_time_limit_options.rb",
+      "size": 577,
+      "sha256": "767fd0216cb3a1c8c6199f233b33642388c5f5731eb7214d6c6825346ce68ddf"
+    },
+    {
+      "path": "api/db/migrate/20260505000000_add_indexes_to_organizations.rb",
+      "size": 303,
+      "sha256": "2ced2647fb826b5085d86d9326f5142523501e5b238a055206342374975ca47f"
+    },
+    {
+      "path": "api/db/migrate/20260505000001_add_candidate_id_indexes.rb",
+      "size": 297,
+      "sha256": "e668f708133b7d1f6889baa674525de4716284e2a20c10b26e956b0834b84103"
+    },
+    {
+      "path": "api/db/migrate/20260505000002_add_candidate_name_to_sessions.rb",
+      "size": 155,
+      "sha256": "d6f7b5ae724a30059cdf770dda585bf8fc536322c5f089f6277e1c4ec0e26c85"
+    },
+    {
+      "path": "api/db/schema.rb",
+      "size": 10366,
+      "sha256": "8df39d5d324852aff3c7530b9bb47667b087955d4783736a44164d7ffd6bd458"
+    },
+    {
+      "path": "api/db/seeds.rb",
+      "size": 26788,
+      "sha256": "cee22c0e47379a40640d212960ab94992b16742e43c195e803f41e0ed7751653"
+    },
+    {
+      "path": "api/k8s/configmap.yaml",
+      "size": 674,
+      "sha256": "bb1470be097fc24a850be5846d655a6c6c3a075aee1596b73ed30ba67314826a"
+    },
+    {
+      "path": "api/k8s/deploy-sidekiq.yaml",
+      "size": 4110,
+      "sha256": "28206afd18e83cb6c07f83dffda2b21c3d85f16dcc4fb019f031cd0bfffa973a"
+    },
+    {
+      "path": "api/k8s/deployment.yaml",
+      "size": 4866,
+      "sha256": "43f48ac4bf6e854208e405e099a1d1c685f3e0b03ea094d9074861316e2e6e31"
+    },
+    {
+      "path": "api/k8s/ingress.yml",
+      "size": 1297,
+      "sha256": "06a1979620748f080228c6fd50bfea247e0fb4bbe6059c0ad37841d95b758372"
+    },
+    {
+      "path": "api/k8s/nodepool.yaml",
+      "size": 1504,
+      "sha256": "825272c14ab5f76d2eb2bf7cfddc9575a28ce6bc65a4d3d0c13f01246ec29132"
+    },
+    {
+      "path": "api/k8s/service.yaml",
+      "size": 247,
+      "sha256": "e632892ec960e0ffec77aef47a7a6605880ff71e58127998cd8b6c70bffc5a26"
+    },
+    {
+      "path": "api/log/.keep",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "web/.env.example",
+      "size": 518,
+      "sha256": "586e48eb4f16431ec6598b3b444173533a9597ea70afe06a7c4ca312ce9be1db"
+    },
+    {
+      "path": "web/.gitignore",
+      "size": 181,
+      "sha256": "6f46cd4a93440048a2271e8eb54473489df785941fe2d37adc1b4ab99dbd6d8d"
+    },
+    {
+      "path": "web/README.md",
+      "size": 3730,
+      "sha256": "68e30a118cf09aff9850a200d5af96e466571f13b2b3b9d810a4a2f487362adc"
+    },
+    {
+      "path": "web/index.html",
+      "size": 307,
+      "sha256": "06dd2c200101ef822df92547fa0e227332322b21b270732fd298a5e952cde83a"
+    },
+    {
+      "path": "web/package.json",
+      "size": 1718,
+      "sha256": "380c9eda1d7a1a599b1761f8725a95d9bedf36c1fb15540775058ad4e26a5389"
+    },
+    {
+      "path": "web/postcss.config.js",
+      "size": 99,
+      "sha256": "218def8d8635601327c5c7c2084d958f316e71e55bc2daece2a627b34ed87b72"
+    },
+    {
+      "path": "web/public/audio-worklet-processor.js",
+      "size": 1410,
+      "sha256": "a09e5f4d66ab2ee01c4e66242ea5885a97662a51c54f702ae6b24f70b2bee748"
+    },
+    {
+      "path": "web/src/App.tsx",
+      "size": 2766,
+      "sha256": "9c962979d4266fbb365656996a2b5744e24a2b5fa39379b8b473d463e2d29c77"
+    },
+    {
+      "path": "web/src/components/ErrorBoundary.tsx",
+      "size": 1047,
+      "sha256": "a8ca233a8ffe4b9bb307faa7743cd0c6da06b4faddc1b8bfd583529b040b5f8d"
+    },
+    {
+      "path": "web/src/components/HardwareCheck.tsx",
+      "size": 13016,
+      "sha256": "6d59a77e33268b5b6183dcd5e813376ff78c710d6116adb8268dc8073343ac99"
+    },
+    {
+      "path": "web/src/components/ProtectedRoute.tsx",
+      "size": 312,
+      "sha256": "f75a986f09bd1c066cd45d558c89da23efac1b727f44f62ac354f10ec1649c32"
+    },
+    {
+      "path": "web/src/components/StatusIndicator.tsx",
+      "size": 1477,
+      "sha256": "2f8583cf7131a05d375bff6e6f9a1bc06f03a19991c4cb9cf794bb473369061c"
+    },
+    {
+      "path": "web/src/components/assessment/CustomSkillForm.tsx",
+      "size": 2802,
+      "sha256": "048d2c2f50de03b9a26b7d6f4c430a7ec3cbd85223e307c76fce9ab84bcaef23"
+    },
+    {
+      "path": "web/src/components/assessment/LevelRadio.tsx",
+      "size": 1019,
+      "sha256": "8dbcc1808998f8ac737f37496fcfe0c24ba289614a334f4526eb914c75cc4980"
+    },
+    {
+      "path": "web/src/components/assessment/SkillCard.tsx",
+      "size": 4056,
+      "sha256": "f9e05e8d3b657dcb9bfe0038aa4d761f349612e8831d8878fab3772f3e1d59cd"
+    },
+    {
+      "path": "web/src/components/assessment/SkillPicker.tsx",
+      "size": 3113,
+      "sha256": "f195183785b28e5a8ee09e619fea196e31c1f9eb9955bce7b684e7488f2412b2"
+    },
+    {
+      "path": "web/src/components/fitgap/ComparisonTable.tsx",
+      "size": 3449,
+      "sha256": "80f356adfd3f4ec77a0f35f631b34e9b876def28cc028764b6b6661f80f32d2f"
+    },
+    {
+      "path": "web/src/components/interview/ConnectionStatus.tsx",
+      "size": 871,
+      "sha256": "1c7efd2cb3b9b38b15b123e4bf7de03631f1dca95e6a57b4bd38bf9c33571988"
+    },
+    {
+      "path": "web/src/components/interview/InterviewTimer.tsx",
+      "size": 1207,
+      "sha256": "6851480ef2b2951789be545b59779934c1b44dc2297200cbda29010675f42a9f"
+    },
+    {
+      "path": "web/src/components/interview/TranscriptBubble.tsx",
+      "size": 794,
+      "sha256": "fa73913de22b2eb59a7bf1add0c8bbf30c17cb32d95651c4061d2b4bdad78c9c"
+    },
+    {
+      "path": "web/src/components/interview/VoiceBars.tsx",
+      "size": 1158,
+      "sha256": "effdfe69f80f8508b54b17c86c313d6458e73852ba02e0b5c7ca324acb81ca38"
+    },
+    {
+      "path": "web/src/components/layout/AssessorLayout.tsx",
+      "size": 2849,
+      "sha256": "c4eee6fd9f0143456017c8680e074fcefddbb136652ff38b3e577ac6a44b9da1"
+    },
+    {
+      "path": "web/src/components/layout/CandidateLayout.tsx",
+      "size": 558,
+      "sha256": "188a51fd1faef21a4d53376594ca3d079a260bf1d16a08eed4de6f6608f58787"
+    },
+    {
+      "path": "web/src/components/portfolio/ConfidenceIndicator.tsx",
+      "size": 1096,
+      "sha256": "3f98a6d0b73f0b6a976f31b8eb451c9b7e17f0835fc417e56fe7c6cd8ac898bd"
+    },
+    {
+      "path": "web/src/components/portfolio/LevelBadge.tsx",
+      "size": 802,
+      "sha256": "b70f0551f7c84daf25d73a72bee7aead8bd8280ece318f03d445d8439cf2fafb"
+    },
+    {
+      "path": "web/src/components/portfolio/OverridePanel.tsx",
+      "size": 3757,
+      "sha256": "e6db20bd0cb1ce8c7a6e70e54042cec4987e409d8b26b4c75b2a36ee4fda1f38"
+    },
+    {
+      "path": "web/src/components/portfolio/SkillPortfolioCard.tsx",
+      "size": 3029,
+      "sha256": "7c7e74ab4650fcde4eefd775d4cdf123b7659c1e5bf75ab9d818ea58c1deb147"
+    },
+    {
+      "path": "web/src/components/ui/accordion.tsx",
+      "size": 2023,
+      "sha256": "227b11cd75336ec8f59f718eda7185b8d6354c9d8ac537f929766d9676408b09"
+    },
+    {
+      "path": "web/src/components/ui/alert-dialog.tsx",
+      "size": 4476,
+      "sha256": "c8d93266f48f50c353f0c8e525cade0ca47dcc96b1d0589ed1657074341e89bd"
+    },
+    {
+      "path": "web/src/components/ui/badge.tsx",
+      "size": 1275,
+      "sha256": "cddd1d447547aa24a9475119e3e177b009ea3655cdeb6f8ae761875eacc02339"
+    },
+    {
+      "path": "web/src/components/ui/button.tsx",
+      "size": 2096,
+      "sha256": "7b1cd7b684687ceaea2a1a5efce9d869529fef53d9a36ffc0cc2f8bc842d8840"
+    },
+    {
+      "path": "web/src/components/ui/card.tsx",
+      "size": 1914,
+      "sha256": "755b905c6626ee822663b09c83866c7267d815070d529d2569f50eeae8c2bfc0"
+    },
+    {
+      "path": "web/src/components/ui/dialog.tsx",
+      "size": 3877,
+      "sha256": "1fe8fb679bebfd4df7a6b5c643e78b1a9b8b8bb74bdf64c98e6a7580e332f949"
+    },
+    {
+      "path": "web/src/components/ui/dropdown-menu.tsx",
+      "size": 3401,
+      "sha256": "ffae8e58945a1507413d93e0492ba3685d6d516a279099f4fc842d09dbc45867"
+    },
+    {
+      "path": "web/src/components/ui/input.tsx",
+      "size": 850,
+      "sha256": "cdd4e04461be35d69e51aaee4e3e3fe7e470ec56d239e2a98c13398b6c616829"
+    },
+    {
+      "path": "web/src/components/ui/label.tsx",
+      "size": 598,
+      "sha256": "15b18dd379c078ca8ab16f908ecbb6659a138cf9601ccbb4feac09f1ad361980"
+    },
+    {
+      "path": "web/src/components/ui/progress.tsx",
+      "size": 875,
+      "sha256": "697d068430533039c9fea9e7bfaa91ca8604cf7a03bc9196292d897d7e7074f6"
+    },
+    {
+      "path": "web/src/components/ui/radio-group.tsx",
+      "size": 1480,
+      "sha256": "79398887f10d87bd113c25e79df04946dc67bd7fab2cd238aab3f1409f99c056"
+    },
+    {
+      "path": "web/src/components/ui/select.tsx",
+      "size": 5742,
+      "sha256": "acc1f3d0baa70c09b93fcd9856f2a496a966d2240b16458d58d1ece1de7c0213"
+    },
+    {
+      "path": "web/src/components/ui/separator.tsx",
+      "size": 744,
+      "sha256": "bcfc8f1f10351e61c1a9d8f7dd7dc28417b85a1ebd7431f74731184f219f9b1c"
+    },
+    {
+      "path": "web/src/components/ui/skeleton.tsx",
+      "size": 272,
+      "sha256": "a0a85d36c64d4737006d0a66e971c305eb7398c8afd1f45925d78fc9a2d85bf0"
+    },
+    {
+      "path": "web/src/components/ui/tabs.tsx",
+      "size": 1945,
+      "sha256": "c04aeaa1e9a9e793b0ed88f8417d18b33871637db471dae864df37ae60c91c4c"
+    },
+    {
+      "path": "web/src/components/ui/textarea.tsx",
+      "size": 797,
+      "sha256": "250f8ec822147f5cee83f48dcd3fb2e7c732eec09d55d0f6f3cddc4e7d4340ec"
+    },
+    {
+      "path": "web/src/components/ui/tooltip.tsx",
+      "size": 1176,
+      "sha256": "3e5e4bc70d88d80019920f0606bc8405a646420e4dd61be4188820674c3d1bcc"
+    },
+    {
+      "path": "web/src/hooks/useAudioCapture.ts",
+      "size": 2347,
+      "sha256": "b513df462d42d35afc069b6326eb8164ffd6146ff83b93005b844c7db1c29c24"
+    },
+    {
+      "path": "web/src/hooks/useAudioPlayback.ts",
+      "size": 3129,
+      "sha256": "2b42b2cc020a41f6719b7c4ab4db2757a137dc57c516ea01745630857b965cd9"
+    },
+    {
+      "path": "web/src/hooks/useAudioWebSocket.ts",
+      "size": 5645,
+      "sha256": "b596499dd69a5fb2400bf0ced0c7ae2f05cf2ce2c9ad045a35687cceac671d20"
+    },
+    {
+      "path": "web/src/hooks/useCoverageWebSocket.ts",
+      "size": 2860,
+      "sha256": "d0ce0a0c9995b87ebce646e52a5b185563ea13c853307484665100dd6f661b47"
+    },
+    {
+      "path": "web/src/hooks/usePolling.ts",
+      "size": 391,
+      "sha256": "0de39a9d5c4e8fbd7f896ef0b623c36f1dd989b558faad7c2b703515cf73b3fe"
+    },
+    {
+      "path": "web/src/index.css",
+      "size": 1821,
+      "sha256": "67807f3e7bd0d6bea3a0f2268bb6f2fba6ad4a536ec07db0e7a0cdfdd167cd51"
+    },
+    {
+      "path": "web/src/lib/utils.ts",
+      "size": 177,
+      "sha256": "4053bb17c3cf06152cd986d3e2e9851b2944003de20d5c93e6964cb52256e17c"
+    },
+    {
+      "path": "web/src/main.tsx",
+      "size": 495,
+      "sha256": "e7453d8c19822cb6e635d30f81727f9cf9af22a8a30bcaf8eb9ee62877553dff"
+    },
+    {
+      "path": "web/src/pages/assessments/AssessmentEditPage.tsx",
+      "size": 7022,
+      "sha256": "91adcecf67bd23943e817942e02249311fde390ded907b8ac0493cb463b338f4"
+    },
+    {
+      "path": "web/src/pages/assessments/AssessmentInvitePage.tsx",
+      "size": 12798,
+      "sha256": "9b96ea872a72417091f007b6f15490ed2e7547035aa04d175a33b73bd9a24cf4"
+    },
+    {
+      "path": "web/src/pages/assessments/AssessmentListPage.tsx",
+      "size": 3907,
+      "sha256": "d7a84a70962d158229f79fe08c504e2e2cf2cf4c460963e98ee46e7f4932cae1"
+    },
+    {
+      "path": "web/src/pages/assessments/AssessmentNewPage.tsx",
+      "size": 8419,
+      "sha256": "e5d3de5826efda51056f6d4831bb3f3fa0584e92843d94f6f9e8f30ac13696f7"
+    },
+    {
+      "path": "web/src/pages/auth/LoginPage.tsx",
+      "size": 2633,
+      "sha256": "5d819b78eb00ce99c85c530add95dedfb1b198f2f5398a41b0d5d0775b12f38d"
+    },
+    {
+      "path": "web/src/pages/auth/SignupPage.tsx",
+      "size": 3792,
+      "sha256": "01ae2fc36985af09e994d07dfa18845119e0b41f9a0e169c2bd6f31705b8d43e"
+    },
+    {
+      "path": "web/src/pages/fitgap/FitGapReportPage.tsx",
+      "size": 7832,
+      "sha256": "021571204dedd4a7f575de204a58f05eac4fde1b507930627fe5a0c47e378e30"
+    },
+    {
+      "path": "web/src/pages/interview/InterviewPage.tsx",
+      "size": 15042,
+      "sha256": "28485aa148c68a36a81738da98893d8431ae96759dd251dd367277277ddcfd8c"
+    },
+    {
+      "path": "web/src/pages/monitor/LiveMonitorPage.tsx",
+      "size": 12387,
+      "sha256": "c68e078833f7cee5c004a0fc07856fbad7742c9d970337fe77dd604f52389782"
+    },
+    {
+      "path": "web/src/pages/portfolio/PortfolioPage.tsx",
+      "size": 9914,
+      "sha256": "e3b1841f19e67874be636e1ae9726d84dea4bf5a21917f0a73d532fcfdc537d2"
+    },
+    {
+      "path": "web/src/pages/transcript/TranscriptPage.tsx",
+      "size": 4052,
+      "sha256": "9e71e4600420cd06961f894c565494f8560927f88f7a43eb1fc4c0669ae70014"
+    },
+    {
+      "path": "web/src/pages/vacancies/VacancyEditPage.tsx",
+      "size": 4889,
+      "sha256": "ee265ab0dd65e646556de2740ff65deb71240776f1da78a6f8f9bd5a3c8b266c"
+    },
+    {
+      "path": "web/src/pages/vacancies/VacancyListPage.tsx",
+      "size": 2703,
+      "sha256": "8ff1264866682c3309975fa08a2d5a3b0c863ab6e0b362c3bba409500c4cc69d"
+    },
+    {
+      "path": "web/src/pages/vacancies/VacancyNewPage.tsx",
+      "size": 5900,
+      "sha256": "e4f0860acfa4fce4f267e74d676c6e0ad40c444079587d2e24f55d14c69bc100"
+    },
+    {
+      "path": "web/src/services/api.ts",
+      "size": 1156,
+      "sha256": "06248a9adf7f2b971e90819c1966ad87dec4af8cdce77970a83eb0aec76e27fd"
+    },
+    {
+      "path": "web/src/services/assessments.ts",
+      "size": 1403,
+      "sha256": "7dcbb50c2d7ed4290121deb8f1cf064df08b9f7fc219907c3a07479087c3475c"
+    },
+    {
+      "path": "web/src/services/auth.ts",
+      "size": 408,
+      "sha256": "2c7ef54ee719a77be7d6929c05d656406b32c265582deea72bef110e204b1acc"
+    },
+    {
+      "path": "web/src/services/portfolios.ts",
+      "size": 1247,
+      "sha256": "3736bd4b2a9629c4ab2f7ae66b9847daada91fbfa7a39a09e07ab324eaa1914a"
+    },
+    {
+      "path": "web/src/services/sessions.ts",
+      "size": 1285,
+      "sha256": "bdcab65dccb62f56bbbaec4942389f3321d8ff944ffdf4a8f7298e1b6ef01628"
+    },
+    {
+      "path": "web/src/services/skillTaxonomies.ts",
+      "size": 317,
+      "sha256": "6ac7abd02a0accf94a81064291958097ca15f8b71c8723161bbd11c55e99cf1a"
+    },
+    {
+      "path": "web/src/services/vacancies.ts",
+      "size": 831,
+      "sha256": "a14431e1331c9546cbbbdfe3410d12c9612dbe2f71a2a32a4b6302d443c1a612"
+    },
+    {
+      "path": "web/src/stores/authAtom.ts",
+      "size": 521,
+      "sha256": "f65df3ee2c53a3a3a1c5a15181bd1bd1554f8f10fc5f40e7e14054ba8f8fdd79"
+    },
+    {
+      "path": "web/src/stores/tenantAtom.ts",
+      "size": 343,
+      "sha256": "2b46a8cb326afd6465eaf022d20f1c2e3c29cb2434e7d3b3cc77aeba11ff8a1c"
+    },
+    {
+      "path": "web/src/types/index.ts",
+      "size": 4625,
+      "sha256": "9bfc06c9949369b7c1189a4302243ff8672d6aa72dcc0c25b4b04873f8c15ea4"
+    },
+    {
+      "path": "web/src/utils/constants.ts",
+      "size": 1838,
+      "sha256": "1021426e242870ee292a6a7a2c06f2171709b21445562734ecbaa2b1594c71e9"
+    },
+    {
+      "path": "web/src/utils/hardwareUtils.ts",
+      "size": 2490,
+      "sha256": "27ce2c887137d2a2f9164484470af8c53418a40b167acf59c07c50cd23c70010"
+    },
+    {
+      "path": "web/src/utils/internetSpeedTest.ts",
+      "size": 5644,
+      "sha256": "f964c0f49bbc86738bf4d0d2cc8ee6cf625c6bb494e9a16b4b6e24e9260e24a4"
+    },
+    {
+      "path": "web/tailwind.config.js",
+      "size": 2683,
+      "sha256": "f98bd492a037f60fde87b0e56cd5172c325455168385c80c951ba2de3a818f34"
+    },
+    {
+      "path": "web/tsconfig.json",
+      "size": 911,
+      "sha256": "4bc2779cc19f8ae7b5d595661cdf5e90f2a31cedbbd52e76e03481566e0e8311"
+    },
+    {
+      "path": "web/tsconfig.node.json",
+      "size": 288,
+      "sha256": "cf833b03dc49ebd67f2964d2a97e735e44b7595b2ddba71236e9159652a94772"
+    },
+    {
+      "path": "web/vercel.json",
+      "size": 1171,
+      "sha256": "3d02cc999a6d36a82f81232dac898445775c7445ff439ef78f3fc25a022e4dc3"
+    },
+    {
+      "path": "web/vite.config.ts",
+      "size": 777,
+      "sha256": "b7fcaa791dcfff00ae242e2797403fdd93815c6b7bc713f95a4490c7b9888d07"
+    }
+  ]
+}

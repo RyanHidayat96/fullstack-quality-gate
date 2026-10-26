@@ -1,0 +1,86 @@
+{
+  "baseline_archive": "quality-net-phase5-private-working-copy.zip",
+  "baseline_existing_paths": 295,
+  "changed_existing_files": [
+    {
+      "file": ".github/workflows/quality.yml",
+      "change": "modified"
+    },
+    {
+      "file": "api/spec/regression/critical_contract_test.rb",
+      "change": "modified"
+    },
+    {
+      "file": "assessment/02-quality-system.md",
+      "change": "modified"
+    },
+    {
+      "file": "assessment/03-traceability.md",
+      "change": "modified"
+    },
+    {
+      "file": "assessment/EXECUTION_LOG.md",
+      "change": "modified"
+    },
+    {
+      "file": "scripts/test_ci_contract.py",
+      "change": "modified"
+    },
+    {
+      "file": "scripts/test_validate_pr_inputs.py",
+      "change": "modified"
+    },
+    {
+      "file": "scripts/validate_pr_inputs.py",
+      "change": "modified"
+    },
+    {
+      "file": "web/README.md",
+      "change": "modified"
+    }
+  ],
+  "new_files_count": 38,
+  "new_files": [
+    "assessment/06-independent-verification.md",
+    "assessment/06-local-verification-runbook.md",
+    "assessment/06-traceability-verification.md",
+    "assessment/PHASE_6_HANDOFF.md",
+    "assessment/evidence/phase-6/all-ruby-syntax.json",
+    "assessment/evidence/phase-6/baseline-policy.log",
+    "assessment/evidence/phase-6/baseline-ruby.log",
+    "assessment/evidence/phase-6/baseline-tsc.log",
+    "assessment/evidence/phase-6/baseline-web.log",
+    "assessment/evidence/phase-6/check_publication_risk.py",
+    "assessment/evidence/phase-6/final-mutation.log",
+    "assessment/evidence/phase-6/final-traceability.log",
+    "assessment/evidence/phase-6/mutation-probes.json",
+    "assessment/evidence/phase-6/node-js-syntax.json",
+    "assessment/evidence/phase-6/phase-6-checks.json",
+    "assessment/evidence/phase-6/policy-after-hardening.log",
+    "assessment/evidence/phase-6/policy-final-interim.log",
+    "assessment/evidence/phase-6/publication-readiness.json",
+    "assessment/evidence/phase-6/rails-bundle-check.log",
+    "assessment/evidence/phase-6/rails-rspec-attempt.log",
+    "assessment/evidence/phase-6/repeat-1-policy.log",
+    "assessment/evidence/phase-6/repeat-1-ruby.log",
+    "assessment/evidence/phase-6/repeat-1-web.log",
+    "assessment/evidence/phase-6/repeat-2-policy.log",
+    "assessment/evidence/phase-6/repeat-2-ruby.log",
+    "assessment/evidence/phase-6/repeat-2-web.log",
+    "assessment/evidence/phase-6/repeat-3-policy.log",
+    "assessment/evidence/phase-6/repeat-3-ruby.log",
+    "assessment/evidence/phase-6/repeat-3-web.log",
+    "assessment/evidence/phase-6/ruby-hardened.log",
+    "assessment/evidence/phase-6/run_mutation_probes.py",
+    "assessment/evidence/phase-6/run_verification.py",
+    "assessment/evidence/phase-6/traceability-verification.json",
+    "assessment/evidence/phase-6/verify_traceability.py",
+    "assessment/evidence/phase-6/web-build.log",
+    "assessment/evidence/phase-6/web-offline-install.log",
+    "assessment/evidence/phase-6/web-typecheck.log",
+    "assessment/evidence/phase-6/workflow-yaml-parse.json"
+  ],
+  "production_implementation_diffs": [],
+  "new_commit_created": false,
+  "github_actions_execution": false
+}

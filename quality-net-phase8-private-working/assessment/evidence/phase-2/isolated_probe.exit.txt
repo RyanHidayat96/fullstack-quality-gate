@@ -1,0 +1,2 @@
+Command: ruby assessment/evidence/phase-2/isolated_source_probe.rb
+Exit code: 0

@@ -1,0 +1,66 @@
+test_no_fail_open (test_ci_contract.WorkflowContractTests.test_no_fail_open) ... ok
+test_no_missing_rspects (test_ci_contract.WorkflowContractTests.test_no_missing_rspects) ... ok
+test_no_pull_request_target (test_ci_contract.WorkflowContractTests.test_no_pull_request_target) ... ok
+test_no_silent_skip_of_web (test_ci_contract.WorkflowContractTests.test_no_silent_skip_of_web) ... ok
+test_no_unrequired_summary (test_ci_contract.WorkflowContractTests.test_no_unrequired_summary) ... ok
+test_pr_validator_cannot_run_from_untrusted_head (test_ci_contract.WorkflowContractTests.test_pr_validator_cannot_run_from_untrusted_head) ... ok
+test_pr_validator_requires_trusted_base_sha (test_ci_contract.WorkflowContractTests.test_pr_validator_requires_trusted_base_sha) ... ok
+test_valid_workflow (test_ci_contract.WorkflowContractTests.test_valid_workflow) ... ok
+test_audit_index_must_not_be_missing (test_release_gate.ReleaseGateTests.test_audit_index_must_not_be_missing) ... ok
+test_audit_parser_detects_real_markdown_p1_state (test_release_gate.ReleaseGateTests.test_audit_parser_detects_real_markdown_p1_state) ... ok
+test_code_fix_without_integration_verification_blocks (test_release_gate.ReleaseGateTests.test_code_fix_without_integration_verification_blocks) ... ok
+test_fails_without_tag_or_sha (test_release_gate.ReleaseGateTests.test_fails_without_tag_or_sha) ... ok
+test_mismatched_candidate_tag_blocks (test_release_gate.ReleaseGateTests.test_mismatched_candidate_tag_blocks) ... ok
+test_missing_audit_blocks (test_release_gate.ReleaseGateTests.test_missing_audit_blocks) ... ok
+test_missing_mandatory_evidence_blocks (test_release_gate.ReleaseGateTests.test_missing_mandatory_evidence_blocks) ... ok
+test_missing_or_failed_critical_job_blocks (test_release_gate.ReleaseGateTests.test_missing_or_failed_critical_job_blocks) ... ok
+test_missing_or_renamed_finding_blocks (test_release_gate.ReleaseGateTests.test_missing_or_renamed_finding_blocks) ... ok
+test_missing_readiness_blocks (test_release_gate.ReleaseGateTests.test_missing_readiness_blocks) ... ok
+test_missing_tag_binding_blocks_even_when_everything_else_passes (test_release_gate.ReleaseGateTests.test_missing_tag_binding_blocks_even_when_everything_else_passes) ... ok
+test_non_pr_job_must_be_skipped (test_release_gate.ReleaseGateTests.test_non_pr_job_must_be_skipped) ... ok
+test_nonexistent_local_evidence_does_not_clear_gate (test_release_gate.ReleaseGateTests.test_nonexistent_local_evidence_does_not_clear_gate) ... ok
+test_prevent_unrelated_main_run_substitution (test_release_gate.ReleaseGateTests.test_prevent_unrelated_main_run_substitution) ... ok
+test_register_and_audit_disagreement_blocks (test_release_gate.ReleaseGateTests.test_register_and_audit_disagreement_blocks) ... ok
+test_repeated_finding_id_blocks (test_release_gate.ReleaseGateTests.test_repeated_finding_id_blocks) ... ok
+test_risk_acceptance_requires_real_owner_and_document (test_release_gate.ReleaseGateTests.test_risk_acceptance_requires_real_owner_and_document) ... ok
+test_synthetic_all_verified_controls_can_be_releasable (test_release_gate.ReleaseGateTests.test_synthetic_all_verified_controls_can_be_releasable) ... ok
+test_traversal_and_remote_link_not_accepted_as_executed_evidence (test_release_gate.ReleaseGateTests.test_traversal_and_remote_link_not_accepted_as_executed_evidence) ... ok
+test_unresolved_p1_blocks_even_when_all_ci_green (test_release_gate.ReleaseGateTests.test_unresolved_p1_blocks_even_when_all_ci_green) ... ok
+test_exact_tag_commit_binding_is_verified (test_release_workflow.ReleaseWorkflowContractTests.test_exact_tag_commit_binding_is_verified) ... ok
+test_release_decision_fails_when_upstream_skipped_or_failed (test_release_workflow.ReleaseWorkflowContractTests.test_release_decision_fails_when_upstream_skipped_or_failed) ... ok
+test_release_job_uses_read_only_permissions (test_release_workflow.ReleaseWorkflowContractTests.test_release_job_uses_read_only_permissions) ... ok
+test_release_verdict_fails_job_and_uploads_blocked_evidence (test_release_workflow.ReleaseWorkflowContractTests.test_release_verdict_fails_job_and_uploads_blocked_evidence) ... ok
+test_version_tags_trigger_workflow (test_release_workflow.ReleaseWorkflowContractTests.test_version_tags_trigger_workflow) ... ok
+test_DOCS_only_exemption (test_validate_pr_inputs.PolicyGateTests.test_DOCS_only_exemption) ... ok
+test_DOCS_only_validates_changed_document_content (test_validate_pr_inputs.PolicyGateTests.test_DOCS_only_validates_changed_document_content) ... ok
+test_DOR_01_missing_spec (test_validate_pr_inputs.PolicyGateTests.test_DOR_01_missing_spec) ... ok
+test_DOR_02_bad_acceptance (test_validate_pr_inputs.PolicyGateTests.test_DOR_02_bad_acceptance) ... ok
+test_DOR_03_missing_design (test_validate_pr_inputs.PolicyGateTests.test_DOR_03_missing_design) ... ok
+test_DOR_04_positive_metadata_only (test_validate_pr_inputs.PolicyGateTests.test_DOR_04_positive_metadata_only) ... ok
+test_POLICY_change_requires_policy_tests_and_high_risk (test_validate_pr_inputs.PolicyGateTests.test_POLICY_change_requires_policy_tests_and_high_risk) ... ok
+test_TEST_GATE_01_no_new_test (test_validate_pr_inputs.PolicyGateTests.test_TEST_GATE_01_no_new_test) ... ok
+test_TEST_GATE_02_mere_assertion_does_not_prove_value (test_validate_pr_inputs.PolicyGateTests.test_TEST_GATE_02_mere_assertion_does_not_prove_value) ... ok
+test_TEST_GATE_03_external_url (test_validate_pr_inputs.PolicyGateTests.test_TEST_GATE_03_external_url) ... ok
+test_TEST_GATE_03_symlink_escape (test_validate_pr_inputs.PolicyGateTests.test_TEST_GATE_03_symlink_escape) ... ok
+test_TEST_GATE_03_traversal (test_validate_pr_inputs.PolicyGateTests.test_TEST_GATE_03_traversal) ... ok
+test_affected_paths_must_be_changed (test_validate_pr_inputs.PolicyGateTests.test_affected_paths_must_be_changed) ... ok
+test_broken_req_reference (test_validate_pr_inputs.PolicyGateTests.test_broken_req_reference) ... ok
+test_deleted_code_is_in_the_verified_git_diff (test_validate_pr_inputs.PolicyGateTests.test_deleted_code_is_in_the_verified_git_diff) ... ok
+test_duplicate_field (test_validate_pr_inputs.PolicyGateTests.test_duplicate_field) ... ok
+test_gate_accepts_executable_node_mjs_tests (test_validate_pr_inputs.PolicyGateTests.test_gate_accepts_executable_node_mjs_tests) ... ok
+test_gate_rejects_duplicate_affected_path_declarations (test_validate_pr_inputs.PolicyGateTests.test_gate_rejects_duplicate_affected_path_declarations) ... ok
+test_gate_rejects_undeclared_changed_code (test_validate_pr_inputs.PolicyGateTests.test_gate_rejects_undeclared_changed_code) ... ok
+test_secure_execution_and_head_validation (test_validate_pr_inputs.PolicyGateTests.test_secure_execution_and_head_validation) ... {"error": "Affected paths must enumerate every changed code/test/policy file", "result": "BLOCKED"}
+ok
+test_test_id_must_appear_in_changed_test_file (test_validate_pr_inputs.PolicyGateTests.test_test_id_must_appear_in_changed_test_file) ... ok
+test_trusted_base_validator_blocks_self_modified_gate (test_validate_pr_inputs.PolicyGateTests.test_trusted_base_validator_blocks_self_modified_gate)
+Simulates bypass of an untrusted HEAD validator with a trivial no-op. ... {"error": "Affected paths must enumerate every changed code/test/policy file", "result": "BLOCKED"}
+ok
+test_unknown_test_id (test_validate_pr_inputs.PolicyGateTests.test_unknown_test_id) ... ok
+test_valid_real_git_diff_cli_passes_metadata (test_validate_pr_inputs.PolicyGateTests.test_valid_real_git_diff_cli_passes_metadata) ... ok
+
+----------------------------------------------------------------------
+Ran 57 tests in 1.025s
+
+OK
+{"affected": ["api/app/session.rb", "api/spec/requests/session_completion_spec.rb"], "human_review_required": true, "linked_documents": {"Acceptance": "assessment/criteria/AC-SESSION-001.md", "Design": "assessment/designs/DES-SESSION-001.md", "Spec": "assessment/requirements/REQ-SESSION-001.md"}, "result": "METADATA_PASS", "scope": "CODE", "tests": ["SESSION-01"], "tests_executed": false}

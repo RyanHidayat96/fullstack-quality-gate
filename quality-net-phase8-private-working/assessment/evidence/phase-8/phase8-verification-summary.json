@@ -1,0 +1,76 @@
+{
+  "phase": 8,
+  "date": "2026-10-22",
+  "timezone": "Asia/Jakarta",
+  "status": "LOCAL_PREPARATION_COMPLETE",
+  "mandatory_exit": "BLOCKED",
+  "release": "DO_NOT_SHIP",
+  "git_remote_created": false,
+  "two_real_prs_created": false,
+  "tag_created": false,
+  "hiring_platform_submitted": false,
+  "checks": {
+    "python_unit": {
+      "exit_code": 0,
+      "tests": 63,
+      "scope": "policy, release, and synthetic submission preflight"
+    },
+    "ruby_contract": {
+      "exit_code": 0,
+      "tests": 12,
+      "assertions": 40,
+      "scope": "source-level only",
+      "failures": 0,
+      "errors": 0,
+      "skips": 0
+    },
+    "node_contract": {
+      "exit_code": 0,
+      "tests": 2,
+      "scope": "static URL contract only"
+    },
+    "ruby_syntax": {
+      "exit_code": 0,
+      "files": 89
+    },
+    "release_gate": {
+      "exit_code": 1,
+      "status": "BLOCKED"
+    },
+    "submission_preflight": {
+      "exit_code": 1,
+      "status": "BLOCKED",
+      "required_docs": true,
+      "markdown_links_local": true
+    },
+    "private_publication_scan": {
+      "scanner_exit_code": 0,
+      "identifier_file_count": 45,
+      "detected_pem_markers": 0,
+      "suspicious_assignment_path_count": 0,
+      "publication_ready": false
+    }
+  },
+  "unverified_p1_ids": [
+    "FIND-001",
+    "FIND-002",
+    "FIND-004",
+    "FIND-005",
+    "FIND-003",
+    "FIND-007",
+    "FIND-011",
+    "FIND-006"
+  ],
+  "unverified_integrations": {
+    "api_db_integration": "BLOCKED",
+    "frontend_build": "BLOCKED",
+    "component_regression": "BLOCKED",
+    "browser_api_db_journey": "BLOCKED",
+    "traceability_complete": "BLOCKED",
+    "spec_acceptance_approved": "BLOCKED",
+    "publication_clearance": "BLOCKED",
+    "two_real_pr_demonstrations": "BLOCKED",
+    "release_approval": "MISSING"
+  },
+  "user_next_action": "Owner-controlled publication, repo, PR, tag and platform submission only after resolving technical/confidentiality blockers"
+}

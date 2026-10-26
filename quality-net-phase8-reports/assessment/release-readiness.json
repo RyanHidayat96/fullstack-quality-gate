@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "candidate_tag": "v0.1.0-rc1",
+  "policy": "Fail closed: P1 resolution/acceptance requires independently reviewed, recorded evidence. Current report is BLOCKED.",
+  "p1_findings": [
+    {
+      "id": "FIND-001",
+      "state": "CODE_FIXED_UNVERIFIED",
+      "evidence_paths": [],
+      "risk_acceptance": null
+    },
+    {
+      "id": "FIND-002",
+      "state": "CODE_FIXED_UNVERIFIED",
+      "evidence_paths": [],
+      "risk_acceptance": null
+    },
+    {
+      "id": "FIND-004",
+      "state": "CODE_FIXED_UNVERIFIED",
+      "evidence_paths": [],
+      "risk_acceptance": null
+    },
+    {
+      "id": "FIND-005",
+      "state": "CODE_FIXED_UNVERIFIED",
+      "evidence_paths": [],
+      "risk_acceptance": null
+    },
+    {
+      "id": "FIND-003",
+      "state": "CODE_FIXED_UNVERIFIED",
+      "evidence_paths": [],
+      "risk_acceptance": null
+    },
+    {
+      "id": "FIND-007",
+      "state": "CODE_FIXED_UNVERIFIED",
+      "evidence_paths": [],
+      "risk_acceptance": null
+    },
+    {
+      "id": "FIND-011",
+      "state": "OPEN",
+      "evidence_paths": [],
+      "risk_acceptance": null
+    },
+    {
+      "id": "FIND-006",
+      "state": "CODE_FIXED_UNVERIFIED",
+      "evidence_paths": [],
+      "risk_acceptance": null
+    }
+  ],
+  "mandatory_verifications": {
+    "api_db_integration": {
+      "status": "BLOCKED",
+      "evidence_paths": [],
+      "reason": "Rails + real test PostgreSQL/Redis checks not run"
+    },
+    "frontend_build": {
+      "status": "BLOCKED",
+      "evidence_paths": [],
+      "reason": "vite/client dependency absent and lockfile missing"
+    },
+    "component_regression": {
+      "status": "BLOCKED",
+      "evidence_paths": [],
+      "reason": "No component regression suite verified"
+    },
+    "browser_api_db_journey": {
+      "status": "BLOCKED",
+      "evidence_paths": [],
+      "reason": "Browser/API/database end-to-end not executed"
+    },
+    "traceability_complete": {
+      "status": "BLOCKED",
+      "evidence_paths": [],
+      "reason": "16 planned scenarios missing; 3 Rails specs not executed"
+    },
+    "spec_acceptance_approved": {
+      "status": "BLOCKED",
+      "evidence_paths": [],
+      "reason": "Product-approved tenant-membership and other ambiguous rules unavailable"
+    },
+    "publication_clearance": {
+      "status": "BLOCKED",
+      "evidence_paths": [],
+      "reason": "45 file paths retain organization/product identifiers; independent Git history unavailable"
+    },
+    "two_real_pr_demonstrations": {
+      "status": "BLOCKED",
+      "evidence_paths": [],
+      "reason": "Independent GitHub repository and blocked/passing PRs postponed by user"
+    },
+    "release_owner_signoff": {
+      "status": "BLOCKED",
+      "evidence_paths": [],
+      "reason": "Release owner or co-signing reviewer approval not provided; nobody may be invented"
+    }
+  },
+  "release_owner_review": "NOT_GRANTED",
+  "external_ci_url": null,
+  "notes": "This is a readiness ledger, not an assertion of GitHub run results. Do not change status without evidence."
+}

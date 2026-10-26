@@ -1,0 +1,47 @@
+{
+  "parser": "PyYAML BaseLoader",
+  "pass": true,
+  "workflow_file": ".github/workflows/quality.yml",
+  "workflow_sha256": "f799d8d01bed10ea941891c9420bd5237812cd2f5425f4089f1780f88551d9e5",
+  "events": {
+    "pull_request": {
+      "types": [
+        "opened",
+        "reopened",
+        "synchronize",
+        "ready_for_review",
+        "edited"
+      ]
+    },
+    "push": {
+      "branches": [
+        "main"
+      ],
+      "tags": [
+        "v*"
+      ]
+    }
+  },
+  "jobs": [
+    "policy-unit",
+    "pr-inputs",
+    "api-contract",
+    "api-critical",
+    "web-quality",
+    "quality-summary",
+    "release-decision"
+  ],
+  "tag_trigger": [
+    "v*"
+  ],
+  "release_job_has_always": true,
+  "release_needs": [
+    "policy-unit",
+    "pr-inputs",
+    "api-contract",
+    "api-critical",
+    "web-quality",
+    "quality-summary"
+  ],
+  "note": "static YAML structure only; not an actionlint result or remote execution"
+}

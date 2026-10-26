@@ -1,0 +1,585 @@
+{
+  "total_planned": 41,
+  "total_findings": 13,
+  "status_counts": {
+    "PARTIAL_EXECUTED_LOCAL": 22,
+    "AUTHORED_NOT_RUN": 3,
+    "MISSING": 16
+  },
+  "disclaimer": "Token presence is not full assertion coverage; no Rails/DB/WS/browser proof.",
+  "tests": [
+    {
+      "finding": "FIND-001",
+      "requirement": "REQ-SEC-001",
+      "acceptance": "AC-SEC-001",
+      "test_id": "AUTH-TENANT-01",
+      "planned_path": "",
+      "found_paths": [
+        "api/spec/regression/critical_contract_test.rb"
+      ],
+      "executed_local_layer": [
+        "api/spec/regression/critical_contract_test.rb"
+      ],
+      "authored_not_run": [],
+      "status": "PARTIAL_EXECUTED_LOCAL"
+    },
+    {
+      "finding": "FIND-001",
+      "requirement": "REQ-SEC-001",
+      "acceptance": "AC-SEC-001",
+      "test_id": "AUTH-TENANT-02",
+      "planned_path": "",
+      "found_paths": [
+        "api/spec/regression/critical_contract_test.rb"
+      ],
+      "executed_local_layer": [
+        "api/spec/regression/critical_contract_test.rb"
+      ],
+      "authored_not_run": [],
+      "status": "PARTIAL_EXECUTED_LOCAL"
+    },
+    {
+      "finding": "FIND-001",
+      "requirement": "REQ-SEC-001",
+      "acceptance": "AC-SEC-001",
+      "test_id": "AUTH-TENANT-03",
+      "planned_path": "",
+      "found_paths": [
+        "api/spec/workers/fit_gap_tenant_spec.rb"
+      ],
+      "executed_local_layer": [],
+      "authored_not_run": [
+        "api/spec/workers/fit_gap_tenant_spec.rb"
+      ],
+      "status": "AUTHORED_NOT_RUN"
+    },
+    {
+      "finding": "FIND-002",
+      "requirement": "REQ-SESSION-001",
+      "acceptance": "AC-SESSION-001",
+      "test_id": "SESSION-01",
+      "planned_path": "",
+      "found_paths": [
+        "api/spec/regression/critical_contract_test.rb",
+        "api/spec/requests/session_completion_spec.rb",
+        "scripts/test_validate_pr_inputs.py"
+      ],
+      "executed_local_layer": [
+        "api/spec/regression/critical_contract_test.rb"
+      ],
+      "authored_not_run": [
+        "api/spec/requests/session_completion_spec.rb"
+      ],
+      "status": "PARTIAL_EXECUTED_LOCAL"
+    },
+    {
+      "finding": "FIND-002",
+      "requirement": "REQ-SESSION-001",
+      "acceptance": "AC-SESSION-001",
+      "test_id": "SESSION-02",
+      "planned_path": "",
+      "found_paths": [
+        "api/spec/regression/critical_contract_test.rb",
+        "api/spec/requests/session_completion_spec.rb"
+      ],
+      "executed_local_layer": [
+        "api/spec/regression/critical_contract_test.rb"
+      ],
+      "authored_not_run": [
+        "api/spec/requests/session_completion_spec.rb"
+      ],
+      "status": "PARTIAL_EXECUTED_LOCAL"
+    },
+    {
+      "finding": "FIND-002",
+      "requirement": "REQ-SESSION-001",
+      "acceptance": "AC-SESSION-001",
+      "test_id": "SESSION-03",
+      "planned_path": "",
+      "found_paths": [
+        "api/spec/regression/critical_contract_test.rb",
+        "api/spec/requests/session_completion_spec.rb"
+      ],
+      "executed_local_layer": [
+        "api/spec/regression/critical_contract_test.rb"
+      ],
+      "authored_not_run": [
+        "api/spec/requests/session_completion_spec.rb"
+      ],
+      "status": "PARTIAL_EXECUTED_LOCAL"
+    },
+    {
+      "finding": "FIND-002",
+      "requirement": "REQ-SESSION-001",
+      "acceptance": "AC-SESSION-001",
+      "test_id": "SESSION-04",
+      "planned_path": "",
+      "found_paths": [
+        "api/spec/regression/critical_contract_test.rb"
+      ],
+      "executed_local_layer": [
+        "api/spec/regression/critical_contract_test.rb"
+      ],
+      "authored_not_run": [],
+      "status": "PARTIAL_EXECUTED_LOCAL"
+    },
+    {
+      "finding": "FIND-004",
+      "requirement": "REQ-DATA-001",
+      "acceptance": "AC-DATA-001",
+      "test_id": "FITGAP-01",
+      "planned_path": "",
+      "found_paths": [
+        "api/spec/regression/critical_contract_test.rb",
+        "api/spec/models/fit_gap_freshness_spec.rb"
+      ],
+      "executed_local_layer": [
+        "api/spec/regression/critical_contract_test.rb"
+      ],
+      "authored_not_run": [
+        "api/spec/models/fit_gap_freshness_spec.rb"
+      ],
+      "status": "PARTIAL_EXECUTED_LOCAL"
+    },
+    {
+      "finding": "FIND-004",
+      "requirement": "REQ-DATA-001",
+      "acceptance": "AC-DATA-001",
+      "test_id": "FITGAP-02",
+      "planned_path": "",
+      "found_paths": [
+        "api/spec/models/fit_gap_freshness_spec.rb"
+      ],
+      "executed_local_layer": [],
+      "authored_not_run": [
+        "api/spec/models/fit_gap_freshness_spec.rb"
+      ],
+      "status": "AUTHORED_NOT_RUN"
+    },
+    {
+      "finding": "FIND-004",
+      "requirement": "REQ-DATA-001",
+      "acceptance": "AC-DATA-001",
+      "test_id": "FITGAP-03",
+      "planned_path": "",
+      "found_paths": [],
+      "executed_local_layer": [],
+      "authored_not_run": [],
+      "status": "MISSING"
+    },
+    {
+      "finding": "FIND-005",
+      "requirement": "REQ-DATA-002",
+      "acceptance": "AC-DATA-002",
+      "test_id": "PORTFOLIO-01",
+      "planned_path": "",
+      "found_paths": [
+        "api/spec/regression/critical_contract_test.rb",
+        "api/spec/services/portfolio_level_spec.rb"
+      ],
+      "executed_local_layer": [
+        "api/spec/regression/critical_contract_test.rb"
+      ],
+      "authored_not_run": [
+        "api/spec/services/portfolio_level_spec.rb"
+      ],
+      "status": "PARTIAL_EXECUTED_LOCAL"
+    },
+    {
+      "finding": "FIND-005",
+      "requirement": "REQ-DATA-002",
+      "acceptance": "AC-DATA-002",
+      "test_id": "PORTFOLIO-02",
+      "planned_path": "",
+      "found_paths": [
+        "api/spec/regression/critical_contract_test.rb",
+        "api/spec/services/portfolio_level_spec.rb"
+      ],
+      "executed_local_layer": [
+        "api/spec/regression/critical_contract_test.rb"
+      ],
+      "authored_not_run": [
+        "api/spec/services/portfolio_level_spec.rb"
+      ],
+      "status": "PARTIAL_EXECUTED_LOCAL"
+    },
+    {
+      "finding": "FIND-005",
+      "requirement": "REQ-DATA-002",
+      "acceptance": "AC-DATA-002",
+      "test_id": "PORTFOLIO-03",
+      "planned_path": "",
+      "found_paths": [],
+      "executed_local_layer": [],
+      "authored_not_run": [],
+      "status": "MISSING"
+    },
+    {
+      "finding": "FIND-003",
+      "requirement": "REQ-DATA-003",
+      "acceptance": "AC-DATA-003",
+      "test_id": "FITGAP-04",
+      "planned_path": "",
+      "found_paths": [
+        "api/spec/regression/critical_contract_test.rb",
+        "api/spec/services/fit_gap_engine_spec.rb"
+      ],
+      "executed_local_layer": [
+        "api/spec/regression/critical_contract_test.rb"
+      ],
+      "authored_not_run": [
+        "api/spec/services/fit_gap_engine_spec.rb"
+      ],
+      "status": "PARTIAL_EXECUTED_LOCAL"
+    },
+    {
+      "finding": "FIND-003",
+      "requirement": "REQ-DATA-003",
+      "acceptance": "AC-DATA-003",
+      "test_id": "FITGAP-05",
+      "planned_path": "",
+      "found_paths": [
+        "api/spec/regression/critical_contract_test.rb"
+      ],
+      "executed_local_layer": [
+        "api/spec/regression/critical_contract_test.rb"
+      ],
+      "authored_not_run": [],
+      "status": "PARTIAL_EXECUTED_LOCAL"
+    },
+    {
+      "finding": "FIND-007",
+      "requirement": "REQ-SEC-002",
+      "acceptance": "AC-SEC-002",
+      "test_id": "WS-AUTH-01",
+      "planned_path": "",
+      "found_paths": [
+        "api/spec/middleware/coverage_ws_auth_spec.rb"
+      ],
+      "executed_local_layer": [],
+      "authored_not_run": [
+        "api/spec/middleware/coverage_ws_auth_spec.rb"
+      ],
+      "status": "AUTHORED_NOT_RUN"
+    },
+    {
+      "finding": "FIND-007",
+      "requirement": "REQ-SEC-002",
+      "acceptance": "AC-SEC-002",
+      "test_id": "WS-AUTH-02",
+      "planned_path": "",
+      "found_paths": [],
+      "executed_local_layer": [],
+      "authored_not_run": [],
+      "status": "MISSING"
+    },
+    {
+      "finding": "FIND-007",
+      "requirement": "REQ-SEC-002",
+      "acceptance": "AC-SEC-002",
+      "test_id": "WS-AUTH-03",
+      "planned_path": "",
+      "found_paths": [],
+      "executed_local_layer": [],
+      "authored_not_run": [],
+      "status": "MISSING"
+    },
+    {
+      "finding": "FIND-007",
+      "requirement": "REQ-SEC-002",
+      "acceptance": "AC-SEC-002",
+      "test_id": "WS-AUTH-04",
+      "planned_path": "",
+      "found_paths": [],
+      "executed_local_layer": [],
+      "authored_not_run": [],
+      "status": "MISSING"
+    },
+    {
+      "finding": "FIND-011",
+      "requirement": "REQ-SEC-003",
+      "acceptance": "AC-SEC-003",
+      "test_id": "AUTH-TENANT-04",
+      "planned_path": "",
+      "found_paths": [],
+      "executed_local_layer": [],
+      "authored_not_run": [],
+      "status": "MISSING"
+    },
+    {
+      "finding": "FIND-011",
+      "requirement": "REQ-SEC-003",
+      "acceptance": "AC-SEC-003",
+      "test_id": "AUTH-TENANT-05",
+      "planned_path": "",
+      "found_paths": [],
+      "executed_local_layer": [],
+      "authored_not_run": [],
+      "status": "MISSING"
+    },
+    {
+      "finding": "FIND-011",
+      "requirement": "REQ-SEC-003",
+      "acceptance": "AC-SEC-003",
+      "test_id": "AUTH-TENANT-06",
+      "planned_path": "",
+      "found_paths": [],
+      "executed_local_layer": [],
+      "authored_not_run": [],
+      "status": "MISSING"
+    },
+    {
+      "finding": "FIND-006",
+      "requirement": "REQ-FLOW-001",
+      "acceptance": "AC-FLOW-001",
+      "test_id": "INVITE-01",
+      "planned_path": "",
+      "found_paths": [
+        "api/spec/regression/critical_contract_test.rb"
+      ],
+      "executed_local_layer": [
+        "api/spec/regression/critical_contract_test.rb"
+      ],
+      "authored_not_run": [],
+      "status": "PARTIAL_EXECUTED_LOCAL"
+    },
+    {
+      "finding": "FIND-006",
+      "requirement": "REQ-FLOW-001",
+      "acceptance": "AC-FLOW-001",
+      "test_id": "INVITE-02",
+      "planned_path": "",
+      "found_paths": [],
+      "executed_local_layer": [],
+      "authored_not_run": [],
+      "status": "MISSING"
+    },
+    {
+      "finding": "FIND-006",
+      "requirement": "REQ-FLOW-001",
+      "acceptance": "AC-FLOW-001",
+      "test_id": "INVITE-03",
+      "planned_path": "",
+      "found_paths": [
+        "web/tests/api_config.test.mjs"
+      ],
+      "executed_local_layer": [
+        "web/tests/api_config.test.mjs"
+      ],
+      "authored_not_run": [],
+      "status": "PARTIAL_EXECUTED_LOCAL"
+    },
+    {
+      "finding": "FIND-008",
+      "requirement": "REQ-SEC-004",
+      "acceptance": "AC-SEC-004",
+      "test_id": "INVITE-04",
+      "planned_path": "",
+      "found_paths": [],
+      "executed_local_layer": [],
+      "authored_not_run": [],
+      "status": "MISSING"
+    },
+    {
+      "finding": "FIND-009",
+      "requirement": "REQ-QUALITY-001",
+      "acceptance": "AC-QUALITY-001",
+      "test_id": "TEST-GATE-01",
+      "planned_path": "",
+      "found_paths": [
+        "scripts/test_validate_pr_inputs.py"
+      ],
+      "executed_local_layer": [
+        "scripts/test_validate_pr_inputs.py"
+      ],
+      "authored_not_run": [],
+      "status": "PARTIAL_EXECUTED_LOCAL"
+    },
+    {
+      "finding": "FIND-009",
+      "requirement": "REQ-QUALITY-001",
+      "acceptance": "AC-QUALITY-001",
+      "test_id": "TEST-GATE-02",
+      "planned_path": "",
+      "found_paths": [
+        "scripts/test_validate_pr_inputs.py"
+      ],
+      "executed_local_layer": [
+        "scripts/test_validate_pr_inputs.py"
+      ],
+      "authored_not_run": [],
+      "status": "PARTIAL_EXECUTED_LOCAL"
+    },
+    {
+      "finding": "FIND-009",
+      "requirement": "REQ-QUALITY-001",
+      "acceptance": "AC-QUALITY-001",
+      "test_id": "TEST-GATE-04",
+      "planned_path": "",
+      "found_paths": [],
+      "executed_local_layer": [],
+      "authored_not_run": [],
+      "status": "MISSING"
+    },
+    {
+      "finding": "FIND-009",
+      "requirement": "REQ-QUALITY-001",
+      "acceptance": "AC-QUALITY-001",
+      "test_id": "TEST-GATE-06",
+      "planned_path": "",
+      "found_paths": [
+        "scripts/test_ci_contract.py"
+      ],
+      "executed_local_layer": [
+        "scripts/test_ci_contract.py"
+      ],
+      "authored_not_run": [],
+      "status": "PARTIAL_EXECUTED_LOCAL"
+    },
+    {
+      "finding": "FIND-009",
+      "requirement": "REQ-QUALITY-001",
+      "acceptance": "AC-QUALITY-001",
+      "test_id": "RELEASE-GATE-01",
+      "planned_path": "",
+      "found_paths": [],
+      "executed_local_layer": [],
+      "authored_not_run": [],
+      "status": "MISSING"
+    },
+    {
+      "finding": "FIND-009",
+      "requirement": "REQ-QUALITY-001",
+      "acceptance": "AC-QUALITY-001",
+      "test_id": "RELEASE-GATE-02",
+      "planned_path": "",
+      "found_paths": [],
+      "executed_local_layer": [],
+      "authored_not_run": [],
+      "status": "MISSING"
+    },
+    {
+      "finding": "FIND-009",
+      "requirement": "REQ-QUALITY-001",
+      "acceptance": "AC-QUALITY-001",
+      "test_id": "RELEASE-GATE-03",
+      "planned_path": "",
+      "found_paths": [],
+      "executed_local_layer": [],
+      "authored_not_run": [],
+      "status": "MISSING"
+    },
+    {
+      "finding": "FIND-010",
+      "requirement": "REQ-QUALITY-002",
+      "acceptance": "AC-QUALITY-002",
+      "test_id": "DOR-01",
+      "planned_path": "",
+      "found_paths": [
+        "scripts/test_validate_pr_inputs.py"
+      ],
+      "executed_local_layer": [
+        "scripts/test_validate_pr_inputs.py"
+      ],
+      "authored_not_run": [],
+      "status": "PARTIAL_EXECUTED_LOCAL"
+    },
+    {
+      "finding": "FIND-010",
+      "requirement": "REQ-QUALITY-002",
+      "acceptance": "AC-QUALITY-002",
+      "test_id": "DOR-02",
+      "planned_path": "",
+      "found_paths": [
+        "scripts/test_validate_pr_inputs.py"
+      ],
+      "executed_local_layer": [
+        "scripts/test_validate_pr_inputs.py"
+      ],
+      "authored_not_run": [],
+      "status": "PARTIAL_EXECUTED_LOCAL"
+    },
+    {
+      "finding": "FIND-010",
+      "requirement": "REQ-QUALITY-002",
+      "acceptance": "AC-QUALITY-002",
+      "test_id": "DOR-03",
+      "planned_path": "",
+      "found_paths": [
+        "scripts/test_validate_pr_inputs.py"
+      ],
+      "executed_local_layer": [
+        "scripts/test_validate_pr_inputs.py"
+      ],
+      "authored_not_run": [],
+      "status": "PARTIAL_EXECUTED_LOCAL"
+    },
+    {
+      "finding": "FIND-010",
+      "requirement": "REQ-QUALITY-002",
+      "acceptance": "AC-QUALITY-002",
+      "test_id": "DOR-04",
+      "planned_path": "",
+      "found_paths": [
+        "scripts/test_validate_pr_inputs.py"
+      ],
+      "executed_local_layer": [
+        "scripts/test_validate_pr_inputs.py"
+      ],
+      "authored_not_run": [],
+      "status": "PARTIAL_EXECUTED_LOCAL"
+    },
+    {
+      "finding": "FIND-010",
+      "requirement": "REQ-QUALITY-002",
+      "acceptance": "AC-QUALITY-002",
+      "test_id": "TEST-GATE-03",
+      "planned_path": "",
+      "found_paths": [
+        "scripts/test_validate_pr_inputs.py"
+      ],
+      "executed_local_layer": [
+        "scripts/test_validate_pr_inputs.py"
+      ],
+      "authored_not_run": [],
+      "status": "PARTIAL_EXECUTED_LOCAL"
+    },
+    {
+      "finding": "FIND-010",
+      "requirement": "REQ-QUALITY-002",
+      "acceptance": "AC-QUALITY-002",
+      "test_id": "TEST-GATE-05",
+      "planned_path": "",
+      "found_paths": [],
+      "executed_local_layer": [],
+      "authored_not_run": [],
+      "status": "MISSING"
+    },
+    {
+      "finding": "FIND-012",
+      "requirement": "REQ-DOC-001",
+      "acceptance": "AC-DOC-001",
+      "test_id": "DOC-01",
+      "planned_path": "",
+      "found_paths": [
+        "web/tests/api_config.test.mjs"
+      ],
+      "executed_local_layer": [
+        "web/tests/api_config.test.mjs"
+      ],
+      "authored_not_run": [],
+      "status": "PARTIAL_EXECUTED_LOCAL"
+    },
+    {
+      "finding": "FIND-013",
+      "requirement": "REQ-FLOW-002",
+      "acceptance": "AC-FLOW-002",
+      "test_id": "SIGNUP-01",
+      "planned_path": "",
+      "found_paths": [],
+      "executed_local_layer": [],
+      "authored_not_run": [],
+      "status": "MISSING"
+    }
+  ]
+}

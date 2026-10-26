@@ -1,0 +1,32 @@
+test_no_fail_open (test_ci_contract.WorkflowContractTests.test_no_fail_open) ... ok
+test_no_missing_rspects (test_ci_contract.WorkflowContractTests.test_no_missing_rspects) ... ok
+test_no_pull_request_target (test_ci_contract.WorkflowContractTests.test_no_pull_request_target) ... ok
+test_no_silent_skip_of_web (test_ci_contract.WorkflowContractTests.test_no_silent_skip_of_web) ... ok
+test_no_unrequired_summary (test_ci_contract.WorkflowContractTests.test_no_unrequired_summary) ... ok
+test_valid_workflow (test_ci_contract.WorkflowContractTests.test_valid_workflow) ... ok
+test_DOCS_only_exemption (test_validate_pr_inputs.PolicyGateTests.test_DOCS_only_exemption) ... ok
+test_DOCS_only_validates_changed_document_content (test_validate_pr_inputs.PolicyGateTests.test_DOCS_only_validates_changed_document_content) ... ok
+test_DOR_01_missing_spec (test_validate_pr_inputs.PolicyGateTests.test_DOR_01_missing_spec) ... ok
+test_DOR_02_bad_acceptance (test_validate_pr_inputs.PolicyGateTests.test_DOR_02_bad_acceptance) ... ok
+test_DOR_03_missing_design (test_validate_pr_inputs.PolicyGateTests.test_DOR_03_missing_design) ... ok
+test_DOR_04_positive_metadata_only (test_validate_pr_inputs.PolicyGateTests.test_DOR_04_positive_metadata_only) ... ok
+test_POLICY_change_requires_policy_tests_and_high_risk (test_validate_pr_inputs.PolicyGateTests.test_POLICY_change_requires_policy_tests_and_high_risk) ... ok
+test_TEST_GATE_01_no_new_test (test_validate_pr_inputs.PolicyGateTests.test_TEST_GATE_01_no_new_test) ... ok
+test_TEST_GATE_02_mere_assertion_does_not_prove_value (test_validate_pr_inputs.PolicyGateTests.test_TEST_GATE_02_mere_assertion_does_not_prove_value) ... ok
+test_TEST_GATE_03_external_url (test_validate_pr_inputs.PolicyGateTests.test_TEST_GATE_03_external_url) ... ok
+test_TEST_GATE_03_symlink_escape (test_validate_pr_inputs.PolicyGateTests.test_TEST_GATE_03_symlink_escape) ... ok
+test_TEST_GATE_03_traversal (test_validate_pr_inputs.PolicyGateTests.test_TEST_GATE_03_traversal) ... ok
+test_affected_paths_must_be_changed (test_validate_pr_inputs.PolicyGateTests.test_affected_paths_must_be_changed) ... ok
+test_broken_req_reference (test_validate_pr_inputs.PolicyGateTests.test_broken_req_reference) ... ok
+test_duplicate_field (test_validate_pr_inputs.PolicyGateTests.test_duplicate_field) ... ok
+test_secure_execution_and_head_validation (test_validate_pr_inputs.PolicyGateTests.test_secure_execution_and_head_validation) ... {"error": "Affected paths must name actual changed files", "result": "BLOCKED"}
+ok
+test_test_id_must_appear_in_changed_test_file (test_validate_pr_inputs.PolicyGateTests.test_test_id_must_appear_in_changed_test_file) ... ok
+test_unknown_test_id (test_validate_pr_inputs.PolicyGateTests.test_unknown_test_id) ... ok
+test_valid_real_git_diff_cli_passes_metadata (test_validate_pr_inputs.PolicyGateTests.test_valid_real_git_diff_cli_passes_metadata) ... ok
+
+----------------------------------------------------------------------
+Ran 25 tests in 0.078s
+
+OK
+{"affected": ["api/app/session.rb", "api/spec/requests/session_completion_spec.rb"], "human_review_required": true, "linked_documents": {"Acceptance": "assessment/criteria/AC-SESSION-001.md", "Design": "assessment/designs/DES-SESSION-001.md", "Spec": "assessment/requirements/REQ-SESSION-001.md"}, "result": "METADATA_PASS", "scope": "CODE", "tests": ["SESSION-01"], "tests_executed": false}

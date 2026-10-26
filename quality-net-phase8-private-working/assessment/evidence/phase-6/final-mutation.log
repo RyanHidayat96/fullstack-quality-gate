@@ -1,0 +1,40 @@
+$ python3 assessment/evidence/phase-6/run_mutation_probes.py
+[exit_code] 0
+
+[stdout]
+{
+  "result": "PASS",
+  "mutants": [
+    {
+      "mutation": "SESSION-02",
+      "expected_assertion_failure": true,
+      "exit_code": 1,
+      "test_summary": "1 runs, 1 assertions, 1 failures, 0 errors, 0 skips",
+      "stderr_excerpt": ""
+    },
+    {
+      "mutation": "FITGAP-04",
+      "expected_assertion_failure": true,
+      "exit_code": 1,
+      "test_summary": "1 runs, 1 assertions, 1 failures, 0 errors, 0 skips",
+      "stderr_excerpt": ""
+    },
+    {
+      "mutation": "PORTFOLIO-01",
+      "expected_assertion_failure": true,
+      "exit_code": 1,
+      "test_summary": "1 runs, 1 assertions, 1 failures, 0 errors, 0 skips",
+      "stderr_excerpt": ""
+    },
+    {
+      "mutation": "INVITE-01",
+      "expected_assertion_failure": true,
+      "exit_code": 1,
+      "test_summary": "1 runs, 1 assertions, 1 failures, 0 errors, 0 skips",
+      "stderr_excerpt": ""
+    }
+  ],
+  "original_source_modified": false
+}
+
+[stderr]

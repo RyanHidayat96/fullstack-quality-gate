@@ -1,0 +1,4 @@
+$ bash -lc for f in vite.config.ts postcss.config.js tailwind.config.js; do case "$f" in *.js) node --check "$f" || exit 1 ;; esac; done; echo checked_postcss_tailwind
+exit_code=0
+checked_postcss_tailwind
+

@@ -1,0 +1,12 @@
+{
+  "result": "PARSED",
+  "jobs": [
+    "api-contract",
+    "api-critical",
+    "policy-unit",
+    "pr-inputs",
+    "quality-summary",
+    "web-quality"
+  ],
+  "note": "Parser check is not a GitHub-hosted execution"
+}

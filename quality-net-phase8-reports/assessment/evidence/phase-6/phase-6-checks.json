@@ -1,0 +1,233 @@
+{
+  "phase": "6",
+  "scope": "LOCAL_INDEPENDENT_VERIFICATION",
+  "checks": [
+    {
+      "id": "repeat-1-ruby",
+      "command": [
+        "ruby",
+        "api/spec/regression/critical_contract_test.rb",
+        "--seed",
+        "11"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "id": "repeat-1-policy",
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scripts",
+        "-p",
+        "test_*.py",
+        "-q"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "id": "repeat-1-web",
+      "command": [
+        "node",
+        "--test",
+        "web/tests/api_config.test.mjs"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "id": "repeat-2-ruby",
+      "command": [
+        "ruby",
+        "api/spec/regression/critical_contract_test.rb",
+        "--seed",
+        "424"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "id": "repeat-2-policy",
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scripts",
+        "-p",
+        "test_*.py",
+        "-q"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "id": "repeat-2-web",
+      "command": [
+        "node",
+        "--test",
+        "web/tests/api_config.test.mjs"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "id": "repeat-3-ruby",
+      "command": [
+        "ruby",
+        "api/spec/regression/critical_contract_test.rb",
+        "--seed",
+        "837"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "id": "repeat-3-policy",
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scripts",
+        "-p",
+        "test_*.py",
+        "-q"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "id": "repeat-3-web",
+      "command": [
+        "node",
+        "--test",
+        "web/tests/api_config.test.mjs"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "id": "final-mutation",
+      "command": [
+        "python3",
+        "assessment/evidence/phase-6/run_mutation_probes.py"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "id": "final-traceability",
+      "command": [
+        "python3",
+        "assessment/evidence/phase-6/verify_traceability.py"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "id": "web-typecheck",
+      "command": [
+        "tsc",
+        "--noEmit",
+        "--project",
+        "web/tsconfig.json"
+      ],
+      "exit_code": 2,
+      "expected_exit_code": 0,
+      "status": "BLOCKED_OR_FAILED"
+    },
+    {
+      "id": "web-build",
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "exit_code": 2,
+      "expected_exit_code": 0,
+      "status": "BLOCKED_OR_FAILED"
+    },
+    {
+      "id": "web-offline-install",
+      "command": [
+        "npm",
+        "ci",
+        "--offline",
+        "--ignore-scripts",
+        "--no-audit",
+        "--no-fund"
+      ],
+      "exit_code": 1,
+      "expected_exit_code": 0,
+      "status": "BLOCKED_OR_FAILED"
+    },
+    {
+      "id": "rails-bundle-check",
+      "command": [
+        "ruby",
+        "-rbundler",
+        "-e",
+        "puts 'Bundler: ' + Bundler::VERSION; abort 'Rails gem unavailable' unless Gem::Specification.find_all_by_name('rails').any?"
+      ],
+      "exit_code": 1,
+      "expected_exit_code": 0,
+      "status": "BLOCKED_OR_FAILED"
+    },
+    {
+      "id": "rails-rspec-attempt",
+      "command": [
+        "ruby",
+        "-e",
+        "require 'rspec/core'"
+      ],
+      "exit_code": 1,
+      "expected_exit_code": 0,
+      "status": "BLOCKED_OR_FAILED"
+    },
+    {
+      "id": "all-ruby-syntax",
+      "command": [
+        "ruby",
+        "-c",
+        "api/**/*.rb"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "id": "workflow-yaml-parse",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "id": "node-js-syntax",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "status": "PASS"
+    }
+  ],
+  "runtime_integration_executed": false,
+  "github_pull_requests_executed": false,
+  "release_status": "BLOCKED",
+  "note": "Failed/blocked mandatory commands remain nonzero and are never reported as passing."
+}

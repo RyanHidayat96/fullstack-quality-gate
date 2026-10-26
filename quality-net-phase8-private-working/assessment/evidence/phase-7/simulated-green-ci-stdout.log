@@ -1,0 +1,69 @@
+{
+  "release_status": "BLOCKED",
+  "decision": "DO_NOT_SHIP",
+  "ref": "refs/tags/v0.1.0-rc1",
+  "commit_sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "ci_checks": {
+    "policy-unit": "success",
+    "api-contract": "success",
+    "api-critical": "success",
+    "web-quality": "success",
+    "quality-summary": "success",
+    "pr-inputs": "skipped"
+  },
+  "tag_binding": "verified",
+  "p1_risks": [
+    {
+      "id": "FIND-001",
+      "state": "CODE_FIXED_UNVERIFIED"
+    },
+    {
+      "id": "FIND-002",
+      "state": "CODE_FIXED_UNVERIFIED"
+    },
+    {
+      "id": "FIND-003",
+      "state": "CODE_FIXED_UNVERIFIED"
+    },
+    {
+      "id": "FIND-004",
+      "state": "CODE_FIXED_UNVERIFIED"
+    },
+    {
+      "id": "FIND-005",
+      "state": "CODE_FIXED_UNVERIFIED"
+    },
+    {
+      "id": "FIND-006",
+      "state": "CODE_FIXED_UNVERIFIED"
+    },
+    {
+      "id": "FIND-007",
+      "state": "CODE_FIXED_UNVERIFIED"
+    },
+    {
+      "id": "FIND-011",
+      "state": "OPEN"
+    }
+  ],
+  "blockers": [
+    "FIND-001: P1 not closed/accepted (CODE_FIXED_UNVERIFIED)",
+    "FIND-002: P1 not closed/accepted (CODE_FIXED_UNVERIFIED)",
+    "FIND-003: P1 not closed/accepted (CODE_FIXED_UNVERIFIED)",
+    "FIND-004: P1 not closed/accepted (CODE_FIXED_UNVERIFIED)",
+    "FIND-005: P1 not closed/accepted (CODE_FIXED_UNVERIFIED)",
+    "FIND-006: P1 not closed/accepted (CODE_FIXED_UNVERIFIED)",
+    "FIND-007: P1 not closed/accepted (CODE_FIXED_UNVERIFIED)",
+    "FIND-011: P1 not closed/accepted (OPEN)",
+    "api_db_integration: mandatory evidence not VERIFIED with local file references",
+    "frontend_build: mandatory evidence not VERIFIED with local file references",
+    "component_regression: mandatory evidence not VERIFIED with local file references",
+    "browser_api_db_journey: mandatory evidence not VERIFIED with local file references",
+    "traceability_complete: mandatory evidence not VERIFIED with local file references",
+    "spec_acceptance_approved: mandatory evidence not VERIFIED with local file references",
+    "publication_clearance: mandatory evidence not VERIFIED with local file references",
+    "two_real_pr_demonstrations: mandatory evidence not VERIFIED with local file references",
+    "release_owner_signoff: mandatory evidence not VERIFIED with local file references"
+  ],
+  "scope": "tag-specific CI result and repository-authored readiness policy; human approval still required"
+}

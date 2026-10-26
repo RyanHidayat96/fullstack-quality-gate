@@ -1,0 +1,9 @@
+$ ruby -e require 'rspec/core'
+[exit_code] 1
+
+[stdout]
+
+[stderr]
+<internal:/usr/lib/ruby/vendor_ruby/rubygems/core_ext/kernel_require.rb>:136:in `require': cannot load such file -- rspec/core (LoadError)
+	from <internal:/usr/lib/ruby/vendor_ruby/rubygems/core_ext/kernel_require.rb>:136:in `require'
+	from -e:1:in `<main>'

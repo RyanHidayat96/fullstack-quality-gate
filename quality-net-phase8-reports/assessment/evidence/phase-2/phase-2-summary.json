@@ -1,0 +1,19 @@
+{
+  "timestamp_jakarta": "2026-10-22 15:15:01 +0700",
+  "finding_count": 13,
+  "p1_count": 8,
+  "p2_count": 5,
+  "source_probe_count": 4,
+  "static_contract_count": 9,
+  "runtime_end_to_end_executed": false,
+  "integration_blocked": true,
+  "audit_release_decision": "DO_NOT_SHIP",
+  "phase_exit": "PASS_SOURCE_AUDIT_WITH_RUNTIME_LIMITATION",
+  "integrity": {
+    "expected": 188,
+    "missing": [],
+    "modified": [],
+    "verified": 188,
+    "original_source_unchanged": true
+  }
+}
