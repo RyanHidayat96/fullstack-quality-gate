@@ -1,0 +1,11 @@
+# DES-FLOW-002 — Remove unreachable signup consumer
+- Design ID: DES-FLOW-002
+- Requirement: REQ-FLOW-002
+- Acceptance IDs: AC-FLOW-002
+- Planned test IDs: SIGNUP-01
+- Affected layers: React app and frontend REST service.
+- Proposed solution: Remove unused SignupPage and authApi.signup; keep existing login route and controlled tenant membership enrollment.
+- Data migration / backwards compatibility: None; /signup never existed as an active route.
+- Alternatives and trade-offs: Implementing a new public registration API would expose role and organization grants without approved business policy.
+- Failure handling and rollback: Add a source-level contract test to prevent shipping a dangling registration UI.
+- Risks and open questions: Future registration UX and identity verification require product signoff.
