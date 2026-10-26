@@ -43,7 +43,10 @@ Changes must link an existing spec, acceptance criteria and design, declare affe
 
 ### 6. Show blocked and passing PR evidence.
 
-**No actual GitHub PRs exist.** Demonstrate local synthetic PR fixtures only, clearly named simulations. An owner-created independent GitHub repository, real blocked PR, real passing PR, and preserved CI URLs/SHA are still required. Do not suggest screenshots or invented PR numbers as substitutes.
+Open the live GitHub repository:
+- **Blocked PR demonstration:** [PR #1](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/1) — modifies application code but intentionally omits Definition of Ready inputs. CI check `pr-inputs` failed closed with `{"error": "required PR field missing/placeholder: Spec", "result": "BLOCKED"}`.
+- **Passing PR demonstration:** [PR #2](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/2) — links valid requirements, acceptance criteria, design doc, test ID `SESSION-01`, and lists matching affected paths. CI check `pr-inputs` passed with `{"result": "METADATA_PASS", "scope": "CODE"}`, and all test suites ran GREEN.
+- Explain the security design: the PR validator is checked out from the trusted target base commit (`.trusted-policy`), so an untrusted PR cannot edit the gate script in its own branch to bypass validation.
 
 ### 7. Show RED → GREEN and why the fix is causal.
 
@@ -51,7 +54,8 @@ Open `assessment/evidence/phase-4/source-regressions-red.log` (five failing asse
 
 ### 8. Why was release blocked and who owns residual risks?
 
-There are eight P1 findings: seven code-fixed pending integration, one still OPEN (`FIND-011`). Rails/DB/Redis, build/browser test evidence, product sign-off, two real PRs, tagged CI and publication clearance are missing. `assessment/03-release-decision.md` therefore states **DO NOT SHIP**. No real risk owner or approver has accepted these deficiencies; ownership must be assigned by the future project/release sponsor, not invented here.
+Open the tag release pipeline: [Tag v1.0.0 Run #40277694610](https://github.com/RyanHidayat96/fullstack-quality-gate/actions/runs/40277694610).
+Explain the honest fail-closed gate: while all automated test jobs (`policy-unit`, `api-contract`, `api-critical`, `web-quality`) passed 100%, the automated release gate `scripts/release_gate.py` produced a **BLOCKED / DO NOT SHIP** verdict because `FIND-011` remains OPEN and live multi-tenant browser-to-DB integration testing requires formal risk signoff. No fictitious green status was forced.
 
 ### 9. How was AI used responsibly?
 
@@ -66,7 +70,7 @@ First obtain approved tenant membership and ownership policy, then implement/rev
 - “That result is reproduced at method level; the HTTP/database integration remains an explicitly blocked item.”
 - “Those requirements are proposed, not yet product-approved; I would block the related release decision.”
 - “The automated validator enforces traceable inputs, but human review is still required for semantic correctness.”
-- “I cannot show real GitHub PR/CI links yet; the controlled GitHub import belongs to the repository owner.”
+- “Our PR and release tag checks are live in GitHub Actions: PR #1 demonstrates the block, PR #2 demonstrates the pass, and tag v1.0.0 demonstrates the fail-closed release gate.”
 - “A blocked release with evidence is safer than misrepresenting an unverified version as production-ready.”
 
 ## Demonstration discipline
