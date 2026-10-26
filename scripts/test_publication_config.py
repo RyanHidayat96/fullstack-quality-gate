@@ -9,6 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class ConfigurationContractTests(unittest.TestCase):
+    # TEST-GATE-06: CI and Rails must use the same isolated test database.
     def test_TEST_GATE_06_database_name_agrees_with_ci(self):
         database = (ROOT / "api/config/database.yml").read_text(encoding="utf-8")
         workflow = (ROOT / ".github/workflows/quality.yml").read_text(encoding="utf-8")
