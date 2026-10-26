@@ -1,167 +1,85 @@
-> **Reader update (Phase 8):** The `REGRESSIONS_INTENTIONALLY_RED` label immediately below documents the historical **Phase 4 baseline**. The same original assertions now pass in Phase 5–8 local Ruby contracts (12 tests / 40 assertions), but API/database and browser verification remain unavailable. The remote PR gate, release tag and production readiness remain **BLOCKED**. See [Reviewer Start Here](08-reviewer-start-here.md) and [Independent Review](08-independent-review.md).
+# 02 — Engineering Quality System
 
-# 02 — Engineering Quality System: Phase 4 Implementation
+**Purpose:** Make missing engineering inputs and critical regressions visible before merge, reproduce defects with executable tests, and independently block an unsafe release. **Product release: BLOCKED / DO NOT SHIP.**
 
-> **Status:** LOCAL_IMPLEMENTATION / REMOTE_UNVERIFIED / REGRESSIONS_INTENTIONALLY_RED.  
-> **Date:** 2026-10-22 (Asia/Jakarta). **Release:** **BLOCKED**.  
-> The application source was not repaired during Phase 4. All **188** original files from the user-supplied clone still match their Phase 0 SHA256 values. Independent repository and GitHub PRs remain user-deferred.
+## Definition of Ready / Done
 
-## 1. Executive summary
+A code-changing pull request must link a **spec/PRD**, **acceptance criteria or test scenarios**, and a **solution/design plan**, all checked into this repository. It must also list a known regression test ID, risk, findings (where relevant) and every changed code/test/policy file.
 
-This phase turns the Phase 3 quality architecture into executable PR-policy tests, genuine failing application regressions, DB-backed test scaffolding, frontend configuration contracts, and a GitHub Actions CI blueprint. The tests intentionally fail against original product behavior and **must not** be deleted, skipped, or weakened to make CI green. Real remote GitHub enforcement has NOT yet been observed.
+The required PR fields are:
 
-**Measured, as executed**:
-
-| Check | Exact executed command | Result | Evidence |
-|---|---|---|---|
-| Adversarial PR+CI-validator tests | `python3 -m unittest discover -s scripts -p 'test_*.py' -v` | **PASS: 25 tests, exit 0** | `evidence/phase-4/policy-unittest.log` |
-| Ruby product method regressions | `ruby api/spec/regression/critical_contract_test.rb` | **RED: 5 runs, 5 failures, 0 errors, exit 1** | `evidence/phase-4/source-regressions-red.log` |
-| Web config contracts | `node --test web/tests/*.test.mjs` | **RED: 2 tests fail, exit 1** | `evidence/phase-4/frontend-contract-red.log` |
-| New Rails RSpec specs | `ruby -c api/spec/**/*.rb` (each newly added file) | **SYNTAX PASS**, **NOT EXECUTED** | `evidence/phase-4/phase4-summary.json` |
-| Source integrity | SHA256 manifest of original 188 files | **PASS: 188/188 unchanged** | `evidence/phase-4/phase4-summary.json` |
-| Live CI & PR statuses | GitHub Actions events (independent repo) | **NOT RUN** (user-deferred) | No CI run links exist |
-
-**Evidence limitation:** the Ruby contract suite loads unmodified production Ruby methods with minimal stand-ins for Rails/DB/network effects. It proves method-level behavior, **not** HTTP, persisted tenant isolation, or real concurrency. The RSpec tests for persistence exist but cannot be executed until Rails 3.3.2, PostgreSQL/Redis and a test environment are available.
-
-## 2. Files implemented (new files only)
-
-- `scripts/validate_pr_inputs.py` — fail-closed PR metadata/changed-file validator; uses Python stdlib, untrusted text not evaluated.
-- `scripts/test_validate_pr_inputs.py` — adversarial fixtures including missing inputs, invalid refs, symlinks/traversal, broken IDs, absent/irrelevant test ID, actual temporary Git diff, positive and negative CLI.
-- `scripts/test_ci_contract.py` — fail-open CI YAML-pattern guard; real YAML parser still needed for full workflow semantics.
-- `.github/pull_request_template.md` — reviewable DoR/DoD fields and evidence placeholders.
-- `.github/workflows/quality.yml` — PR and main quality net: `policy-unit`, `pr-inputs`, `api-contract`, `api-critical`, `web-quality`, and `quality-summary`.
-- `api/spec/regression/critical_contract_test.rb` — 5 failing original-source method regressions, no external services.
-- `api/spec/rails_helper.rb`, `api/spec/support/synthetic_records.rb` — isolated Rails request/service/model test scaffolding.
-- `api/spec/requests/session_completion_spec.rb` — persisted pending-state and no-job behavior.
-- `api/spec/services/fit_gap_engine_spec.rb` — persisted duplicate vacancy skill comparisons.
-- `api/spec/services/portfolio_level_spec.rb` — reject malformed AI levels before storing.
-- `api/spec/models/fit_gap_freshness_spec.rb` — cache/report freshness after vacancy update.
-- `web/tests/api_config.test.mjs` — deterministic source-level frontend env/client contract (not DOM test).
-- `assessment/requirements/REQ-*.md`, `assessment/criteria/AC-*.md`, `assessment/designs/DES-*.md` — **9** linked engineering input sets, `Status: PROPOSED`; no product sign-off claimed.
-- `assessment/design/phase-4-implementation-map.json` — per-ID implementation status for all 41 Phase 3 plans.
-
-**No production `.rb`, `.tsx`, `.ts`, migrations or config files were fixed in this phase.**
-
-## 3. Workflow gate: exact enforced vs review responsibilities
-
-PR inputs are parsed from its body with exact fields `Spec`, `Acceptance`, `Design`, `Findings` (when applicable), `Tests`, `Risk`, `Affected paths`, and `Exemption`/`Justification`. For code changes, existing repo-relative docs must match prefixes and file IDs, contain required substantive sections, cross-link the same IDs, and reference known catalog test IDs. Code-changing PRs must include a changed executable test file containing the linked ID. Policy/workflow edits need a high-risk label and updated validator tests.
-
-**Negative outcomes reproduced locally**: no spec, no AC, no design, no test, unknown test ID, path escape, external link, symlink, malformed input, incorrect requirement relationships, forged changed paths, and missing policy fixture on a workflow edit — blocked as designed. **Positive**: complete structural PR event with changed code + test passes metadata validation. These are synthetic Git repositories; NOT actual GitHub PR statuses.
-
-Docs-only changes are narrowly exempt from adding an executable test if `Exemption: DOCS_ONLY` and meaningful justification are present. Changed structured docs are still validated. All ambiguous paths default to code impact. The script cannot establish whether an assertion is intellectually useful, whether business rules are approved, or whether a human reviewer actually approved the PR. Real branch rules and reviewer requirements must be configured on the future independent repository.
-
-The gate never reads secrets or arbitrary filesystem paths outside checkout; linked docs have size bounds and reject symlinks. No PR code runs under `pull_request_target`; job permissions are read-only. Official trusted action major tags are used; converting to verified immutable action SHAs is still a hardening item.
-
-## 4. Actual RED evidence (before fixing anything)
-
-| Finding / test ID | Source method/layer | Actual RED proof | Phase 5 remedy required |
-|---|---|---|---|
-| FIND-001 / `AUTH-TENANT-01` | `PortfoliosController#fitgap` with foreign record double | Handler returns fit-gap success without controller-level tenant ownership guard | Enforce parent tenant ownership for direct portfolio, overrides, report read/write; confirm with tenant-separated HTTP/DB tests |
-| FIND-002 / `SESSION-01` | `SessionsController#audio_complete` | Synthetic pending session changes to ended via termination handler | Require persisted server-verifiable readiness & idempotent state transition |
-| FIND-003 / `FITGAP-04` | `FitGap::Engine#build_skill_comparisons` | Two same-label rows become one comparison | Preserve each row by stable key, or reject duplicate at write depending on product decision |
-| FIND-005 / `PORTFOLIO-01` | `Portfolios::Generator#save_skills` | Invalid `'not_a_level'` accepted/coerced; no error | Validate raw AI response and transactionally preserve prior valid data on failure |
-| FIND-006 / `INVITE-01` | `Session#invite_url` | Local invite points to API `:3001` rather than frontend `:5173` | Separate frontend public origin from backend base address |
-| FIND-012 / `DOC-01`, `INVITE-03` | `web/.env.example`, `web/src/services/api.ts` | Default REST and WS ports `:3000` disagree with API `:3001` | Align documented env/fallback with application actual address |
-
-Source probes intentionally do not provide a database tenant identity or execute HTTP middleware; `AUTH-TENANT-01` is a **source-method trust-boundary demonstration**, not evidence of actual unauthorized production access.
-
-## 5. RSpec persistence and CI architecture
-
-The DB suite declares synthetic assessments, sessions, portfolios and vacancies only. RSpec transaction fixtures isolate tests. The request spec expects a rejected completion, no changed session state, no new portfolio, and no queued background job. Service/model specs verify DB-visible comparison cardinality, AI-level input rejection and fit-gap freshness. All four new RSpec spec files passed `ruby -c`; **0 live DB-backed examples have run locally**.
-
-CI job independence prevents a RED source contract job from suppressing DB-backed test execution. `quality-summary` runs on `always()` and checks each required job's exact success state; `pr-inputs` may be skipped only for non-PR `push` events. There is no `continue-on-error`, no bypass for intentional RED, no privileged PR execution, and nonzero check results block overall success. `rspec --fail-if-no-examples` prevents a fake green empty suite.
-
-### Reproducible local commands
-
-```bash
-# Run from repository root
-python3 -m unittest discover -s scripts -p 'test_*.py' -v
-ruby api/spec/regression/critical_contract_test.rb    # expected exit 1, not a test harness error
-node --test web/tests/*.test.mjs                         # expected exit 1 until config fixed
-
-# Once Ruby 3.3.2 + bundle + local isolated PostgreSQL + Redis exist:
-cd api
-bundle install
-RAILS_ENV=test bundle exec rails db:migrate
-RAILS_ENV=test bundle exec rspec spec/requests spec/services spec/models --fail-if-no-examples
-
-# Once network/dependencies accessible and *no* real secrets used:
-cd web
-npm install --package-lock-only --ignore-scripts --no-audit --no-fund
-npm ci --ignore-scripts --no-audit --no-fund
-npm run build
+```text
+Spec: assessment/requirements/REQ-...md
+Acceptance: assessment/criteria/AC-...md
+Design: assessment/designs/DES-...md
+Findings: FIND-...
+Tests: TEST-ID
+Risk: high | medium | low
+Affected paths: path/to/source, path/to/executable_test
+Exemption: none
+Justification: scope and evidence
 ```
 
-The frontend `web/package-lock.json` **does not exist** yet: npm registry access from this environment failed, so the frontend CI intentionally fails closed. A real React/component test suite and isolated browser test environment still need to be built, then run as mandatory CI jobs; a static config test is not a replacement. Do not auto-skip those requirements just to get GREEN.
+Files in `assessment/requirements/`, `assessment/criteria/` and `assessment/designs/` are traceable engineering inputs, **not automatically approved business specifications**. The baseline test catalog is `assessment/design/phase-3-test-catalog.json`. `scripts/validate_pr_inputs.py` verifies document IDs, linked requirements, path safety, test references and changed executable test files. Missing spec, acceptance/design, valid test, or critical regression **fails the PR gate**. A genuinely docs-only PR can use the narrowly defined `DOCS_ONLY` exemption.
 
-## 6. Traceability and gaps
+The `pr-inputs` job checks PR inputs using the **target branch's trusted validator**, not a policy script modified by the PR itself. This prevents an author from changing the validator in the same PR and silently bypassing it. Automated structural validation does **not** replace a reviewer's judgment about requirements, test usefulness, acceptance or risk.
 
-**Original plan:** 41 Phase 3 test IDs. Phase 4 implements targeted native method regressions, four RSpec files, two frontend config checks and policy fixture tests. See `design/phase-4-implementation-map.json` for each ID's exact `EXECUTED_*`, `DB_SPEC_WRITTEN_NOT_RUN`, `PARTIAL_*` or `PLANNED_NOT_IMPLEMENTED` status; do not equate implementation coverage with passing application behavior.
+## Quality net and exact commands
 
-Remaining high-impact scenarios: role/tenant membership identity and WebSocket boundary (`WS-AUTH-*`, `AUTH-TENANT-04..06`), race-safe end-once completion (`SESSION-03/04`), cache invalidation from overrides, browser component behavior and expired/revoked invite policies; none are claimed proven. Product approval is needed for tenant admin scope, duplicate-skill semantics, invite token TTL/revocation, and server-side completion handshake. Source/reference evidence and exception rationale live in `01-audit.md` and `03-quality-gate-contract.md`.
+| CI job | What runs | Failure it prevents |
+| --- | --- | --- |
+| `policy-unit` | `python -m unittest discover -s scripts -p 'test_*.py' -v` | Accidental or adversarial bypass of metadata, CI and release policies |
+| `pr-inputs` | `python .trusted-policy/scripts/validate_pr_inputs.py --repo . --event "$GITHUB_EVENT_PATH"` | PR proceeds without linked spec/AC/design, modified test and affected-file traceability |
+| `api-contract` | `ruby api/spec/regression/critical_contract_test.rb` | Regression in critical Ruby behaviors independent of Rails test services |
+| `api-critical` | `bundle exec rails db:migrate`; `bundle exec rspec spec --format documentation` from `api/` | HTTP, PostgreSQL persistence, service, model, middleware and worker regressions |
+| `web-quality` | `npm ci --ignore-scripts --no-audit --no-fund`; `npm run build`; `node --test tests/*.test.mjs` from `web/` | Unrepeatable dependency/build, TypeScript, frontend configuration and component rendering regressions |
+| `quality-summary` | Requires every relevant upstream job to succeed, including `pr-inputs` for PR events | A failed or skipped mandatory job presented as green |
+| `release-decision` | On version tags, `python scripts/release_gate.py` validates the exact tag commit and release-risk ledger | A releasable badge with open P1 risks, missing checks, incomplete acceptance or no owner |
 
-## 7. Next-phase red-to-green ledger (do not fill early)
+GitHub Actions is in `.github/workflows/quality.yml`, and the human-facing PR inputs are in `.github/pull_request_template.md`. The pipeline runs on pull requests, pushes to `main`, and `v*` tags. Rails CI uses isolated PostgreSQL and Redis service containers and synthetic fixtures; it does not run against a customer environment.
 
-| Finding | RED captured | Fix commit SHA | GREEN retest | Remaining risk |
-|---|---|---|---|---|
-| FIND-001 | `evidence/phase-4/source-regressions-red.log` | **NONE** | **NOT EXECUTED** | Full tenant request/DB boundary unknown |
-| FIND-002 | same | **NONE** | **NOT EXECUTED** | Server readiness/race policy unresolved |
-| FIND-003 | same | **NONE** | **NOT EXECUTED** | Duplicate skill contract unresolved |
-| FIND-004 | RSpec written, not run | **NONE** | **NOT EXECUTED** | DB cache stale behavior unverified |
-| FIND-005 | `evidence/phase-4/source-regressions-red.log` | **NONE** | **NOT EXECUTED** | Existing valid data must be preserved |
-| FIND-006 | source + frontend config RED | **NONE** | **NOT EXECUTED** | Public frontend domain injection needed |
+### Repeatable local verification
 
-**Gate outcome**: policy validation locally PASS; app regression suite RED by design; backend DB/DOM test runtime BLOCKED; frontend lockfile missing; remote checks and branch protection not configured. **The app is DO NOT SHIP.** Phase 4 is **partially verified** and the final mandatory PR demonstrations remain deferred until the user creates the independent GitHub repository and the underlying defects are fixed.
+```bash
+# From repository root:
+python -m unittest discover -s scripts -p 'test_*.py' -v
+ruby api/spec/regression/critical_contract_test.rb
 
-**Stop line:** Do not start Phase 5 or modify production business logic until the user explicitly authorizes the next phase.
+# In api/ with PostgreSQL/Redis and test environment configured:
+bundle exec rails db:migrate
+bundle exec rspec spec --format documentation
 
+# In web/:
+npm ci --ignore-scripts --no-audit --no-fund
+npm run build
+node --test tests/*.test.mjs
+```
 
----
+Follow `api/README.md` and `web/README.md` for environment setup. Tests that use a browser/UI integration or live WebSocket upgrade must be reported separately; a static render test is not equivalent.
 
-## Phase 5 — RED → GREEN evidence (2026-10-22)
+## Real RED → GREEN evidence
 
-**Source-method CI contract:** Original 5 tests RED: `assessment/evidence/phase-5/ruby-before-red.log` (5 assertions failed). Same original 5 assertions after production remediation GREEN. Extended suite 12 tests / 40 assertions GREEN: `assessment/evidence/phase-5/ruby-after-green.log`. Original assertions unchanged, machine-verified in `original-assertion-preservation.json`.
+| Scenario | Before — CI RED | Fix and after — CI GREEN |
+| --- | --- | --- |
+| Missing Definition-of-Ready inputs | [PR #1](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/1) deliberately blocked by `pr-inputs` | [PR #2](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/2) has linked engineering inputs and a passing gate |
+| FIND-011: unauthorized tenant selection | [Test-only run 40295447111](https://github.com/RyanHidayat96/fullstack-quality-gate/actions/runs/40295447111): 14 Rails examples, **4 failures** | [Run 40297012832](https://github.com/RyanHidayat96/fullstack-quality-gate/actions/runs/40297012832): tenant membership/token/WS fixes and all mandatory jobs PASS |
+| Audio WebSocket JWT without grant | [Run 40299313986](https://github.com/RyanHidayat96/fullstack-quality-gate/actions/runs/40299313986): 24 Rails examples, **1 failure** | [Run 40299543911](https://github.com/RyanHidayat96/fullstack-quality-gate/actions/runs/40299543911): signed-audio access verified against grants, mandatory CI PASS |
+| FIND-008: expiring/revoking invitation tokens | [Run 40300922243](https://github.com/RyanHidayat96/fullstack-quality-gate/actions/runs/40300922243): 27 Rails examples, **3 failures** | [Run 40301673841](https://github.com/RyanHidayat96/fullstack-quality-gate/actions/runs/40301673841): 27 examples, **0 failures**, all required jobs PASS |
 
-**Frontend static config:** 2/2 GREEN (`web-contract-after.log`), previously 2/2 RED (`assessment/evidence/phase-4/frontend-contract-red.log`). **CI metadata policy:** 25/25 GREEN (`policy-after.log`). **Syntax:** 72 Ruby files PASS (`ruby-syntax-after.log`). Neither Ruby isolated probes nor static JS checks replace browser/DB validation.
+The RED and GREEN runs above correspond to **real GitHub commits**, with production fixes between them. Earlier local Phase 0–8 notes were interim development records, not substitutes for these remote test results.
 
-**Missing:** `bundle` executable, Rails/Postgres, npm dependencies, independent GitHub repository/PRs, actual commit SHA and CI run. The application remains **BLOCKED FOR RELEASE**; see `PHASE_5_HANDOFF.md` for full remediation ledger and exact limits.
+## What the net catches, and what it does not
 
+**Covered by executable checks:** syntactic policy bypass, absent PR inputs/tests, test execution being reduced to file-presence checks, tenant JWT membership and revocation, selected cross-tenant HTTP/DB mutations, session completion state, stale fit/gap data, malformed portfolio scoring, invitation origin/expiry/revocation, Ruby contracts and React rendering/configuration.
 
-## Phase 6 verification amendment (2026-10-22)
+**Not fully demonstrated:** actual browser-driven journeys through an interactive UI, WebSocket upgrade and audio streaming over a real network connection, realistic concurrent requests and jobs, all 41 originally planned test IDs, the exact behavior of external AI services, and product-approved global-admin/SSO semantics. The seven-day candidate invitation lifetime is a provisional security assumption.
 
-This does not replace the Phase 4 RED or Phase 5 GREEN original evidence. Independent local repeatability verification: **three** runs of 12 Ruby tests/40 assertions, 32 Python quality-gate tests, and 2 Node config tests passed. A deliberate missing-readiness-guard mutation exposed an incomplete test double; the fixture was repaired without changing its business assertions. **4/4** isolated mutations now fail as actual assertions without runtime errors. See `assessment/06-independent-verification.md` and `assessment/evidence/phase-6/`.
+**Repository enforcement gap:** CI may run on every PR, but GitHub currently reports `main` as **unprotected**, with no active repository ruleset. A direct push could bypass the PR gate. The repository administrator must activate rules requiring PRs and `quality-summary` plus relevant critical job checks; passing workflow runs are not proof this setting exists.
 
-CI security improvement: PR metadata validation now runs a checker copied from the trusted target **base SHA**, not a PR-editable Python script. Additional tests cover gate self-modification, undeclared/deleted code and Node `.test.mjs` files. This is local-only; real PR checks and externally enforced branch protection remain **UNVERIFIED**. Full application integration, `npm ci`, frontend build and Rails RSpec remain **BLOCKED**; no green claim extends to those layers.
+## Fail-closed tagged release
 
-## 8. Verified Red-to-Green Implementation & Remote CI Summary
+The repository has a real annotated `v1.0.0` tag. Its [tag-specific workflow run](https://github.com/RyanHidayat96/fullstack-quality-gate/actions/runs/40277694610) passed technical quality jobs but **blocked release** because risk/approval gates were not satisfied. The improvements in later PRs are **not included** in the tagged commit.
 
-Per the brief's explicit requirement to document the red-to-green transition (*what was red, what you changed, what is green now*):
+Release readiness is evaluated from `assessment/release-readiness.json` and the actual tag/check states; `assessment/submission-evidence.json` records independent-repository/PR/tag evidence for preflight. These machine-readable inputs are retained because the gate uses them, even though their filenames are not standalone PDF deliverables.
 
-### A. What Was RED (Initial Defect State)
-1. **Critical Source Regressions:** 5 assertions failed in `critical_contract_test.rb` (FIND-001, FIND-002, FIND-003, FIND-005, FIND-006). See `assessment/evidence/phase-4/source-regressions-red.log`.
-2. **Frontend Config Contract:** 2 assertions failed in `web/tests/api_config.test.mjs` due to port :3000 vs :3001 mismatch (FIND-012).
-3. **Multi-Tenant Exposure:** Direct portfolio/override queries bypassed tenant scope (`PortfoliosController#fitgap`, `PortfolioSkillsController#override`).
-4. **Premature Session Termination:** Client could send `audio_complete` on a pending or unverified session, writing `ended / all_covered` and enqueuing portfolio generation prematurely.
-5. **Duplicate Skill Collapse:** Multiple vacancy skills with identical labels collapsed into a single comparison in `FitGap::Engine#build_skill_comparisons`.
-6. **AI Level Coercion:** Invalid scores (`"n/a"`, `nil`) were coerced via `.to_i.clamp(1, 5)` into authoritative L1/L5 scores.
-
-### B. What Was Changed (Causal Engineering Fixes)
-1. **Tenant Scoping:** Enforced `Current.tenant_id` ancestor check on `Portfolio.joins(:session)` and `PortfolioSkill.joins(:portfolio)`.
-2. **Session Readiness Guard:** Added migration `add_server_end_readiness_to_sessions` and required `ready_to_end_at` timestamp verification before processing candidate completion.
-3. **Stable Skill Identification:** Replaced label-based hashing with stable `skill_id` in `FitGap::Engine`.
-4. **Strict AI Level Validation:** Implemented strict input checking in `Portfolios::Generator#save_skills`, rejecting invalid/out-of-range ratings and raising `ArgumentError` before DB commit.
-5. **Freshness Tracking:** Added migration `add_fit_gap_source_fingerprint` to mark reports stale when target vacancy skills change.
-6. **Role Guard in WebSocket:** Enforced assessor role validation in `CoverageWebSocketMiddleware`.
-7. **Frontend Port Alignment & Lockfile:** Aligned REST/WS default endpoints to port 3001, generated `web/package-lock.json`, and added `web/src/lib/utils.test.ts`.
-8. **CI Infrastructure Hardening:** Configured floating `ruby-version: '3.3'` with Zeitwerk `WebSocket` inflections and PostgreSQL 16/Redis 7 services.
-
-### C. What Is GREEN Now (Proven in CI)
-1. **Source Method Contracts:** 12 tests, 40 assertions PASS (`api/spec/regression/critical_contract_test.rb`).
-2. **Database-Backed RSpec Suite:** All request, service, model, and worker specs PASS against real PostgreSQL 16 & Redis 7 in CI (`spec/requests/session_completion_spec.rb`, `spec/services/fit_gap_engine_spec.rb`, `spec/services/portfolio_level_spec.rb`, `spec/models/fit_gap_freshness_spec.rb`).
-3. **Frontend Contract Tests:** 2/2 PASS in Node.js test runner (`web/tests/api_config.test.mjs`).
-4. **Policy & Release Suite:** 63/63 PASS in Python unittest (`scripts/test_*.py`).
-5. **Remote GitHub Actions CI:** All jobs (`policy-unit`, `api-contract`, `api-critical`, `web-quality`, `quality-summary`) are **ALL GREEN** on `main` ([Run #40277969659](https://github.com/RyanHidayat96/fullstack-quality-gate/actions/runs/40277969659)).
-6. **Demonstrated via Real GitHub PRs:**
-   - **PR #1 (RED / Blocked):** [PR #1](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/1) — blocked by gate when DoR inputs are missing.
-   - **PR #2 (GREEN / Passed):** [PR #2](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/2) — passes gate and executes test suites when DoR inputs are present.
-
+Read [01 — Audit](01-audit.md) for ranked risks and [03 — Release Decision](03-release-decision.md) for what must happen before shipping. **Never make a red gate green by weakening or deleting its checks.**
