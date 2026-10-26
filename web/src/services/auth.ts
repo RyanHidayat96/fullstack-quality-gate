@@ -3,6 +3,7 @@ import api from "./api";
 export interface LoginPayload {
   email: string;
   password: string;
+  tenant_scheme?: string;
 }
 
 export interface LoginResponse {

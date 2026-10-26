@@ -13,6 +13,7 @@ export default function LoginPage() {
   const setAuth = useSetAtom(authAtom);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [tenantScheme, setTenantScheme] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -21,7 +22,7 @@ export default function LoginPage() {
     setError(null);
     setLoading(true);
     try {
-      const res = await authApi.login({ email, password });
+      const res = await authApi.login({ email, password, tenant_scheme: tenantScheme.trim() || undefined });
       const token = res.data.token;
       saveToken(token);
       setAuth({ token });
@@ -64,6 +65,19 @@ export default function LoginPage() {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
+          </div>
+
+          <div className="space-y-1.5">
+            <Label htmlFor="tenant-scheme">Organization code (optional)</Label>
+            <Input
+              id="tenant-scheme"
+              value={tenantScheme}
+              onChange={(e) => setTenantScheme(e.target.value)}
+              autoComplete="organization"
+            />
+            <p className="text-xs text-muted-foreground">
+              Required only if your account belongs to multiple organizations.
+            </p>
           </div>
 
           {error && <p className="text-sm text-destructive">{error}</p>}
