@@ -1,7 +1,0 @@
-{"error": "Affected paths must enumerate every changed code/test/policy file", "result": "BLOCKED"}
-{"error": "Affected paths must enumerate every changed code/test/policy file", "result": "BLOCKED"}
-----------------------------------------------------------------------
-Ran 57 tests in 0.974s
-
-OK
-{"affected": ["api/app/session.rb", "api/spec/requests/session_completion_spec.rb"], "human_review_required": true, "linked_documents": {"Acceptance": "assessment/criteria/AC-SESSION-001.md", "Design": "assessment/designs/DES-SESSION-001.md", "Spec": "assessment/requirements/REQ-SESSION-001.md"}, "result": "METADATA_PASS", "scope": "CODE", "tests": ["SESSION-01"], "tests_executed": false}

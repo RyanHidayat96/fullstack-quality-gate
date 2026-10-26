@@ -25,7 +25,7 @@ class ConfigurationContractTests(unittest.TestCase):
         self.assertNotIn("No remote Git tag", notes)
 
     def test_current_status_does_not_claim_release_approval(self):
-        status = (ROOT / "assessment/09-current-status.md").read_text(encoding="utf-8")
+        status = (ROOT / "assessment/03-release-decision.md").read_text(encoding="utf-8")
         self.assertIn("BLOCKED / DO NOT SHIP", status)
         self.assertIn("FIND-011", status)
         self.assertIn("historical", status.lower())

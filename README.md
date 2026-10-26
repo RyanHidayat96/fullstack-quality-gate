@@ -1,35 +1,58 @@
-> **Case Study Submission: Fullstack Engineer (SDET Depth)**  
-> **Reviewer Tour:** Begin with [Reviewer Start Here](assessment/08-reviewer-start-here.md), then inspect [Platform Audit](assessment/01-audit.md), [Quality System & Red-to-Green](assessment/02-quality-system.md), [Release Decision](assessment/03-release-decision.md), and [Live Defense Guide](assessment/08-live-defense.md).  
-> **Workflow Gate Demonstrations:** [PR #1 (Gate Blocked / RED)](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/1) | [PR #2 (Gate Passed / GREEN)](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/2) | [Release Tag v1.0.0 CI Run](https://github.com/RyanHidayat96/fullstack-quality-gate/actions/runs/40277694610).  
-> **Current Release Decision:** **BLOCKED / DO NOT SHIP** (fail-closed release gate evaluated via `scripts/release_gate.py`).
-> **Current verification:** [Status and known gaps](assessment/09-current-status.md) · [PR #3 expanded test execution](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/3). Phase handoff logs are historical snapshots, not live GitHub status.
+# Fullstack Quality Gate
 
----
+This repository contains a two-service interview-assessment platform and the engineering quality net built around it for a Fullstack Engineer (SDET Depth) case study.
 
-# Architecture & Specification
-Please refer to [Architecture Notes](assessment/architecture-notes.md) and [Audit Findings](assessment/01-audit.md) for platform architecture and specifications.
+**Release decision: BLOCKED / DO NOT SHIP.** Passing CI is not production approval.
 
-# The Platform
+## Case-study deliverables
 
-A two-service application used for the Product Engineer case study. It is provided as a single repository so the whole thing clones, runs, and releases as one unit.
+| Requested deliverable | Evidence |
+| --- | --- |
+| Risk-based audit | [01 — Audit](assessment/01-audit.md) |
+| Quality system, Definition of Ready, executable checks and RED → GREEN | [02 — Quality System](assessment/02-quality-system.md) |
+| Tagged release gate and ship/block decision | [03 — Release Decision](assessment/03-release-decision.md), [release notes](RELEASE_NOTES.md) |
+| Blocked and passing PR demonstrations | [PR #1 — blocked](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/1), [PR #2 — passed](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/2) |
+| Remediation with real GitHub CI evidence | [PR #5 — tenant authorization](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/5), [PR #7 — API/WS authorization](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/7), [PR #9 — invitation lifecycle](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/9) |
+| Tag-specific release CI | [v1.0.0 — blocked](https://github.com/RyanHidayat96/fullstack-quality-gate/actions/runs/40277694610) |
 
+The repository includes the required linked engineering inputs in `assessment/requirements/`, `assessment/criteria/`, and `assessment/designs/`. They are used by the PR validator; these are not independently approved business specifications.
+
+## Platform
+
+```text
+api/         Rails 7, PostgreSQL, Redis / Sidekiq, REST and WebSocket
+web/         React, TypeScript, Vite
+assessment/  Audit, quality system, release decision, linked engineering inputs
+scripts/     Quality policy, release and submission verification
+.github/     Pull request template and GitHub Actions
 ```
-.
-├── api/    # Backend service (Ruby on Rails, PostgreSQL, Redis/Sidekiq)
-└── web/    # Frontend web app (React 18 + TypeScript, Vite, Tailwind)
+
+The web app calls the Rails REST API and WebSocket middleware.
+
+## Run and verify
+
+1. Follow [api/README.md](api/README.md) to configure a disposable PostgreSQL database, Redis, credentials, migrations and tenant memberships. By default Rails serves at `http://localhost:3001`.
+2. Follow [web/README.md](web/README.md). Copy `web/.env.example` into your local untracked `.env`; Vite serves at `http://localhost:5173`.
+3. Verify the quality net:
+
+```bash
+python -m unittest discover -s scripts -p 'test_*.py' -v
+ruby api/spec/regression/critical_contract_test.rb
+
+cd api
+bundle exec rails db:migrate RAILS_ENV=test
+bundle exec rspec spec --format documentation
+
+cd ../web
+npm ci --ignore-scripts --no-audit --no-fund
+npm run build
+node --test tests/*.test.mjs
 ```
 
-The two services run together: the web app talks to the API over REST and WebSocket.
+CI executes the same core checks on pull requests and `main`. A separate tag-triggered release decision blocks on unresolved risks even when technical tests pass.
 
-## Running it locally
+## Known limits
 
-Each service has its own setup guide. Run the API first, then the web app pointed at it.
+PostgreSQL-backed request coverage and component rendering are verified, but actual browser-to-API-to-DB journeys, upgraded WebSocket streaming, exhaustive test catalog coverage and realistic concurrency still need further verification. The `main` branch has not been verified as protected. Historical Git objects and redistribution rights are not cleared even though the active application source passes a naming guard.
 
-1. **API** — see [`api/README.md`](api/README.md). Rails app; needs Ruby (see `api/.ruby-version`), PostgreSQL, and Redis. It serves on `http://localhost:3001`.
-2. **Web** — see [`web/README.md`](web/README.md). Vite app; `npm install`, copy `.env.example` to `.env`, point `VITE_API_BASE_URL` at the API, then `npm run dev`. It serves on `http://localhost:5173`.
-
-## Notes for the case study
-
-- This is the codebase you assess, harden, and release. Treat it as a version about to ship to a client.
-- Work in the `/assessment` folder at the repo root for your written deliverables; code changes go in `api/` or `web/`.
-- See the case-study brief you were given for what to produce and how it is evaluated.
+The [release decision](assessment/03-release-decision.md) records why the product remains blocked and which approvals are missing. No secret, publication clearance or production sign-off is implied.

@@ -13,12 +13,11 @@ import subprocess
 from pathlib import Path
 from urllib.parse import urlparse
 
+# PDF-required documents plus operational entry points, not optional phase notes.
 REQUIRED = (
     'README.md', 'RELEASE_NOTES.md', '.github/workflows/quality.yml',
     'assessment/01-audit.md', 'assessment/02-quality-system.md',
-    'assessment/03-release-decision.md', 'assessment/EXECUTION_LOG.md',
-    'assessment/08-reviewer-start-here.md', 'assessment/08-live-defense.md',
-    'assessment/08-submission-checklist.md',
+    'assessment/03-release-decision.md',
 )
 REMOTE_FIELDS = ('public_independent_repo', 'blocked_pr', 'passing_pr', 'tag_commit',
                  'tag_ci_run', 'hiring_platform_submission')

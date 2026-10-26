@@ -23,7 +23,7 @@ The following changes are real and verified, but they **are not part of the olde
 | Removed unsupported self-service signup | [PR #8](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/8) |
 | Expiring and revocable invitation tokens | [PR #9](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/9), [CI: 27 RSpec / 0 failures](https://github.com/RyanHidayat96/fullstack-quality-gate/actions/runs/40301673841) |
 
-For a complete timeline, read [current verification](09-current-status.md). Archived Phase 0–8 notes reflect the state of their original local execution and must not override current remote CI evidence.
+For the current evidence, read [01 — Audit](01-audit.md) and [02 — Quality System](02-quality-system.md). Actual GitHub PR and CI links above take precedence over earlier interim local notes.
 
 ## Release blockers
 
