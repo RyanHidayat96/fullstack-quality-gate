@@ -18,8 +18,7 @@ class Organization < ApplicationRecord
       (alias_hosts && ARRAY[?]::varchar[])
     SQL
 
-    where(sql_string, identifier, Array(identifier)).first ||
-      default_organization
+    where(sql_string, identifier, Array(identifier)).first
   end
 
   def self.default_organization
