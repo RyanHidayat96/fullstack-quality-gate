@@ -16,6 +16,7 @@ class Session < ApplicationRecord
   validates :end_reason, inclusion: { in: END_REASONS }, allow_nil: true
 
   before_validation :generate_invite_token, on: :create
+  before_validation :assign_invite_expiry, on: :create
 
   scope :active,  -> { where(status: 'active') }
   scope :pending, -> { where(status: 'pending') }
@@ -31,7 +32,17 @@ class Session < ApplicationRecord
     "#{base}/interview/#{invite_token}"
   end
 
+  # Candidate tokens have a provisional seven-day lifetime. Do not infer validity
+  # from possession of a token alone.
+  def invite_valid?
+    invite_expires_at.present? && invite_expires_at.future? && invite_revoked_at.nil?
+  end
+
   private
+
+  def assign_invite_expiry
+    self.invite_expires_at ||= 7.days.from_now
+  end
 
   def generate_invite_token
     self.invite_token ||= SecureRandom.hex(32)
