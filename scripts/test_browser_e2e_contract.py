@@ -5,6 +5,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 
+# TEST-GATE-06: a real browser and WebSocket job is required, not a file-name check.
 class BrowserE2EContractTests(unittest.TestCase):
     def test_TEST_GATE_06_browser_and_ws_job_is_executable(self):
         workflow = (ROOT / ".github/workflows/live-e2e.yml").read_text(encoding="utf-8")
