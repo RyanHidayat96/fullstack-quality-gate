@@ -41,8 +41,11 @@
     },
     {
       "id": "FIND-011",
-      "state": "OPEN",
-      "evidence_paths": [],
+      "state": "CODE_FIXED_UNVERIFIED",
+      "evidence_paths": [
+        "assessment/09-current-status.md",
+        "api/spec/requests/login_tenant_policy_spec.rb"
+      ],
       "risk_acceptance": null
     },
     {
@@ -54,52 +57,62 @@
   ],
   "mandatory_verifications": {
     "api_db_integration": {
-      "status": "BLOCKED",
-      "evidence_paths": [],
-      "reason": "Rails + real test PostgreSQL/Redis checks not run"
+      "status": "VERIFIED",
+      "evidence_paths": [
+        "api/spec/requests/tenant_api_journey_spec.rb",
+        "api/spec/requests/invite_token_lifecycle_spec.rb"
+      ],
+      "reason": "Scoped Rails request+PostgreSQL checks ran in CI (27 examples, 0 failures, PR #9 run 40301673841). Browser-to-API-to-DB and live WebSocket handshake remain separate blocked gates."
     },
     "frontend_build": {
-      "status": "BLOCKED",
-      "evidence_paths": [],
-      "reason": "vite/client dependency absent and lockfile missing"
+      "status": "VERIFIED",
+      "evidence_paths": [
+        "web/package-lock.json",
+        "web/package.json"
+      ],
+      "reason": "npm ci, TypeScript check and Vite build passed in PR #9 CI run 40301673841."
     },
     "component_regression": {
-      "status": "BLOCKED",
-      "evidence_paths": [],
-      "reason": "No component regression suite verified"
+      "status": "VERIFIED",
+      "evidence_paths": [
+        "web/tests/component_render.test.mjs"
+      ],
+      "reason": "Nine Node frontend tests passed in prior PRs; server-render component labels are not browser E2E."
     },
     "browser_api_db_journey": {
       "status": "BLOCKED",
       "evidence_paths": [],
-      "reason": "Browser/API/database end-to-end not executed"
+      "reason": "Rails HTTP→DB and React render checks exist; browser-driven UI interactions and actual WebSocket upgrades have not been verified."
     },
     "traceability_complete": {
       "status": "BLOCKED",
       "evidence_paths": [],
-      "reason": "16 planned scenarios missing; 3 Rails specs not executed"
+      "reason": "41 planned test IDs are not exhaustively reconciled to executed live CI assertions; additional tests exist beyond historical Phase 6 snapshot."
     },
     "spec_acceptance_approved": {
       "status": "BLOCKED",
       "evidence_paths": [],
-      "reason": "Product-approved tenant-membership and other ambiguous rules unavailable"
+      "reason": "FIND-011 tenant grants/global-admin SSO and FIND-008 invitation TTL are provisional engineering rules without independent product owner signoff."
     },
     "publication_clearance": {
       "status": "BLOCKED",
       "evidence_paths": [],
-      "reason": "45 file paths retain organization/product identifiers; independent Git history unavailable"
+      "reason": "Active app source names sanitized in PR #6, but historical Git objects, archived assessment evidence and redistribution rights are not cleared."
     },
     "two_real_pr_demonstrations": {
-      "status": "BLOCKED",
-      "evidence_paths": [],
-      "reason": "Independent GitHub repository and blocked/passing PRs postponed by user"
+      "status": "VERIFIED",
+      "evidence_paths": [
+        "assessment/09-current-status.md"
+      ],
+      "reason": "PR #1 rejected missing inputs; PR #2 passed required inputs. Both have live GitHub Actions run links."
     },
     "release_owner_signoff": {
       "status": "BLOCKED",
       "evidence_paths": [],
-      "reason": "Release owner or co-signing reviewer approval not provided; nobody may be invented"
+      "reason": "No authorized owner or independent reviewer has provided acceptance or release approval."
     }
   },
   "release_owner_review": "NOT_GRANTED",
-  "external_ci_url": null,
-  "notes": "This is a readiness ledger, not an assertion of GitHub run results. Do not change status without evidence."
+  "external_ci_url": "https://github.com/RyanHidayat96/fullstack-quality-gate/actions/runs/40301673841",
+  "notes": "Current main has Rails/DB, Node, PR and CI evidence linked in assessment/09-current-status.md. This updates the post-tag engineering ledger and does not retroactively modify the immutable v1.0.0 tag. Release remains BLOCKED until all gates are independently verified."
 }
