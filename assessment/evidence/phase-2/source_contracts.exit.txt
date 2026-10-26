@@ -1,2 +1,0 @@
-Command: python assessment/evidence/phase-2/source_contract_checks.py
-Exit code: 0

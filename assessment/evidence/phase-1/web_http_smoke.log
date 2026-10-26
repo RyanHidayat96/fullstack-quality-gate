@@ -1,6 +1,0 @@
-$ curl --silent --show-error --max-time 2 --output /dev/null --write-out http_code=%{http_code}
- http://127.0.0.1:5173/
-exit_code=7
-http_code=000
-
-curl: (7) Failed to connect to 127.0.0.1 port 5173 after 0 ms: Could not connect to server

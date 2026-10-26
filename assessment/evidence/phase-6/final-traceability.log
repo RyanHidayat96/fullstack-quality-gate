@@ -1,7 +1,0 @@
-$ python3 assessment/evidence/phase-6/verify_traceability.py
-[exit_code] 0
-
-[stdout]
-{"AUTHORED_NOT_RUN": 3, "MISSING": 16, "PARTIAL_EXECUTED_LOCAL": 22}
-
-[stderr]
