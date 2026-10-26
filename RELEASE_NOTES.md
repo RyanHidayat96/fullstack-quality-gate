@@ -26,4 +26,4 @@
 - The tagged commit predates [PR #3](https://github.com/RyanHidayat96/fullstack-quality-gate/pull/3) which expanded RSpec and React render checks. Those improvements are **not included** in the `v1.0.0` tag.
 - No release owner or product stakeholder has accepted outstanding risk.
 
-See [the current verification index](assessment/09-current-status.md) and [the release decision](assessment/03-release-decision.md). A subsequent candidate must have its own tag and evidence; do not rewrite or recycle `v1.0.0`.
+See [the quality system](assessment/02-quality-system.md) and [the release decision](assessment/03-release-decision.md). A subsequent candidate must have its own tag and evidence; do not rewrite or recycle `v1.0.0`.
