@@ -96,3 +96,28 @@ Runs on **port 5173** by default.
 | Sidekiq | `bundle exec sidekiq -r ./config/environment.rb -C config/sidekiq.yml` | — |
 | Rails API | `bundle exec rails server` | 3001 |
 | Frontend | `npm run dev` (in `web/`) | 5173 |
+
+## Tenant membership provisioning
+
+Administrative tokens are tenant-bound. A valid admin password is no longer enough to
+select an arbitrary organization. Grant access explicitly before expecting login to
+succeed. This is a **case-study fail-closed policy** pending product/SSO approval.
+
+In an isolated development Rails console, after creating an admin user and the
+target organization through your normal authorized provisioning process:
+
+```ruby
+admin = User.find_by!(email: ENV.fetch("DEV_ADMIN_EMAIL"))
+tenant = Organization.find_by!(scheme: ENV.fetch("DEV_TENANT_SCHEME"))
+TenantMembership.find_or_create_by!(user: admin, organization: tenant)
+```
+
+Do not create wildcard grants or backfill every existing admin into every
+organization. Accounts with one grant can log in without specifying a tenant.
+Accounts with multiple grants must provide their organization code on the login
+form (or `tenant_scheme` in the request). Removing a grant also prevents use
+of an already-issued token on protected endpoints.
+
+The release remains blocked until the business owner approves actual global
+administration and SSO enrollment semantics. No test account or password is
+embedded in the repository.
