@@ -6,7 +6,7 @@ module Api
       authorize_auth_token! :assessor, except: %i[candidate_info audio_complete]
       skip_before_action :require_tenant!, only: %i[candidate_info audio_complete]
 
-      before_action :set_session, only: %i[show end_session coverage transcript]
+      before_action :set_session, only: %i[show end_session coverage transcript revoke_invite]
 
       # GET /api/v1/assessments/:assessment_id/sessions
       def index
@@ -77,6 +77,15 @@ module Api
         end
       end
 
+      # POST /api/v1/sessions/:id/revoke_invite
+      # The assessor must be authorized for the session tenant.
+      def revoke_invite
+        return json_error('Cannot revoke an ended session', :unprocessable_entity) if @session.ended?
+
+        @session.update!(invite_revoked_at: Time.current) unless @session.invite_revoked_at.present?
+        json_response(invite_revoked: true)
+      end
+
       # GET /api/v1/sessions/:id/coverage
       def coverage
         maps       = @session.coverage_maps.configured.order(:id)
@@ -117,7 +126,7 @@ module Api
       # Ends the session if all coverage is complete; idempotent if already ended.
       def audio_complete
         session = Session.unscoped.find_by(invite_token: params[:token])
-        return json_error("Invalid or expired invite token", :not_found) unless session
+        return json_error("Invalid or expired invite token", :not_found) unless session && session.invite_valid?
 
         return json_response(ended: true, message: "Session already ended") if session.ended?
 
@@ -137,7 +146,7 @@ module Api
       def candidate_info
         session = Session.unscoped.find_by(invite_token: params[:token])
 
-        unless session
+        unless session && session.invite_valid?
           return json_error("Invalid or expired invite token", :not_found)
         end
 

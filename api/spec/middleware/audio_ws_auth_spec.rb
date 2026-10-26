@@ -29,4 +29,14 @@ RSpec.describe AudioWebSocketMiddleware do
     expect(error).to be_nil
     expect(resolved.id).to eq(session.id)
   end
+  it 'INVITE-04 rejects an expired candidate invitation on the audio token path' do
+    session = synthetic_session
+    session.update!(invite_expires_at: 1.minute.ago)
+    env = Rack::MockRequest.env_for("/ws/sessions/#{session.id}/audio?token=#{session.invite_token}")
+
+    resolved, error = described_class.allocate.send(:authenticate_and_load, env, session.id.to_s)
+    expect(resolved).to be_nil
+    expect(error).to include('expired or revoked')
+  end
+
 end
