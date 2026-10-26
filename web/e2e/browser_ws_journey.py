@@ -95,7 +95,8 @@ def main():
                 headers={"Authorization": f"Bearer {auth}"},
             )
             assert sessions.ok, f"session list failed: {sessions.status}"
-            rows = sessions.json()["data"]["sessions"]
+            response_body = sessions.json()
+            rows = response_body.get("data", response_body)["sessions"]
             created = next(s for s in rows if s["candidate_name"] == "Synthetic Browser Guest")
             sid = created["id"]
             assert created["invite_url"].endswith(token)
